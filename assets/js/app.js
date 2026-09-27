@@ -26,7 +26,7 @@ const FoodieApp = (() => {
       }
     }
     // 4. Production Java Spring Boot Backend Hosting URL
-    return 'https://foodie-backend-api.onrender.com';
+    return 'https://foodie-express-backend-production.up.railway.app';
   };
 
   const API_BASE = getApiBaseUrl();

@@ -10,7 +10,7 @@ window.__FOODIE_CONFIG__ = window.__FOODIE_CONFIG__ || {
   // Update this default backend URL with your live deployed Java hosting instance:
   API_BASE_URL: (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:')
     ? 'http://localhost:8080'
-    : 'https://foodie-backend-api.onrender.com',
+    : 'https://foodie-express-backend-production.up.railway.app',
   APP_NAME: 'Foodie Express',
   VERSION: '1.0.0',
   ENV: (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') ? 'development' : 'production'
