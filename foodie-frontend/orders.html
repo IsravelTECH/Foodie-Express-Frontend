@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Orders — Foodie Express</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <style>
+    .orders-hero {
+      background: radial-gradient(circle at 50% 0%, rgba(232, 93, 4, 0.08) 0%, rgba(255, 253, 249, 0) 70%);
+      padding: 40px 0 28px 0;
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+    .order-card {
+      background: var(--surface);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .order-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+  <link rel="icon" type="image/png" href="images/logo.png">
+    <div class="header-container container">
+      <a href="index.html" class="brand-logo">
+        <div class="logo-badge"><i class="fa-solid fa-utensils"></i></div>
+        <span class="brand-title">Foodie<span>Express</span></span>
+      </a>
+
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="menu.html" class="nav-link">Menu</a>
+        <a href="reservations.html" class="nav-link">Reservations</a>
+        <a href="orders.html" class="nav-link active">Orders</a>
+        <a href="wishlist.html" class="nav-link">Wishlist</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="wishlist.html" class="header-icon-btn" title="Wishlist">
+          <i class="fa-regular fa-heart"></i>
+          <span class="header-badge wishlist-count-badge" style="display: none;">0</span>
+        </a>
+        <a href="cart.html" class="header-icon-btn" title="Cart">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="header-badge cart-count-badge" style="display: none;">0</span>
+        </a>
+        <button class="user-menu-btn" id="userProfileBtn" onclick="location.href='profile.html'">
+          <div class="user-avatar-circle" id="headerUserAvatar">👤</div>
+          <span id="headerUserName">Account</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="orders-hero">
+    <div class="container">
+      <h1 style="font-size: 2.2rem; font-weight: 800; color: var(--dark);">My Food Orders</h1>
+      <p style="color: var(--text-secondary); margin-top: 6px;">Track your placed deliveries and order history in real-time.</p>
+    </div>
+  </section>
+
+  <main class="container" style="max-width: 860px; margin: 36px auto 60px auto;">
+    <div id="ordersContainer">
+      <div style="text-align: center; padding: 48px; color: var(--text-muted);">
+        <i class="fa-solid fa-spinner fa-spin fa-2x"></i>
+        <p style="margin-top: 12px;">Fetching your orders...</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Mobile Bottom Nav -->
+  <nav class="mobile-bottom-nav">
+    <div class="mobile-nav-grid">
+      <a href="index.html" class="mobile-nav-item">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+      </a>
+      <a href="menu.html" class="mobile-nav-item">
+        <i class="fa-solid fa-utensils"></i>
+        <span>Menu</span>
+      </a>
+      <a href="orders.html" class="mobile-nav-item active">
+        <i class="fa-solid fa-receipt"></i>
+        <span>Orders</span>
+      </a>
+      <a href="cart.html" class="mobile-nav-item">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span>Cart</span>
+        <span class="mobile-badge cart-count-badge" style="display: none;">0</span>
+      </a>
+      <a href="profile.html" class="mobile-nav-item">
+        <i class="fa-solid fa-user"></i>
+        <span>Profile</span>
+      </a>
+    </div>
+  </nav>
+
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/navbar.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = JSON.parse(localStorage.getItem('user'));
+      const token = localStorage.getItem('token');
+      const container = document.getElementById('ordersContainer');
+
+      if (!user) {
+        container.innerHTML = `
+          <div style="text-align: center; padding: 48px; background: white; border-radius: var(--radius-xl); border: 1px solid var(--border);">
+            <i class="fa-solid fa-lock fa-3x" style="color: var(--primary); margin-bottom: 16px;"></i>
+            <h3>Please Sign In</h3>
+            <p style="color: var(--text-muted); margin: 8px 0 20px 0;">You need to be logged in to view your placed orders.</p>
+            <a href="login.html" class="btn btn-primary">Log In / Register</a>
+          </div>
+        `;
+        return;
+      }
+
+      try {
+        const headers = {};
+        if (token) headers['Authorization'] = `Bearer ${token}`;
+
+        const res = await fetch(`${FoodieApp.API_BASE}/api/orders/my-orders?email=${encodeURIComponent(user.email || '')}`, { headers });
+        if (!res.ok) throw new Error('Failed to load orders');
+        const orders = await res.json();
+
+        if (orders.length === 0) {
+          container.innerHTML = `
+            <div style="text-align: center; padding: 48px; background: white; border-radius: var(--radius-xl); border: 1px solid var(--border);">
+              <i class="fa-solid fa-receipt fa-3x" style="color: var(--text-muted); margin-bottom: 16px;"></i>
+              <h3>No Orders Found</h3>
+              <p style="color: var(--text-muted); margin: 8px 0 20px 0;">You haven't placed any orders yet. Explore our mouthwatering menu!</p>
+              <a href="menu.html" class="btn btn-primary">Browse Menu</a>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = orders.map(order => {
+          let items = [];
+          try {
+            items = typeof order.cartJson === 'string' ? JSON.parse(order.cartJson) : order.cartJson;
+          } catch (e) {
+            items = [];
+          }
+
+          const statusKey = (order.orderStatus || 'pending').toLowerCase();
+          const formattedDate = order.createdAt ? new Date(order.createdAt).toLocaleDateString('en-IN', {
+            year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+          }) : 'Recent';
+
+          return `
+            <div class="order-card">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 16px;">
+                <div>
+                  <div style="font-weight: 800; font-size: 1.15rem; color: var(--dark);">
+                    Order #FE-${order.id}
+                  </div>
+                  <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;">
+                    <i class="fa-regular fa-clock"></i> Placed on ${formattedDate}
+                  </div>
+                </div>
+                <span class="status-pill ${statusKey}">
+                  ${(order.orderStatus || 'PENDING').replace(/_/g, ' ')}
+                </span>
+              </div>
+
+              <div style="margin-bottom: 16px;">
+                ${Array.isArray(items) && items.length > 0 ? items.map(i => `
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 0.92rem;">
+                    <span><strong style="color: var(--primary);">${i.quantity || 1} ×</strong> ${i.name}</span>
+                    <span style="font-weight: 600; color: var(--dark);">₹${(parseFloat(i.price || 0) * (i.quantity || 1)).toFixed(2)}</span>
+                  </div>
+                `).join('') : `<p style="font-size: 0.9rem; color: var(--text-muted);">${order.cartJson || 'Ordered Dishes'}</p>`}
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; background: var(--surface-soft); padding: 14px 18px; border-radius: var(--radius-md); font-size: 0.92rem; border: 1px solid var(--border);">
+                <div>
+                  <span style="color: var(--text-muted); font-size: 0.8rem; display: block;">Payment via ${order.paymentMethod || 'COD'}</span>
+                  <strong>Total Paid: ₹${parseFloat(order.totalAmount || 0).toFixed(2)}</strong>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                  <a href="order-details.html?id=${order.id}" class="btn btn-outline btn-sm">
+                    <i class="fa-solid fa-truck-fast"></i> Track Order
+                  </a>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+      } catch (err) {
+        console.error('Fetch orders error:', err);
+        container.innerHTML = `
+          <div style="text-align: center; padding: 48px; color: var(--danger);">
+            <p>Could not load order history. Please make sure the backend server is running.</p>
+          </div>
+        `;
+      }
+    });
+  </script>
+</body>
+</html>

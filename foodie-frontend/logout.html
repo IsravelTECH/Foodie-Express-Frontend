@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Logged Out - Foodie Express</title>
+
+  <!-- Google Fonts Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Shared CSS Modules -->
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/pages.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+</head>
+<body class="auth-page">
+
+  <div class="status-card animate-fade-in">
+    
+    <div class="status-icon-bubble status-logout">
+      👋
+    </div>
+
+    <h2>You've Been Logged Out</h2>
+    <p style="color: var(--text-muted); margin: 8px auto 24px; max-width: 400px;">
+      Thank you for visiting Foodie Express. Your session has been safely closed. See you again soon!
+    </p>
+
+    <div style="margin-bottom: 28px;">
+      <a href="login.html" class="btn btn-primary btn-lg w-full">
+        Sign In Again ➔
+      </a>
+    </div>
+
+    <div style="font-size: 0.85rem; color: var(--text-muted);">
+      <span>Redirecting to login in <strong id="countdownSec" style="color: var(--primary);">5</strong> seconds...</span>
+      <div style="margin-top: 14px;">
+        <a href="index.html" style="color: var(--text-secondary); text-decoration: underline;">Return to Homepage</a>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Clean up local session
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+
+    // Countdown redirect
+    let secondsLeft = 5;
+    const countdownEl = document.getElementById("countdownSec");
+
+    const timer = setInterval(() => {
+      secondsLeft--;
+      if (countdownEl) countdownEl.textContent = secondsLeft;
+      if (secondsLeft <= 0) {
+        clearInterval(timer);
+        window.location.href = "login.html";
+      }
+    }, 1000);
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal Sign In — Foodie Express</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <style>
+    .admin-auth-wrapper {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+    }
+    .admin-auth-visual {
+      background: linear-gradient(135deg, rgba(23, 23, 23, 0.85), rgba(232, 93, 4, 0.7)), url('images/indianfood.jpg');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 48px;
+      color: white;
+    }
+    .admin-auth-form-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+      background: var(--bg-surface);
+    }
+    .admin-auth-card {
+      width: 100%;
+      max-width: 420px;
+    }
+    @media (max-width: 900px) {
+      .admin-auth-wrapper { grid-template-columns: 1fr; }
+      .admin-auth-visual { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-auth-wrapper">
+    <!-- Left Visual -->
+    <div class="admin-auth-visual">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div class="logo-badge" style="background: white; color: var(--primary);">
+          <i class="fa-solid fa-utensils"></i>
+        </div>
+        <span style="font-family: 'Plus Jakarta Sans'; font-size: 1.3rem; font-weight: 800; color: white;">Foodie Express</span>
+      </div>
+
+      <div>
+        <h2 style="font-size: 2.2rem; color: white; margin-bottom: 14px; line-height: 1.2;">
+          Restaurant Operations & Real-Time Management
+        </h2>
+        <p style="color: rgba(255,255,255,0.85); font-size: 1rem; line-height: 1.6;">
+          Live orders dispatch, kitchen menu controls, customer analytics, table seating schedules, and revenue reports.
+        </p>
+      </div>
+
+      <div style="font-size: 0.85rem; color: rgba(255,255,255,0.65);">
+        Foodie Express Enterprise v2.4 • Secure RBAC
+      </div>
+    </div>
+
+    <!-- Right Login Form -->
+    <div class="admin-auth-form-wrap">
+      <div class="admin-auth-card">
+        <div style="margin-bottom: 32px;">
+          <div style="display: inline-block; padding: 4px 10px; background: var(--primary-subtle); color: var(--primary); font-size: 0.78rem; font-weight: 700; border-radius: var(--radius-sm); margin-bottom: 12px;">
+            STAFF & MANAGEMENT PORTAL
+          </div>
+          <h1 style="font-size: 1.8rem; color: var(--text-dark); margin-bottom: 8px;">Admin Sign In</h1>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Enter your verified credentials to access dashboard.</p>
+        </div>
+
+        <form id="adminLoginForm" onsubmit="handleAdminLogin(event)">
+          <div style="margin-bottom: 18px;">
+            <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; color: var(--text-dark);">Email Address</label>
+            <input type="email" id="adminEmail" value="admin@foodie.com" required placeholder="admin@foodie.com"
+                   style="width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius-md); font-size: 0.92rem;">
+          </div>
+
+          <div style="margin-bottom: 24px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+              <label style="font-size: 0.85rem; font-weight: 600; color: var(--text-dark);">Password</label>
+            </div>
+            <input type="password" id="adminPassword" value="Admin@123" required placeholder="••••••••"
+                   style="width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius-md); font-size: 0.92rem;">
+          </div>
+
+          <button type="submit" id="adminLoginBtn" class="btn btn-primary btn-lg" style="width: 100%; justify-content: center; margin-bottom: 20px;">
+            Sign In to Dashboard <i class="fa-solid fa-arrow-right"></i>
+          </button>
+
+          <div style="text-align: center;">
+            <a href="index.html" style="font-size: 0.85rem; color: var(--text-muted); text-decoration: none;">
+              <i class="fa-solid fa-store"></i> Back to Storefront
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/admin/admin.js"></script>
+  <script>
+    async function handleAdminLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('adminEmail').value.trim();
+      const password = document.getElementById('adminPassword').value;
+      const btn = document.getElementById('adminLoginBtn');
+
+      btn.disabled = true;
+      btn.innerHTML = 'Verifying Credentials... <i class="fa-solid fa-spinner fa-spin"></i>';
+
+      try {
+        const res = await fetch(`${FoodieApp.API_BASE}/api/users/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          if (data.token) localStorage.setItem('token', data.token);
+
+          const role = data.role || (data.user && data.user.role) || '';
+          if (role !== 'ROLE_ADMIN' && role !== 'ADMIN') {
+            FoodieApp.showToast('Access Denied: This portal requires Administrator privileges.', 'error');
+            btn.disabled = false;
+            btn.innerHTML = 'Sign In to Dashboard <i class="fa-solid fa-arrow-right"></i>';
+            return;
+          }
+
+          localStorage.setItem('user', JSON.stringify(data.user || { name: 'Admin Manager', email }));
+          FoodieApp.showToast('Welcome back, Admin! Redirecting...', 'success');
+          setTimeout(() => location.href = 'admin-dashboard.html', 800);
+        } else {
+          FoodieApp.showToast(`Login failed: ${data.error || data.message || 'Invalid credentials'}`, 'error');
+          btn.disabled = false;
+          btn.innerHTML = 'Sign In to Dashboard <i class="fa-solid fa-arrow-right"></i>';
+        }
+      } catch (err) {
+        console.error('Admin login error:', err);
+        FoodieApp.showToast('Could not reach backend authentication server.', 'error');
+        btn.disabled = false;
+        btn.innerHTML = 'Sign In to Dashboard <i class="fa-solid fa-arrow-right"></i>';
+      }
+    }
+  </script>
+</body>
+</html>

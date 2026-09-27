@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assigned Orders — Foodie Express Delivery Portal</title>
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <!-- Supervisor Sidebar -->
+    <aside class="admin-sidebar" id="supervisorSidebar">
+      <div class="admin-brand">
+        <div class="brand-logo" style="background: linear-gradient(135deg, #E85D04, #F48C06);"><i class="fa-solid fa-person-biking"></i></div>
+        <div class="brand-text">
+          <h2>Foodie Express</h2>
+          <span style="color: #E85D04; font-weight: 700;">Delivery Operations</span>
+        </div>
+      </div>
+
+      <div class="sidebar-section-title">DELIVERY OPERATIONS</div>
+      <nav class="admin-nav">
+        <a href="supervisor-dashboard.html" class="admin-nav-link">
+          <i class="fa-solid fa-chart-pie"></i><span>Dashboard</span>
+        </a>
+        <a href="supervisor-orders.html" class="admin-nav-link active">
+          <i class="fa-solid fa-boxes-stacked"></i><span>Assigned Orders</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-section-title">SYSTEM</div>
+      <nav class="admin-nav">
+        <a href="index.html" class="admin-nav-link" target="_blank">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i><span>Live Storefront</span>
+        </a>
+      </nav>
+
+      <div class="admin-sidebar-footer">
+        <div class="admin-user-profile">
+          <div class="admin-avatar" id="supervisorUserInitial" style="background: #FFF1E8; color: #E85D04;">S</div>
+          <div class="admin-user-details">
+            <h4 id="supervisorUserName">Supervisor</h4>
+            <span id="supervisorUserEmail">supervisor@foodie.com</span>
+          </div>
+        </div>
+        <button class="admin-btn admin-btn-outline admin-btn-sm" style="width: 100%; justify-content: center;" onclick="SupervisorApp.logout()">
+          <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <header class="admin-topbar">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle Sidebar"><i class="fa-solid fa-bars"></i></button>
+        <div class="topbar-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="orderSearch" placeholder="Search orders by customer or address..." oninput="filterSupervisorOrders()">
+        </div>
+        <div class="topbar-actions">
+          <a href="supervisor-dashboard.html" class="admin-btn admin-btn-outline admin-btn-sm">
+            <i class="fa-solid fa-arrow-left"></i> Dashboard
+          </a>
+          <div class="topbar-avatar" id="topbarAvatar" style="background: #FFF1E8; color: #E85D04;">S</div>
+        </div>
+      </header>
+
+      <div class="admin-content">
+        <div class="admin-page-header">
+          <div>
+            <h1>Assigned Deliveries Queue</h1>
+            <p>Manage and dispatch the customer food orders assigned under your supervision.</p>
+          </div>
+          <div style="display: flex; gap: 12px; align-items: center;">
+            <select id="statusFilter" class="admin-select" onchange="filterSupervisorOrders()">
+              <option value="ALL">All Delivery Statuses</option>
+              <option value="PREPARING">Preparing</option>
+              <option value="OUT_FOR_DELIVERY">Out for Delivery</option>
+              <option value="DELIVERED">Delivered</option>
+            </select>
+            <button class="admin-btn admin-btn-outline" onclick="loadSupervisorOrders()">
+              <i class="fa-solid fa-rotate"></i> Refresh
+            </button>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <div class="admin-table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Order #</th>
+                  <th>Customer Info</th>
+                  <th>Delivery Address</th>
+                  <th>Ordered Items</th>
+                  <th>Total</th>
+                  <th>Payment</th>
+                  <th>Status</th>
+                  <th>Dispatch Action</th>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody id="supervisorOrdersTbody">
+                <tr>
+                  <td colspan="9" style="text-align: center; padding: 32px; color: var(--admin-text-muted);">
+                    <i class="fa-solid fa-spinner fa-spin"></i> Loading assigned orders...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/supervisor/supervisor.js"></script>
+  <script>
+    let myOrders = [];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadSupervisorOrders();
+    });
+
+    async function loadSupervisorOrders() {
+      try {
+        const res = await SupervisorApp.authFetch('/api/supervisor/orders');
+        if (!res.ok) throw new Error('Failed to load supervisor orders');
+        myOrders = await res.json();
+        filterSupervisorOrders();
+      } catch (err) {
+        console.error(err);
+        FoodieApp.showToast('Failed to fetch assigned orders.', 'error');
+      }
+    }
+
+    function filterSupervisorOrders() {
+      const search = document.getElementById('orderSearch')?.value.toLowerCase().trim() || '';
+      const status = document.getElementById('statusFilter')?.value || 'ALL';
+
+      const filtered = myOrders.filter(o => {
+        const matchSearch = !search ||
+          (o.name && o.name.toLowerCase().includes(search)) ||
+          (o.phone && o.phone.includes(search)) ||
+          (o.address && o.address.toLowerCase().includes(search)) ||
+          (`FE-${o.id}`.toLowerCase().includes(search));
+
+        const matchStatus = status === 'ALL' || o.orderStatus === status;
+        return matchSearch && matchStatus;
+      });
+
+      renderTable(filtered);
+    }
+
+    function renderTable(orders) {
+      const tbody = document.getElementById('supervisorOrdersTbody');
+      if (!tbody) return;
+
+      if (orders.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; padding: 32px; color: var(--admin-text-muted);">No orders matching filter criteria.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = orders.map(order => {
+        let itemsSummary = '';
+        try {
+          const cart = typeof order.cartJson === 'string' ? JSON.parse(order.cartJson) : order.cartJson;
+          if (Array.isArray(cart)) {
+            itemsSummary = cart.map(i => `${i.name} × ${i.quantity}`).join(', ');
+          }
+        } catch {
+          itemsSummary = order.cartJson || 'Order items';
+        }
+
+        let actionBtn = '';
+        if (order.orderStatus === 'PREPARING' || order.orderStatus === 'CONFIRMED' || order.orderStatus === 'READY') {
+          actionBtn = `<button class="admin-btn admin-btn-sm" style="background:#2563EB;color:white;" onclick="updateOrderStatus(${order.id}, 'OUT_FOR_DELIVERY')"><i class="fa-solid fa-truck-fast"></i> Mark Out for Delivery</button>`;
+        } else if (order.orderStatus === 'OUT_FOR_DELIVERY') {
+          actionBtn = `<button class="admin-btn admin-btn-success admin-btn-sm" onclick="updateOrderStatus(${order.id}, 'DELIVERED')"><i class="fa-solid fa-check"></i> Mark Delivered</button>`;
+        } else {
+          actionBtn = `<span style="font-size:0.8rem;color:#16A34A;font-weight:600;"><i class="fa-solid fa-circle-check"></i> Delivered</span>`;
+        }
+
+        return `
+          <tr>
+            <td><strong>#FE-${order.id}</strong></td>
+            <td>
+              <div style="font-weight: 600;">${order.name || 'Customer'}</div>
+              <div style="font-size: 0.75rem; color: var(--admin-text-muted);"><a href="tel:${order.phone}" style="color:#2563EB;"><i class="fa-solid fa-phone"></i> ${order.phone || 'N/A'}</a></div>
+            </td>
+            <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${order.address || ''}">
+              ${order.address || 'Standard Address'}
+            </td>
+            <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${itemsSummary}">
+              ${itemsSummary}
+            </td>
+            <td><strong>₹${parseFloat(order.totalAmount || 0).toFixed(2)}</strong></td>
+            <td><span style="font-size: 0.82rem; font-weight: 600;">${order.paymentMethod || 'COD'}</span></td>
+            <td>
+              <span class="badge-status status-${(order.orderStatus || 'pending').toLowerCase()}">
+                ${order.orderStatus}
+              </span>
+            </td>
+            <td>${actionBtn}</td>
+            <td>
+              <a href="supervisor-order-details.html?id=${order.id}" class="admin-btn admin-btn-outline admin-btn-sm">
+                👁️ Manifest
+              </a>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    async function updateOrderStatus(orderId, newStatus) {
+      const confirmed = await FoodieApp.confirmModal({
+        title: `Advance Delivery Status?`,
+        message: `Mark Order #FE-${orderId} as ${newStatus.replace(/_/g, ' ')}?`,
+        confirmText: `Confirm ${newStatus.replace(/_/g, ' ')}`,
+        type: 'primary'
+      });
+      if (!confirmed) return;
+
+      try {
+        const res = await SupervisorApp.authFetch(`/api/supervisor/orders/${orderId}/status`, {
+          method: 'PUT',
+          body: JSON.stringify({ status: newStatus })
+        });
+        if (res.ok) {
+          FoodieApp.showToast(`Order #FE-${orderId} marked as ${newStatus.replace(/_/g, ' ')}!`, 'success', 'Status Updated');
+          loadSupervisorOrders();
+        } else {
+          const err = await res.json();
+          FoodieApp.showToast(err.error || 'Failed to update order status.', 'error');
+        }
+      } catch (err) {
+        console.error(err);
+        FoodieApp.showToast('Server error updating order status.', 'error');
+      }
+    }
+  </script>
+</body>
+</html>

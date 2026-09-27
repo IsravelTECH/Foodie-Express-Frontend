@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orders Management — Foodie Express Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="admin-brand">
+        <div class="brand-logo"><i class="fa-solid fa-utensils"></i></div>
+        <div class="brand-text">
+          <h2>Foodie Express</h2>
+          <span>Restaurant Manager</span>
+        </div>
+      </div>
+
+      <div class="sidebar-section-title">MANAGEMENT</div>
+      <nav class="admin-nav">
+        <a href="admin-dashboard.html" class="admin-nav-link">
+          <i class="fa-solid fa-chart-pie"></i><span>Dashboard</span>
+        </a>
+        <a href="admin-orders.html" class="admin-nav-link active">
+          <i class="fa-solid fa-receipt"></i><span>Orders</span>
+        </a>
+        <a href="admin-menu.html" class="admin-nav-link">
+          <i class="fa-solid fa-bowl-food"></i><span>Menu Items</span>
+        </a>
+        <a href="admin-categories.html" class="admin-nav-link">
+          <i class="fa-solid fa-tags"></i><span>Categories</span>
+        </a>
+        <a href="admin-customers.html" class="admin-nav-link">
+          <i class="fa-solid fa-users"></i><span>Customers</span>
+        </a>
+        <a href="admin-payments.html" class="admin-nav-link">
+          <i class="fa-solid fa-credit-card"></i><span>Payments</span>
+        </a>
+        <a href="admin-reservations.html" class="admin-nav-link">
+          <i class="fa-solid fa-calendar-check"></i><span>Reservations</span>
+        </a>
+        <a href="admin-messages.html" class="admin-nav-link">
+          <i class="fa-solid fa-envelope"></i><span>Inquiries</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-section-title">SYSTEM</div>
+      <nav class="admin-nav">
+        <a href="admin-settings.html" class="admin-nav-link">
+          <i class="fa-solid fa-sliders"></i><span>Store Settings</span>
+        </a>
+        <a href="index.html" class="admin-nav-link" target="_blank">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i><span>Live Storefront</span>
+        </a>
+      </nav>
+
+      <div class="admin-sidebar-footer">
+        <div class="admin-user-profile">
+          <div class="admin-avatar" id="adminUserInitial">A</div>
+          <div class="admin-user-details">
+            <h4 id="adminUserName">Admin Manager</h4>
+            <span id="adminUserEmail">admin@foodie.com</span>
+          </div>
+        </div>
+        <button class="admin-btn admin-btn-outline admin-btn-sm" style="width: 100%; justify-content: center;" onclick="AdminApp.logout()">
+          <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <header class="admin-topbar">
+  <link rel="icon" type="image/png" href="images/logo.png">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle Sidebar"><i class="fa-solid fa-bars"></i></button>
+        <div class="topbar-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="orderSearch" placeholder="Search by customer name, phone, order #..." oninput="OrdersController.filterOrders()">
+        </div>
+        <div class="topbar-actions">
+          <div class="topbar-avatar" id="topbarAvatar">A</div>
+        </div>
+      </header>
+
+      <div class="admin-content">
+        <div class="admin-page-header">
+          <div>
+            <h1>Orders Management</h1>
+            <p>Track, process, and update the live status of customer food orders.</p>
+          </div>
+          <div style="display: flex; gap: 12px; align-items: center;">
+            <select id="orderStatusFilter" class="admin-select" onchange="OrdersController.filterOrders()">
+              <option value="ALL">All Statuses</option>
+              <option value="PENDING">Pending</option>
+              <option value="CONFIRMED">Confirmed</option>
+              <option value="PREPARING">Preparing</option>
+              <option value="READY">Ready</option>
+              <option value="OUT_FOR_DELIVERY">Out for Delivery</option>
+              <option value="DELIVERED">Delivered</option>
+              <option value="CANCELLED">Cancelled</option>
+            </select>
+            <button class="admin-btn admin-btn-outline" onclick="OrdersController.loadOrders()">
+              <i class="fa-solid fa-rotate"></i> Refresh
+            </button>
+          </div>
+        </div>
+
+        <!-- Bulk Action Bar -->
+        <div id="bulkActionBar" style="display: none; background: #FFF7ED; border: 1px solid #FDBA74; padding: 12px 20px; border-radius: 12px; margin-bottom: 16px; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+          <div style="font-weight: 600; color: #9A3412; display: flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-circle-check"></i>
+            <span id="selectedCountText">0 orders selected</span>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button class="admin-btn admin-btn-primary admin-btn-sm" onclick="OrdersController.openBulkAssignModal()">
+              <i class="fa-solid fa-user-plus"></i> Assign to Supervisor
+            </button>
+            <button class="admin-btn admin-btn-outline admin-btn-sm" onclick="OrdersController.clearSelection()">
+              Cancel
+            </button>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <div class="admin-table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th style="width: 40px;"><input type="checkbox" id="selectAllCheckbox" onchange="OrdersController.toggleSelectAll(this.checked)"></th>
+                  <th>Order #</th>
+                  <th>Customer</th>
+                  <th>Items</th>
+                  <th>Total Amount</th>
+                  <th>Payment</th>
+                  <th>Order Status</th>
+                  <th>Assigned Supervisor</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTbody">
+                <tr>
+                  <td colspan="10" style="text-align: center; padding: 32px; color: var(--admin-text-muted);">
+                    <i class="fa-solid fa-spinner fa-spin"></i> Loading orders list...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Assign Supervisor Modal -->
+  <div class="admin-modal" id="assignSupervisorModal">
+    <div class="admin-modal-dialog">
+      <div class="admin-modal-header">
+        <h3 id="assignModalTitle">Assign Order to Delivery Supervisor</h3>
+        <button class="admin-modal-close" onclick="OrdersController.closeAssignModal()">&times;</button>
+      </div>
+      <div class="admin-modal-body">
+        <p style="font-size: 0.9rem; color: var(--admin-text-muted); margin-bottom: 16px;" id="assignModalSubtitle">
+          Select an active supervisor to oversee preparation and doorstep delivery.
+        </p>
+        
+        <div style="margin-bottom: 16px;">
+          <label class="form-label" style="font-weight: 600; margin-bottom: 6px; display: block;">Select Supervisor</label>
+          <select id="supervisorSelectInput" class="admin-select" style="width: 100%; height: 44px; font-size: 0.95rem;">
+            <option value="">-- Choose Active Supervisor --</option>
+          </select>
+        </div>
+
+        <div id="supervisorPreviewCard" style="display: none; background: #F8FAFC; border: 1px solid #E2E8F0; padding: 14px; border-radius: 10px; margin-top: 12px;">
+          <div style="font-weight: 600; font-size: 0.92rem; color: #1E293B;" id="prevSupName">Vikram Singh</div>
+          <div style="font-size: 0.82rem; color: #64748B;" id="prevSupEmail">supervisor@foodie.com</div>
+          <div style="font-size: 0.82rem; color: #64748B; margin-top: 4px;" id="prevSupPhone"><i class="fa-solid fa-phone"></i> +91 9876512345</div>
+        </div>
+      </div>
+      <div class="admin-modal-footer">
+        <button class="admin-btn admin-btn-outline" onclick="OrdersController.closeAssignModal()">Cancel</button>
+        <button class="admin-btn admin-btn-primary" id="confirmAssignBtn" onclick="OrdersController.confirmAssignment()">Confirm Assignment</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/admin/admin.js"></script>
+  <script src="assets/js/admin/orders.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      OrdersController.loadOrders();
+      OrdersController.loadSupervisors();
+    });
+  </script>
+</body>
+</html>

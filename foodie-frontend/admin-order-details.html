@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Details — Foodie Express Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="admin-brand">
+        <div class="brand-logo"><i class="fa-solid fa-utensils"></i></div>
+        <div class="brand-text">
+          <h2>Foodie Express</h2>
+          <span>Restaurant Manager</span>
+        </div>
+      </div>
+
+      <div class="sidebar-section-title">MANAGEMENT</div>
+      <nav class="admin-nav">
+        <a href="admin-dashboard.html" class="admin-nav-link">
+          <i class="fa-solid fa-chart-pie"></i><span>Dashboard</span>
+        </a>
+        <a href="admin-orders.html" class="admin-nav-link active">
+          <i class="fa-solid fa-receipt"></i><span>Orders</span>
+        </a>
+        <a href="admin-menu.html" class="admin-nav-link">
+          <i class="fa-solid fa-bowl-food"></i><span>Menu Items</span>
+        </a>
+        <a href="admin-categories.html" class="admin-nav-link">
+          <i class="fa-solid fa-tags"></i><span>Categories</span>
+        </a>
+        <a href="admin-customers.html" class="admin-nav-link">
+          <i class="fa-solid fa-users"></i><span>Customers</span>
+        </a>
+        <a href="admin-payments.html" class="admin-nav-link">
+          <i class="fa-solid fa-credit-card"></i><span>Payments</span>
+        </a>
+        <a href="admin-reservations.html" class="admin-nav-link">
+          <i class="fa-solid fa-calendar-check"></i><span>Reservations</span>
+        </a>
+        <a href="admin-messages.html" class="admin-nav-link">
+          <i class="fa-solid fa-envelope"></i><span>Inquiries</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-section-title">SYSTEM</div>
+      <nav class="admin-nav">
+        <a href="admin-settings.html" class="admin-nav-link">
+          <i class="fa-solid fa-sliders"></i><span>Store Settings</span>
+        </a>
+      </nav>
+
+      <div class="admin-sidebar-footer">
+        <div class="admin-user-profile">
+          <div class="admin-avatar" id="adminUserInitial">A</div>
+          <div class="admin-user-details">
+            <h4 id="adminUserName">Admin Manager</h4>
+            <span id="adminUserEmail">admin@foodie.com</span>
+          </div>
+        </div>
+        <button class="admin-btn admin-btn-outline admin-btn-sm" style="width: 100%; justify-content: center;" onclick="AdminApp.logout()">
+          <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <header class="admin-topbar">
+  <link rel="icon" type="image/png" href="images/logo.png">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle Sidebar"><i class="fa-solid fa-bars"></i></button>
+        <div style="font-weight: 600; color: var(--admin-text-main);">Order Detailed Breakdown</div>
+        <div class="topbar-actions">
+          <a href="admin-orders.html" class="admin-btn admin-btn-outline admin-btn-sm">
+            <i class="fa-solid fa-arrow-left"></i> Back to Orders
+          </a>
+        </div>
+      </header>
+
+      <div class="admin-content" id="orderDetailsContainer">
+        <div style="text-align: center; padding: 48px; color: var(--admin-text-muted);">
+          <i class="fa-solid fa-spinner fa-spin fa-2x"></i>
+          <p style="margin-top: 12px;">Loading order details...</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="assets/js/admin/admin.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const params = new URLSearchParams(window.location.search);
+      const orderId = params.get('id');
+      const container = document.getElementById('orderDetailsContainer');
+
+      if (!orderId) {
+        container.innerHTML = `<div style="text-align:center;padding:48px;"><h3>No order ID specified.</h3><a href="admin-orders.html" class="admin-btn admin-btn-primary" style="margin-top:12px;">Return to Orders</a></div>`;
+        return;
+      }
+
+      try {
+        const res = await AdminApp.authFetch(`/api/admin/orders/${orderId}`);
+        if (!res.ok) throw new Error('Failed to fetch order details');
+        const order = await res.json();
+
+        let items = [];
+        try {
+          items = typeof order.cartJson === 'string' ? JSON.parse(order.cartJson) : order.cartJson;
+        } catch (e) {
+          console.warn('Could not parse cart JSON', e);
+        }
+
+        container.innerHTML = `
+          <div class="admin-page-header">
+            <div>
+              <h1>Order #FE-${order.id}</h1>
+              <p>Placed on ${order.createdAt ? new Date(order.createdAt).toLocaleString() : 'N/A'}</p>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: center;">
+              <select id="statusSelect" class="admin-select">
+                <option value="PENDING" ${order.orderStatus === 'PENDING' ? 'selected' : ''}>PENDING</option>
+                <option value="CONFIRMED" ${order.orderStatus === 'CONFIRMED' ? 'selected' : ''}>CONFIRMED</option>
+                <option value="PREPARING" ${order.orderStatus === 'PREPARING' ? 'selected' : ''}>PREPARING</option>
+                <option value="READY" ${order.orderStatus === 'READY' ? 'selected' : ''}>READY</option>
+                <option value="OUT_FOR_DELIVERY" ${order.orderStatus === 'OUT_FOR_DELIVERY' ? 'selected' : ''}>OUT FOR DELIVERY</option>
+                <option value="DELIVERED" ${order.orderStatus === 'DELIVERED' ? 'selected' : ''}>DELIVERED</option>
+                <option value="CANCELLED" ${order.orderStatus === 'CANCELLED' ? 'selected' : ''}>CANCELLED</option>
+              </select>
+              <button class="admin-btn admin-btn-primary" onclick="updateThisStatus(${order.id})">
+                Update Status
+              </button>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+            <!-- Left: Order Items & Pricing Breakdown -->
+            <div style="display: flex; flex-direction: column; gap: 24px;">
+              <div class="admin-card">
+                <div class="admin-card-header">
+                  <h3>Ordered Items (${Array.isArray(items) ? items.length : 0})</h3>
+                  <span class="badge-status status-${(order.orderStatus || 'pending').toLowerCase()}">
+                    ${order.orderStatus || 'PENDING'}
+                  </span>
+                </div>
+                <div class="admin-table-responsive">
+                  <table class="admin-table">
+                    <thead>
+                      <tr>
+                        <th>Item</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                        <th>Subtotal</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      ${Array.isArray(items) && items.length > 0 ? items.map(item => `
+                        <tr>
+                          <td>
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                              ${item.image ? `<img src="${item.image}" style="width: 44px; height: 44px; border-radius: 8px; object-fit: cover;">` : ''}
+                              <div>
+                                <strong style="font-size: 0.95rem;">${item.name || 'Dish'}</strong>
+                                <div style="font-size: 0.78rem; color: var(--admin-text-muted);">${item.category || 'Food Item'}</div>
+                              </div>
+                            </div>
+                          </td>
+                          <td>₹${parseFloat(item.price || 0).toFixed(2)}</td>
+                          <td><strong>× ${item.quantity || 1}</strong></td>
+                          <td><strong>₹${(parseFloat(item.price || 0) * (item.quantity || 1)).toFixed(2)}</strong></td>
+                        </tr>
+                      `).join('') : `<tr><td colspan="4" style="text-align:center;padding:16px;">${order.cartJson || 'No structured items'}</td></tr>`}
+                    </tbody>
+                  </table>
+                </div>
+
+                <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--admin-border); display: flex; flex-direction: column; gap: 8px; align-items: flex-end;">
+                  <div style="display: flex; justify-content: space-between; width: 240px; font-size: 0.9rem; color: var(--admin-text-muted);">
+                    <span>Subtotal:</span>
+                    <span>₹${parseFloat(order.totalAmount || 0).toFixed(2)}</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; width: 240px; font-size: 0.9rem; color: var(--admin-text-muted);">
+                    <span>Delivery Fee:</span>
+                    <span style="color: #10B981; font-weight: 600;">FREE</span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; width: 240px; font-size: 1.15rem; font-weight: 800; color: var(--admin-text-main); margin-top: 6px; padding-top: 8px; border-top: 1px dashed var(--admin-border);">
+                    <span>Total Amount:</span>
+                    <span style="color: var(--admin-primary);">₹${parseFloat(order.totalAmount || 0).toFixed(2)}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Customer & Delivery Information -->
+            <div style="display: flex; flex-direction: column; gap: 24px;">
+              <div class="admin-card">
+                <h3 style="margin-bottom: 16px;"><i class="fa-solid fa-user" style="color: var(--admin-primary); margin-right: 8px;"></i> Customer Info</h3>
+                <div style="display: flex; flex-direction: column; gap: 12px; font-size: 0.92rem;">
+                  <div>
+                    <span style="color: var(--admin-text-muted); font-size: 0.8rem; display: block;">Full Name</span>
+                    <strong>${order.name || 'N/A'}</strong>
+                  </div>
+                  <div>
+                    <span style="color: var(--admin-text-muted); font-size: 0.8rem; display: block;">Email</span>
+                    <span>${order.email || 'N/A'}</span>
+                  </div>
+                  <div>
+                    <span style="color: var(--admin-text-muted); font-size: 0.8rem; display: block;">Phone Number</span>
+                    <span>${order.phone || 'N/A'}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="admin-card">
+                <h3 style="margin-bottom: 16px;"><i class="fa-solid fa-location-dot" style="color: var(--admin-secondary); margin-right: 8px;"></i> Delivery Destination</h3>
+                <div style="font-size: 0.92rem; line-height: 1.5; color: var(--admin-text-main);">
+                  <p><strong>${order.address || 'Standard Address'}</strong></p>
+                  <p style="color: var(--admin-text-muted);">${order.city || ''} ${order.state || ''} ${order.zipCode || ''}</p>
+                </div>
+              </div>
+
+              <div class="admin-card">
+                <h3 style="margin-bottom: 16px;"><i class="fa-solid fa-truck-fast" style="color: #4338CA; margin-right: 8px;"></i> Delivery Assignment</h3>
+                <div style="font-size: 0.92rem; line-height: 1.5; color: var(--admin-text-main);">
+                  ${order.supervisor ? `
+                    <div style="background: #EEF2FF; border: 1px solid #C7D2FE; padding: 12px; border-radius: 10px; margin-bottom: 12px;">
+                      <div style="font-weight: 700; color: #312E81;">${order.supervisor.name}</div>
+                      <div style="font-size: 0.82rem; color: #4338CA;">${order.supervisor.email}</div>
+                      <div style="font-size: 0.82rem; color: #4338CA; margin-top: 4px;"><i class="fa-solid fa-phone"></i> ${order.supervisor.phone || 'N/A'}</div>
+                      <div style="font-size: 0.75rem; color: #6366F1; margin-top: 6px;">Assigned on: ${order.assignedAt ? new Date(order.assignedAt).toLocaleString() : 'Recently'}</div>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                      <button class="admin-btn admin-btn-outline admin-btn-sm" style="flex: 1; justify-content: center;" onclick="openReassignModal(${order.id})">
+                        <i class="fa-solid fa-arrows-rotate"></i> Change
+                      </button>
+                      <button class="admin-btn admin-btn-danger admin-btn-sm" onclick="unassignSupervisorFromDetail(${order.id})">
+                        <i class="fa-solid fa-user-minus"></i> Unassign
+                      </button>
+                    </div>
+                  ` : `
+                    <div style="color: var(--admin-text-muted); margin-bottom: 12px;">No supervisor assigned to this order yet.</div>
+                    <button class="admin-btn admin-btn-primary admin-btn-sm" style="width: 100%; justify-content: center;" onclick="openReassignModal(${order.id})">
+                      <i class="fa-solid fa-user-plus"></i> Assign Supervisor
+                    </button>
+                  `}
+                </div>
+              </div>
+
+              <div class="admin-card">
+                <h3 style="margin-bottom: 16px;"><i class="fa-solid fa-credit-card" style="color: #10B981; margin-right: 8px;"></i> Payment Details</h3>
+                <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.92rem;">
+                  <div style="display: flex; justify-content: space-between;">
+                    <span style="color: var(--admin-text-muted);">Payment Method:</span>
+                    <strong>${order.paymentMethod || 'COD'}</strong>
+                  </div>
+                  <div style="display: flex; justify-content: space-between;">
+                    <span style="color: var(--admin-text-muted);">Payment Status:</span>
+                    <span class="badge-status status-${(order.paymentStatus || 'pending').toLowerCase()}">
+                      ${order.paymentStatus || 'PENDING'}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      } catch (err) {
+        console.error('Error loading order details:', err);
+        container.innerHTML = `<div style="text-align:center;padding:48px;color:#EF4444;"><h3>Failed to load order.</h3><a href="admin-orders.html" class="admin-btn admin-btn-outline" style="margin-top:12px;">Back to Orders</a></div>`;
+      }
+    });
+
+    let activeSupervisorsList = [];
+    async function loadSupervisorsList() {
+      try {
+        const res = await AdminApp.authFetch('/api/admin/supervisors');
+        if (res.ok) activeSupervisorsList = await res.json();
+  <!-- Reassign Supervisor Modal -->
+  <div class="admin-modal" id="reassignSupervisorModal">
+    <div class="admin-modal-dialog">
+      <div class="admin-modal-header">
+        <h3>Assign Delivery Supervisor</h3>
+        <button class="admin-modal-close" onclick="closeReassignModal()">&times;</button>
+      </div>
+      <div class="admin-modal-body">
+        <label class="form-label" style="font-weight: 600; margin-bottom: 8px; display: block;">Select Active Supervisor</label>
+        <select id="detailSupervisorSelect" class="admin-select" style="width: 100%; height: 44px;"></select>
+      </div>
+      <div class="admin-modal-footer">
+        <button class="admin-btn admin-btn-outline" onclick="closeReassignModal()">Cancel</button>
+        <button class="admin-btn admin-btn-primary" onclick="submitSupervisorAssignment()">Assign Supervisor</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/admin/admin.js"></script>
+  <script>
+    let activeSupervisorsList = [];
+    let currentOrderId = null;
+
+    async function loadSupervisorsList() {
+      try {
+        const res = await AdminApp.authFetch('/api/admin/supervisors');
+        if (res.ok) activeSupervisorsList = await res.json();
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    async function openReassignModal(orderId) {
+      currentOrderId = orderId;
+      if (activeSupervisorsList.length === 0) await loadSupervisorsList();
+      const select = document.getElementById('detailSupervisorSelect');
+      select.innerHTML = '<option value="">-- Choose Supervisor --</option>' +
+        activeSupervisorsList.map(s => `<option value="${s.id}">${s.name} (${s.email})</option>`).join('');
+      
+      const modal = document.getElementById('reassignSupervisorModal');
+      if (modal) modal.classList.add('active');
+    }
+
+    function closeReassignModal() {
+      const modal = document.getElementById('reassignSupervisorModal');
+      if (modal) modal.classList.remove('active');
+      currentOrderId = null;
+    }
+
+    async function submitSupervisorAssignment() {
+      const select = document.getElementById('detailSupervisorSelect');
+      const supervisorId = select ? select.value : null;
+
+      if (!supervisorId) {
+        AdminApp.showToast('Please select a supervisor.', 'error');
+        return;
+      }
+
+      try {
+        const res = await AdminApp.authFetch('/api/admin/orders/assign', {
+          method: 'POST',
+          body: JSON.stringify({ orderId: currentOrderId, supervisorId: Number(supervisorId) })
+        });
+        if (res.ok) {
+          closeReassignModal();
+          AdminApp.showToast('Supervisor assigned successfully!', 'success', 'Order Assigned');
+          setTimeout(() => location.reload(), 600);
+        } else {
+          AdminApp.showToast('Failed to assign supervisor.', 'error');
+        }
+      } catch (err) {
+        console.error(err);
+        AdminApp.showToast('Error during supervisor assignment.', 'error');
+      }
+    }
+
+    async function unassignSupervisorFromDetail(orderId) {
+      const confirmed = await FoodieApp.confirmModal({
+        title: 'Unassign Delivery Supervisor?',
+        message: 'Are you sure you want to remove the assigned supervisor from this order?',
+        confirmText: 'Unassign',
+        type: 'danger'
+      });
+      if (!confirmed) return;
+
+      try {
+        const res = await AdminApp.authFetch(`/api/admin/orders/${orderId}/unassign`, {
+          method: 'PUT'
+        });
+        if (res.ok) {
+          AdminApp.showToast('Supervisor unassigned successfully.', 'success', 'Unassigned');
+          setTimeout(() => location.reload(), 600);
+        } else {
+          AdminApp.showToast('Failed to unassign supervisor.', 'error');
+        }
+      } catch (err) {
+        console.error(err);
+        AdminApp.showToast('Error unassigning supervisor.', 'error');
+      }
+    }
+
+    async function updateThisStatus(orderId) {
+      const newStatus = document.getElementById('statusSelect').value;
+      try {
+        const res = await AdminApp.authFetch(`/api/admin/orders/${orderId}/status`, {
+          method: 'PUT',
+          body: JSON.stringify({ status: newStatus })
+        });
+        if (res.ok) {
+          AdminApp.showToast(`Order status updated to ${newStatus}`, 'success', 'Status Updated');
+          setTimeout(() => location.reload(), 800);
+        } else {
+          AdminApp.showToast('Failed to update status', 'error');
+        }
+      } catch (err) {
+        console.error(err);
+        AdminApp.showToast('Server error updating status', 'error');
+      }
+    }
+  </script>
+</body>
+</html>

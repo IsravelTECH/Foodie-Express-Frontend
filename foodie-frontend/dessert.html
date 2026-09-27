@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Desserts, Sweets & Beverages - Foodie Express</title>
+
+  <!-- Google Fonts Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Shared CSS Modules -->
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/pages.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+</head>
+<body>
+
+  <!-- ==================== STICKY NAVBAR ==================== -->
+  <header class="site-header">
+  <link rel="icon" type="image/png" href="images/logo.png">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <img src="images/logo.png" alt="Foodie Logo" onerror="this.style.display='none'">
+        <span>Foodie<span class="highlight">Express</span></span>
+      </a>
+
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="indian.html" class="nav-link">Indian</a>
+        <a href="veg.html" class="nav-link">Veg</a>
+        <a href="nonveg.html" class="nav-link">Non-Veg</a>
+        <a href="snacks.html" class="nav-link">Snacks</a>
+        <a href="dessert.html" class="nav-link active">Desserts</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="wishlist.html" class="action-btn" title="Your Wishlist">
+          <span>❤️</span>
+          <span class="badge-count wishlist-count-badge" style="display: none;">0</span>
+        </a>
+
+        <a href="cart.html" class="btn btn-primary btn-sm" title="View Cart">
+          <span>🛒</span>
+          <span class="cart-count-badge" id="cart-count">0</span>
+        </a>
+
+        <button id="profileTrigger" class="user-profile-btn" type="button">
+          <div class="avatar">👤</div>
+          <span id="navUserName">Account</span>
+        </button>
+
+        <button class="hamburger-btn" aria-label="Toggle menu" type="button">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== PROFILE DRAWER ==================== -->
+  <div class="profile-drawer-overlay" id="drawerOverlay"></div>
+  <aside class="profile-drawer" id="profileDrawer">
+    <div class="drawer-header">
+      <h3>User Profile</h3>
+      <button class="drawer-close-btn" id="drawerCloseBtn" type="button">✕</button>
+    </div>
+    <div class="drawer-avatar-card">
+      <div class="drawer-avatar" id="drawerAvatarText">👤</div>
+      <h4 id="drawerUserName">Welcome, Foodie!</h4>
+      <p id="drawerUserEmail" style="font-size: 0.85rem; color: var(--text-muted);">guest@foodie.com</p>
+    </div>
+    <ul class="drawer-menu">
+      <li class="drawer-menu-item"><a href="cart.html">🛒 My Cart</a></li>
+      <li class="drawer-menu-item"><a href="wishlist.html">❤️ Saved Wishlist</a></li>
+      <li class="drawer-menu-item"><a href="index.html#table-booking-section">🪑 Table Bookings</a></li>
+    </ul>
+    <div style="margin-top: auto;">
+      <a href="login.html" id="drawerAuthAction" class="btn btn-outline w-full">🔑 Login / Sign Up</a>
+    </div>
+  </aside>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="main-content" style="padding: 40px 0 80px;">
+    <div class="container">
+      
+      <!-- Section Header -->
+      <div class="section-header">
+        <span class="section-tag" style="background: rgba(142, 68, 173, 0.15); color: #8E44AD;">🍰 Sweet Indulgence & Drinks</span>
+        <h1 class="section-title">Heavenly Desserts, Shakes & Brews</h1>
+        <p class="section-subtitle">Melt-in-your-mouth Indian sweets, chocolate gateaux, thick milkshakes, and artisanal coffees.</p>
+      </div>
+
+      <!-- Menu Toolbar -->
+      <div class="menu-toolbar">
+        <div class="search-box-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchBox" placeholder="Search brownie, gulab jamun, milkshake, coffee..." onkeyup="MenuController.filterBySearch('searchBox', '.food-card')" />
+        </div>
+
+        <div class="filter-pills">
+          <button class="filter-pill active" onclick="MenuController.filterByCategory('all', this, '.food-card')">All Treats</button>
+          <button class="filter-pill" onclick="MenuController.filterByCategory('sweets', this, '.food-card')">Indian Sweets</button>
+          <button class="filter-pill" onclick="MenuController.filterByCategory('cakes', this, '.food-card')">Cakes & Pastries</button>
+          <button class="filter-pill" onclick="MenuController.filterByCategory('shakes', this, '.food-card')">Milkshakes & Smoothies</button>
+          <button class="filter-pill" onclick="MenuController.filterByCategory('coffee', this, '.food-card')">Cold & Hot Brews</button>
+        </div>
+
+        <select id="sortDishes" class="sort-select" onchange="MenuController.sortDishes('sortDishes', 'dessertMenuGrid', '.food-card')">
+          <option value="default">Sort by: Recommended</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="rating-desc">Highest Rated</option>
+          <option value="name-asc">Name: A to Z</option>
+        </select>
+      </div>
+
+      <!-- Food Items Grid -->
+      <div class="food-grid" id="dessertMenuGrid">
+
+        <!-- 1. Warm Gulab Jamun -->
+        <div class="food-card animate-fade-in" data-category="sweets" data-price="90" data-rating="4.9">
+          <div class="food-card-image-wrap">
+            <span class="card-badge badge-dessert">🍯 All-Time Favorite</span>
+            <img src="images/desserts/gualab.jpg" alt="Gulab Jamun" onerror="this.src='images/indian-desserts.jpg'">
+            <button class="card-wishlist-btn" onclick="toggleFav(this, 'Gulab Jamun', 90, 'images/desserts/gualab.jpg')">♡</button>
+          </div>
+          <div class="food-card-body">
+            <div class="food-card-header">
+              <h3 class="food-card-title">Warm Gulab Jamun (2 Pcs)</h3>
+              <div class="food-card-rating">★ 4.9</div>
+            </div>
+            <p class="food-card-desc">Soft fried milk dough dumplings soaked in fragrant rose and cardamom sugar syrup.</p>
+            <div class="food-card-footer">
+              <div class="food-price">
+                <span class="food-price-label">Price</span>
+                <span class="food-price-val"><span>₹</span>90</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="qty-counter">
+                  <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+                  <span class="qty-value">1</span>
+                  <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+                </div>
+                <button class="btn btn-primary btn-sm" onclick="MenuController.addCardToCart(this, 'Gulab Jamun', 90, 'images/desserts/gualab.jpg')">Add +</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Saffron Rasmalai -->
+        <div class="food-card animate-fade-in" data-category="sweets" data-price="120" data-rating="4.9">
+          <div class="food-card-image-wrap">
+            <span class="card-badge badge-dessert">🥛 Royal Sweet</span>
+            <img src="images/desserts/rasmalai.jpg" alt="Rasmalai" onerror="this.src='images/indian-desserts.jpg'">
+            <button class="card-wishlist-btn" onclick="toggleFav(this, 'Rasmalai', 120, 'images/desserts/rasmalai.jpg')">♡</button>
+          </div>
+          <div class="food-card-body">
+            <div class="food-card-header">
+              <h3 class="food-card-title">Kesar Pista Rasmalai (2 Pcs)</h3>
+              <div class="food-card-rating">★ 4.9</div>
+            </div>
+            <p class="food-card-desc">Soft flattened cottage cheese patties immersed in rich saffron-infused clotted cream milk.</p>
+            <div class="food-card-footer">
+              <div class="food-price">
+                <span class="food-price-label">Price</span>
+                <span class="food-price-val"><span>₹</span>120</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="qty-counter">
+                  <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+                  <span class="qty-value">1</span>
+                  <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+                </div>
+                <button class="btn btn-primary btn-sm" onclick="MenuController.addCardToCart(this, 'Rasmalai', 120, 'images/desserts/rasmalai.jpg')">Add +</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Chocolate Fudge Brownie -->
+        <div class="food-card animate-fade-in" data-category="cakes" data-price="140" data-rating="4.8">
+          <div class="food-card-image-wrap">
+            <span class="card-badge badge-dessert">🍫 Chocolate</span>
+            <img src="images/desserts/brownie.jpg" alt="Chocolate Brownie" onerror="this.src='images/indian-desserts.jpg'">
+            <button class="card-wishlist-btn" onclick="toggleFav(this, 'Brownie', 140, 'images/desserts/brownie.jpg')">♡</button>
+          </div>
+          <div class="food-card-body">
+            <div class="food-card-header">
+              <h3 class="food-card-title">Chocolate Fudge Brownie</h3>
+              <div class="food-card-rating">★ 4.8</div>
+            </div>
+            <p class="food-card-desc">Dense, fudgy chocolate brownie packed with dark chocolate chunks and walnut pieces.</p>
+            <div class="food-card-footer">
+              <div class="food-price">
+                <span class="food-price-label">Price</span>
+                <span class="food-price-val"><span>₹</span>140</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="qty-counter">
+                  <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+                  <span class="qty-value">1</span>
+                  <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+                </div>
+                <button class="btn btn-primary btn-sm" onclick="MenuController.addCardToCart(this, 'Brownie', 140, 'images/desserts/brownie.jpg')">Add +</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Choco Mousse -->
+        <div class="food-card animate-fade-in" data-category="cakes" data-price="180" data-rating="4.9">
+          <div class="food-card-image-wrap">
+            <span class="card-badge badge-dessert">🍰 Signature</span>
+            <img src="images/desserts/chocomouse.jpg" alt="Choco Mousse" onerror="this.src='images/indian-desserts.jpg'">
+            <button class="card-wishlist-btn" onclick="toggleFav(this, 'Choco Mousse', 180, 'images/desserts/chocomouse.jpg')">♡</button>
+          </div>
+          <div class="food-card-body">
+            <div class="food-card-header">
+              <h3 class="food-card-title">Belgian Dark Choco Mousse</h3>
+              <div class="food-card-rating">★ 4.9</div>
+            </div>
+            <p class="food-card-desc">Airy, velvety smooth dark chocolate mousse served in an individual dessert cup.</p>
+            <div class="food-card-footer">
+              <div class="food-price">
+                <span class="food-price-label">Price</span>
+                <span class="food-price-val"><span>₹</span>180</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="qty-counter">
+                  <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+                  <span class="qty-value">1</span>
+                  <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+                </div>
+                <button class="btn btn-primary btn-sm" onclick="MenuController.addCardToCart(this, 'Choco Mousse', 180, 'images/desserts/chocomouse.jpg')">Add +</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Thick Chocolate Milkshake -->
+        <div class="food-card animate-fade-in" data-category="shakes" data-price="150" data-rating="4.8">
+          <div class="food-card-image-wrap">
+            <span class="card-badge badge-dessert">🥤 Creamy</span>
+            <img src="images/desserts/chocomilkshake.jpg" alt="Chocolate Milkshake" onerror="this.src='images/indian-desserts.jpg'">
+            <button class="card-wishlist-btn" onclick="toggleFav(this, 'Choco Milkshake', 150, 'images/desserts/chocomilkshake.jpg')">♡</button>
+          </div>
+          <div class="food-card-body">
+            <div class="food-card-header">
+              <h3 class="food-card-title">Thick Choco Milkshake</h3>
+              <div class="food-card-rating">★ 4.8</div>
+            </div>
+            <p class="food-card-desc">Blended with premium chocolate gelato, chilled milk, and topped with chocolate fudge swirl.</p>
+            <div class="food-card-footer">
+              <div class="food-price">
+                <span class="food-price-label">Price</span>
+                <span class="food-price-val"><span>₹</span>150</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="qty-counter">
+                  <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+                  <span class="qty-value">1</span>
+                  <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+                </div>
+                <button class="btn btn-primary btn-sm" onclick="MenuController.addCardToCart(this, 'Choco Milkshake', 150, 'images/desserts/chocomilkshake.jpg')">Add +</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Fresh Strawberry Cake Slice -->
+        <div class="food-card animate-fade-in" data-category="cakes" data-price="160" data-rating="4.7">
+          <div class="food-card-image-wrap">
+            <span class="card-badge badge-dessert">🍓 Fresh Fruit</span>
+            <img src="images/desserts/strawberry cake.jpg" alt="Strawberry Cake" onerror="this.src='images/indian-desserts.jpg'">
+            <button class="card-wishlist-btn" onclick="toggleFav(this, 'Strawberry Cake', 160, 'images/desserts/strawberry cake.jpg')">♡</button>
+          </div>
+          <div class="food-card-body">
+            <div class="food-card-header">
+              <h3 class="food-card-title">Fresh Strawberry Pastry</h3>
+              <div class="food-card-rating">★ 4.7</div>
+            </div>
+            <p class="food-card-desc">Vanilla sponge cake layered with fresh strawberry compote and whipped cream frosting.</p>
+            <div class="food-card-footer">
+              <div class="food-price">
+                <span class="food-price-label">Price</span>
+                <span class="food-price-val"><span>₹</span>160</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="qty-counter">
+                  <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+                  <span class="qty-value">1</span>
+                  <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+                </div>
+                <button class="btn btn-primary btn-sm" onclick="MenuController.addCardToCart(this, 'Strawberry Cake', 160, 'images/desserts/strawberry cake.jpg')">Add +</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Royal Falooda -->
+        <div class="food-card animate-fade-in" data-category="shakes" data-price="170" data-rating="4.9">
+          <div class="food-card-image-wrap">
+            <span class="card-badge badge-dessert">🌹 Royal Drink</span>
+            <img src="images/juices/Falooda.jpg" alt="Royal Falooda" onerror="this.src='images/indian-desserts.jpg'">
+            <button class="card-wishlist-btn" onclick="toggleFav(this, 'Falooda', 170, 'images/juices/Falooda.jpg')">♡</button>
+          </div>
+          <div class="food-card-body">
+            <div class="food-card-header">
+              <h3 class="food-card-title">Royal Rose Falooda</h3>
+              <div class="food-card-rating">★ 4.9</div>
+            </div>
+            <p class="food-card-desc">Layered dessert with rose syrup, vermicelli, sweet basil seeds, jelly, and vanilla ice cream.</p>
+            <div class="food-card-footer">
+              <div class="food-price">
+                <span class="food-price-label">Price</span>
+                <span class="food-price-val"><span>₹</span>170</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="qty-counter">
+                  <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+                  <span class="qty-value">1</span>
+                  <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+                </div>
+                <button class="btn btn-primary btn-sm" onclick="MenuController.addCardToCart(this, 'Falooda', 170, 'images/juices/Falooda.jpg')">Add +</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. Iced Cold Coffee -->
+        <div class="food-card animate-fade-in" data-category="coffee" data-price="130" data-rating="4.8">
+          <div class="food-card-image-wrap">
+            <span class="card-badge badge-dessert">☕ Chilled Brew</span>
+            <img src="images/juices/Cold Coffee.jpg" alt="Cold Coffee" onerror="this.src='images/indian-desserts.jpg'">
+            <button class="card-wishlist-btn" onclick="toggleFav(this, 'Cold Coffee', 130, 'images/juices/Cold Coffee.jpg')">♡</button>
+          </div>
+          <div class="food-card-body">
+            <div class="food-card-header">
+              <h3 class="food-card-title">Frappe Cold Coffee</h3>
+              <div class="food-card-rating">★ 4.8</div>
+            </div>
+            <p class="food-card-desc">Freshly pulled espresso blended with creamy chilled milk, crushed ice, and a scoop of vanilla cream.</p>
+            <div class="food-card-footer">
+              <div class="food-price">
+                <span class="food-price-label">Price</span>
+                <span class="food-price-val"><span>₹</span>130</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="qty-counter">
+                  <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+                  <span class="qty-value">1</span>
+                  <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+                </div>
+                <button class="btn btn-primary btn-sm" onclick="MenuController.addCardToCart(this, 'Cold Coffee', 130, 'images/juices/Cold Coffee.jpg')">Add +</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="noResultsMsg" style="display: none; text-align: center; padding: 60px 20px;">
+        <h3>No sweet treats match your search 🍨</h3>
+        <p style="color: var(--text-muted); margin-top: 8px;">Try searching for another dessert or clear the filter.</p>
+      </div>
+
+      <div class="text-center" style="margin-top: 50px;">
+        <a href="cart.html" class="btn btn-primary btn-lg">View Cart ➔</a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ==================== SHARED FOOTER ==================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-logo" style="margin-bottom: 16px; color: white;">
+            <span>Foodie<span style="color: var(--primary);">Express</span></span>
+          </div>
+          <p>Delivering authentic flavors, freshly baked snacks, and indulgent desserts with unmatched speed and love.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="wishlist.html">Wishlist</a></li>
+            <li><a href="cart.html">Cart</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Categories</h4>
+          <ul class="footer-links">
+            <li><a href="indian.html">Indian</a></li>
+            <li><a href="veg.html">Pure Veg</a></li>
+            <li><a href="nonveg.html">Non-Veg</a></li>
+            <li><a href="dessert.html">Desserts</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact Us</h4>
+          <ul class="footer-links">
+            <li>📍 123 Food Street, Chennai</li>
+            <li>📞 +91 98765 43210</li>
+            <li>✉️ support@foodieexpress.com</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Foodie Express. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/navbar.js"></script>
+  <script src="assets/js/cart.js"></script>
+  <script src="assets/js/wishlist.js"></script>
+  <script src="assets/js/menu.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,278 @@
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #6A0DAD, #FFA500);
+  margin: 0;
+}
+
+.login-body {
+  background-image: url('images/food-bg.jpg');
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+nav {
+  background-color: #6a0dad;
+  padding: 15px;
+  text-align: center;
+  color: white;
+}
+
+nav a, nav button {
+  margin: 0 10px;
+  color: white;
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  font-size: 16px;
+}
+
+.menu-card {
+  background: white;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 0 10px #ccc;
+  display: inline-block;
+}
+
+.menu-card img {
+  width: 150px;
+  height: 100px;
+  border-radius: 8px;
+}
+
+.checkout-btn {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 25px;
+  background-color: red;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  text-align: center;
+}
+/* Fade-in effect on body */
+body {
+  animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Hover effect for menu cards */
+.menu-card:hover {
+  transform: scale(1.05);
+  transition: 0.3s ease;
+}
+
+/* Button animation on click */
+button:active {
+  transform: scale(0.95);
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+  }
+
+  .menu-card {
+    width: 90%;
+    margin: 10px auto;
+  }
+
+  .menu-section {
+    text-align: center;
+  }
+
+  .checkout-btn {
+    width: 90%;
+  }
+
+  .login-container {
+    width: 90%;
+  }
+
+  nav a, nav button {
+    display: block;
+    margin: 8px 0;
+  }
+}
+
+/* Full page purple background */
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #6a0dad, #b266ff);
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+}
+
+/* Headings in pink */
+h1, h2, h3, h4, h5, h6 {
+  color: #ff69b4; /* hot pink */
+}
+
+/* Optional: Make buttons pop! */
+button {
+  background-color: white;
+  color: #6a0dad;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #ff69b4;
+  color: white;
+}
+.menu-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.menu-card {
+  background-color: white;
+  color: #6a0dad;
+  width: 250px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.menu-card:hover {
+  transform: scale(1.05);
+}
+
+.menu-card img {
+  width: 100%;
+  height: 180px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  object-fit: cover;
+}
+
+.cart-button {
+  background-color: pink;
+  border: none;
+  color: #fff;
+  padding: 8px 15px;
+  border-radius: 6px;
+  font-weight: bold;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cart-button:hover {
+  background-color: #6ab8ff;
+  color: white;
+}
+
+.payment-btn-container {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.payment-button {
+  background-color: pink;
+  color: white;
+  font-weight: bold;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.payment-button:hover {
+  background-color: #6ab8ff;
+  color: white;
+}
+  /* ...your existing styles... */
+
+  .add-to-cart {
+    background-color: pink;
+    color: #6a0dad;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+  }
+
+  .add-to-cart:hover {
+    background-color: #66ccff;
+    color: white;
+  }
+
+  .cart-summary {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .proceed-button {
+    background-color: pink;
+    color: #6a0dad;
+    padding: 12px 25px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+  }
+
+  .proceed-button:hover {
+    background-color: #66ccff;
+    color: white;
+  }
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+  }
+  
+  .footer {
+    background-color: #d2b48c; /* Light brown */
+    color: black;
+    text-align: center;
+    padding: 15px 0;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  

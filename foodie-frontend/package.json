@@ -1,0 +1,12 @@
+{
+  "name": "foodie-express-frontend",
+  "version": "1.0.0",
+  "description": "Foodie Express - Premium Food Delivery & Table Reservation Web Frontend",
+  "private": true,
+  "scripts": {
+    "build": "echo 'Static assets ready for deployment'"
+  },
+  "keywords": ["food-delivery", "restaurant", "static-frontend", "vercel"],
+  "author": "Foodie Express Team",
+  "license": "UNLICENSED"
+}

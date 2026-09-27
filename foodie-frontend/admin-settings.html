@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Store Settings — Foodie Express Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="admin-brand">
+        <div class="brand-logo"><i class="fa-solid fa-utensils"></i></div>
+        <div class="brand-text">
+          <h2>Foodie Express</h2>
+          <span>Restaurant Manager</span>
+        </div>
+      </div>
+
+      <div class="sidebar-section-title">MANAGEMENT</div>
+      <nav class="admin-nav">
+        <a href="admin-dashboard.html" class="admin-nav-link">
+          <i class="fa-solid fa-chart-pie"></i><span>Dashboard</span>
+        </a>
+        <a href="admin-orders.html" class="admin-nav-link">
+          <i class="fa-solid fa-receipt"></i><span>Orders</span>
+        </a>
+        <a href="admin-menu.html" class="admin-nav-link">
+          <i class="fa-solid fa-bowl-food"></i><span>Menu Items</span>
+        </a>
+        <a href="admin-categories.html" class="admin-nav-link">
+          <i class="fa-solid fa-tags"></i><span>Categories</span>
+        </a>
+        <a href="admin-customers.html" class="admin-nav-link">
+          <i class="fa-solid fa-users"></i><span>Customers</span>
+        </a>
+        <a href="admin-payments.html" class="admin-nav-link">
+          <i class="fa-solid fa-credit-card"></i><span>Payments</span>
+        </a>
+        <a href="admin-reservations.html" class="admin-nav-link">
+          <i class="fa-solid fa-calendar-check"></i><span>Reservations</span>
+        </a>
+        <a href="admin-messages.html" class="admin-nav-link">
+          <i class="fa-solid fa-envelope"></i><span>Inquiries</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-section-title">SYSTEM</div>
+      <nav class="admin-nav">
+        <a href="admin-settings.html" class="admin-nav-link active">
+          <i class="fa-solid fa-sliders"></i><span>Store Settings</span>
+        </a>
+        <a href="index.html" class="admin-nav-link" target="_blank">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i><span>Live Storefront</span>
+        </a>
+      </nav>
+
+      <div class="admin-sidebar-footer">
+        <div class="admin-user-profile">
+          <div class="admin-avatar" id="adminUserInitial">A</div>
+          <div class="admin-user-details">
+            <h4 id="adminUserName">Admin Manager</h4>
+            <span id="adminUserEmail">admin@foodie.com</span>
+          </div>
+        </div>
+        <button class="admin-btn admin-btn-outline admin-btn-sm" style="width: 100%; justify-content: center;" onclick="AdminApp.logout()">
+          <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <header class="admin-topbar">
+  <link rel="icon" type="image/png" href="images/logo.png">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle Sidebar"><i class="fa-solid fa-bars"></i></button>
+        <div style="font-weight: 600; color: var(--admin-text-main);">Store Configuration</div>
+        <div class="topbar-actions">
+          <div class="topbar-avatar" id="topbarAvatar">A</div>
+        </div>
+      </header>
+
+      <div class="admin-content">
+        <div class="admin-page-header">
+          <div>
+            <h1>Restaurant Settings</h1>
+            <p>Configure store profile, operational timings, delivery charges, and taxes.</p>
+          </div>
+        </div>
+
+        <div style="max-width: 800px;">
+          <form onsubmit="SettingsAdminController.saveSettings(event)" class="admin-card">
+            <h3 style="margin-bottom: 20px;"><i class="fa-solid fa-shop" style="color: var(--admin-primary); margin-right: 8px;"></i> General Store Details</h3>
+            
+            <div class="admin-form-group">
+              <label class="admin-label">Restaurant Business Name</label>
+              <input type="text" id="restName" class="admin-input" required placeholder="Foodie Express">
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+              <div class="admin-form-group">
+                <label class="admin-label">Contact Phone</label>
+                <input type="text" id="restPhone" class="admin-input" placeholder="+91 98765 43210">
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-label">Contact Email</label>
+                <input type="email" id="restEmail" class="admin-input" placeholder="orders@foodieexpress.com">
+              </div>
+            </div>
+
+            <div class="admin-form-group">
+              <label class="admin-label">Storefront Physical Address</label>
+              <input type="text" id="restAddress" class="admin-input" placeholder="123 Food Street, MG Road, Bangalore">
+            </div>
+
+            <div class="admin-form-group">
+              <label class="admin-label">Operating Hours</label>
+              <input type="text" id="restHours" class="admin-input" placeholder="Mon - Sun: 10:00 AM - 11:30 PM">
+            </div>
+
+            <h3 style="margin: 28px 0 16px 0; padding-top: 20px; border-top: 1px solid var(--admin-border);"><i class="fa-solid fa-calculator" style="color: var(--admin-secondary); margin-right: 8px;"></i> Delivery & Pricing Configurations</h3>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+              <div class="admin-form-group">
+                <label class="admin-label">Base Delivery Fee (₹)</label>
+                <input type="number" id="deliveryFee" class="admin-input" step="1" placeholder="40">
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-label">Free Delivery Over (₹)</label>
+                <input type="number" id="freeDeliveryMin" class="admin-input" step="1" placeholder="499">
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-label">GST / Tax (%)</label>
+                <input type="number" id="taxPercent" class="admin-input" step="0.5" placeholder="5">
+              </div>
+            </div>
+
+            <div class="admin-form-group">
+              <label class="admin-label">Currency Symbol</label>
+              <input type="text" id="currencySymbol" class="admin-input" value="₹" style="max-width: 120px;">
+            </div>
+
+            <div style="background: rgba(32,184,166,0.08); border-left: 4px solid var(--admin-secondary); padding: 14px 18px; border-radius: 8px; margin: 20px 0; display: flex; align-items: center; gap: 12px;">
+              <input type="checkbox" id="acceptingOrders" checked style="width: 20px; height: 20px; cursor: pointer;">
+              <div>
+                <label for="acceptingOrders" style="font-weight: 700; cursor: pointer;">Accepting Customer Orders</label>
+                <p style="margin: 0; font-size: 0.82rem; color: var(--admin-text-muted);">When unchecked, customers will see an "Online Ordering Currently Closed" notice.</p>
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; margin-top: 24px;">
+              <button type="submit" class="admin-btn admin-btn-primary" style="padding: 12px 28px; font-size: 0.95rem;">
+                <i class="fa-solid fa-floppy-disk"></i> Save Changes
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="assets/js/admin/admin.js"></script>
+  <script src="assets/js/admin/settings.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      SettingsAdminController.loadSettings();
+    });
+  </script>
+</body>
+</html>

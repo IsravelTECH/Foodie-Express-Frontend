@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — Foodie Express</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <style>
+    .login-wrapper {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      background: var(--background);
+    }
+    .login-visual {
+      background: linear-gradient(135deg, rgba(23, 23, 23, 0.75), rgba(232, 93, 4, 0.65)), url('images/indianfood.jpg');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 56px;
+      color: #ffffff;
+      position: relative;
+    }
+    .login-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(244, 140, 6, 0.3), transparent 70%);
+      pointer-events: none;
+    }
+    .visual-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 2;
+    }
+    .visual-brand .logo-badge {
+      background: #ffffff;
+      color: var(--primary);
+    }
+    .visual-brand span {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 1.35rem;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+    }
+    .visual-content {
+      z-index: 2;
+      max-width: 480px;
+    }
+    .visual-content h2 {
+      font-size: clamp(2rem, 3.5vw, 2.75rem);
+      color: #ffffff;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    .visual-content p {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+    .visual-footer {
+      z-index: 2;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .login-form-area {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+      background: var(--background);
+    }
+    .login-card {
+      width: min(460px, 100%);
+      background: var(--surface);
+      border-radius: var(--radius-xl);
+      padding: 42px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
+    }
+    .login-header {
+      margin-bottom: 28px;
+    }
+    .login-header h1 {
+      font-size: 1.85rem;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+    .login-header p {
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+    }
+
+    .inline-error {
+      display: none;
+      background: var(--danger-light);
+      color: var(--danger);
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 18px;
+      border: 1px solid rgba(220, 38, 38, 0.2);
+    }
+
+    .input-with-icon {
+      position: relative;
+    }
+    .input-toggle-pwd {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .input-toggle-pwd:hover {
+      color: var(--dark);
+    }
+
+    @media (max-width: 900px) {
+      .login-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .login-visual {
+        display: none;
+      }
+      .login-card {
+        padding: 32px 24px;
+        box-shadow: none;
+        border: none;
+        background: transparent;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-wrapper">
+    <!-- Left Hero Visual Side -->
+    <div class="login-visual">
+      <div class="visual-brand">
+        <div class="logo-badge"><i class="fa-solid fa-utensils"></i></div>
+        <span>Foodie Express</span>
+      </div>
+
+      <div class="visual-content">
+        <h2>Delicious food.<br>Delivered beautifully.</h2>
+        <p>
+          Order gourmet dishes from top chefs, reserve intimate restaurant tables, and track real-time delivery all in one unified portal.
+        </p>
+      </div>
+
+      <div class="visual-footer">
+        © 2026 Foodie Express Platform • Enterprise Auth
+      </div>
+    </div>
+
+    <!-- Right Login Card Side -->
+    <div class="login-form-area">
+      <div class="login-card">
+        <div class="login-header">
+          <h1>Welcome back</h1>
+          <p>Sign in to continue your Foodie Express experience.</p>
+        </div>
+
+        <div id="login-inline-error" class="inline-error"></div>
+
+        <form id="login-form" onsubmit="AuthService.handleLogin(event)">
+          <div style="margin-bottom: 18px;">
+            <label class="form-label" for="login-email">Email Address</label>
+            <input type="email" id="login-email" class="form-control" placeholder="name@example.com" required autocomplete="email">
+          </div>
+
+          <div style="margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <label class="form-label" for="login-password" style="margin-bottom: 0;">Password</label>
+              <a href="#" onclick="FoodieApp.showToast('Please contact support@foodieexpress.com to reset credentials.', 'info')" style="font-size: 0.8rem; color: var(--primary); font-weight: 500;">Forgot Password?</a>
+            </div>
+            <div class="input-with-icon">
+              <input type="password" id="login-password" class="form-control" placeholder="Enter your password" required autocomplete="current-password">
+              <button type="button" class="input-toggle-pwd" onclick="AuthService.togglePasswordVisibility('login-password', this)">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 24px; font-size: 0.88rem; color: var(--text-secondary);">
+            <input type="checkbox" id="remember-me" style="accent-color: var(--primary); width: 16px; height: 16px;" checked>
+            <label for="remember-me" style="cursor: pointer;">Remember me</label>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; justify-content: center; margin-bottom: 22px;">
+            Sign In <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </form>
+
+        <div style="text-align: center; font-size: 0.88rem; color: var(--text-secondary); padding-top: 18px; border-top: 1px solid var(--border);">
+          <p>New to Foodie Express? <a href="signup.html" style="color: var(--primary); font-weight: 600;">Create Account</a></p>
+          <div style="margin-top: 14px;">
+            <a href="index.html" style="font-size: 0.82rem; color: var(--text-muted); text-decoration: none;">
+              <i class="fa-solid fa-arrow-left"></i> Back to Public Storefront
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/auth.js"></script>
+</body>
+</html>
