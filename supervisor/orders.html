@@ -1,18 +1,17 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/supervisor/">
-  <link rel="icon" type="image/png" href="/supervisor/images/foodie-logo.png">
+    <link rel="icon" type="image/png" href="images/foodie-logo.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Assigned Orders â€” Foodie Express Delivery Portal</title>
+  <title>Assigned Orders — Foodie Express Delivery Portal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="/shared/css/global.css">
-  <link rel="stylesheet" href="/shared/css/components.css">
-  <link rel="stylesheet" href="/supervisor/css/supervisor.css">
+  <link rel="stylesheet" href="../shared/css/global.css">
+  <link rel="stylesheet" href="../shared/css/components.css">
+  <link rel="stylesheet" href="css/supervisor.css">
 </head>
 <body>
   <div class="admin-layout">
@@ -30,7 +29,7 @@
         <a href="dashboard.html" class="admin-nav-link">
           <i class="fa-solid fa-chart-pie"></i><span>Dashboard</span>
         </a>
-        <a href="assigned-orders.html" class="admin-nav-link active">
+        <a href="orders.html" class="admin-nav-link active">
           <i class="fa-solid fa-boxes-stacked"></i><span>Assigned Orders</span>
         </a>
       </nav>
@@ -53,7 +52,7 @@
         <div class="admin-user-profile">
           <div class="admin-avatar" id="supervisorUserInitial">V</div>
           <div class="admin-user-details">
-            <h4 id="supervisorUserName">Vikram Singh</h4>
+            <h4 id="supervisorUserName">Supervisor Staff</h4>
             <span id="supervisorUserEmail">supervisor@foodie.com</span>
             <span class="admin-role-badge" id="supervisorUserRole">Supervisor</span>
           </div>
@@ -70,11 +69,11 @@
         <div class="topbar-left-content">
           <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle Sidebar"><i class="fa-solid fa-bars"></i></button>
           <span class="topbar-page-title">Assigned Orders Queue</span>
-          <span class="sup-live-tag"><span class="sup-live-dot"></span> Live</span>
+          <span class="sup-live-tag"><span class="sup-live-dot"></span> Live Dispatch</span>
         </div>
 
         <div class="topbar-actions">
-          <a href="dashboard.html" class="topbar-btn" title="Dashboard">
+          <a href="dashboard.html" class="topbar-btn" title="Back to Dashboard">
             <i class="fa-solid fa-chart-pie"></i>
           </a>
           <div class="admin-profile-dropdown-wrap">
@@ -83,7 +82,7 @@
               <div class="dropdown-header">
                 <div class="dropdown-avatar" id="dropdownAvatar">V</div>
                 <div class="dropdown-info">
-                  <h4 id="dropdownName">Vikram Singh</h4>
+                  <h4 id="dropdownName">Supervisor Staff</h4>
                   <span id="dropdownEmail">supervisor@foodie.com</span>
                   <span class="dropdown-role" id="dropdownRole">Supervisor</span>
                 </div>
@@ -95,7 +94,7 @@
               <a href="dashboard.html" class="dropdown-item">
                 <i class="fa-solid fa-chart-pie"></i> Dashboard
               </a>
-              <a href="assigned-orders.html" class="dropdown-item">
+              <a href="orders.html" class="dropdown-item">
                 <i class="fa-solid fa-boxes-stacked"></i> Assigned Orders
               </a>
               <a href="../customer/index.html" class="dropdown-item" target="_blank">
@@ -136,7 +135,7 @@
         <div class="orders-toolbar-wrapper">
           <div class="orders-search-box">
             <i class="fa-solid fa-magnifying-glass" style="color: #94A3B8;"></i>
-            <input type="text" id="orderSearch" placeholder="Search by Order #, Customer name, phone, or address..." oninput="filterSupervisorOrders()">
+            <input type="text" id="orderSearch" placeholder="Search by Order #, Customer, phone, or address..." oninput="filterSupervisorOrders()">
           </div>
 
           <div class="orders-filter-pills">
@@ -155,27 +154,27 @@
           </div>
         </div>
 
-        <!-- Desktop & Tablet Table (Internally Scrollable Container) -->
+        <!-- Desktop & Tablet Table View (Visible on >= 992px) -->
         <div class="desktop-table-container">
           <div class="table-wrapper">
             <table class="supervisor-table">
               <thead>
                 <tr>
-                  <th style="width: 9%;">Order #</th>
-                  <th style="width: 15%;">Customer</th>
-                  <th style="width: 17%;">Delivery Location</th>
+                  <th style="width: 10%;">Order #</th>
+                  <th style="width: 16%;">Customer</th>
+                  <th style="width: 20%;">Delivery Location</th>
                   <th style="width: 18%;">Items Ordered</th>
                   <th style="width: 10%;">Total Bill</th>
                   <th style="width: 9%;">Payment</th>
-                  <th style="width: 11%;">Stage</th>
+                  <th style="width: 12%;">Stage</th>
                   <th style="width: 11%; text-align: center;">Dispatch Action</th>
-                  <th style="width: 5%; text-align: center;">View</th>
+                  <th style="width: 6%; text-align: center;">View</th>
                 </tr>
               </thead>
               <tbody id="supervisorOrdersTbody">
                 <tr>
-                  <td colspan="9" style="text-align: center; padding: 48px; color: var(--admin-text-muted);">
-                    <i class="fa-solid fa-spinner fa-spin fa-2x"></i>
+                  <td colspan="9" style="text-align: center; padding: 48px; color: var(--sup-text-muted);">
+                    <i class="fa-solid fa-spinner fa-spin fa-2x" style="color: var(--sup-primary);"></i>
                     <p style="margin-top: 10px; font-weight: 600;">Loading assigned orders queue...</p>
                   </td>
                 </tr>
@@ -184,7 +183,7 @@
           </div>
         </div>
 
-        <!-- Mobile Orders List (Visible <= 768px) -->
+        <!-- Mobile Orders Card List (Visible on < 992px) -->
         <div class="mobile-orders-list" id="mobileOrdersList"></div>
       </div>
     </main>
@@ -195,7 +194,7 @@
     <div class="status-modal-dialog" onclick="event.stopPropagation()">
       <div class="status-modal-header">
         <div style="display: flex; align-items: center; gap: 10px;">
-          <i class="fa-solid fa-truck-ramp-box" style="color: var(--admin-primary); font-size: 1.25rem;"></i>
+          <i class="fa-solid fa-truck-ramp-box" style="color: var(--sup-primary); font-size: 1.25rem;"></i>
           <h3>Update Delivery Status</h3>
         </div>
         <button type="button" style="background:none;border:none;font-size:1.2rem;color:#94A3B8;cursor:pointer;" onclick="closeStatusModal()">
@@ -224,7 +223,7 @@
           </div>
           <div>
             <div class="opt-title">In Kitchen (Preparing)</div>
-            <div class="opt-desc">Chef is actively cooking and assembling items.</div>
+            <div class="opt-desc">Chef is actively cooking and packaging food items.</div>
           </div>
         </div>
 
@@ -234,7 +233,7 @@
           </div>
           <div>
             <div class="opt-title">Out for Delivery</div>
-            <div class="opt-desc">Order dispatched on vehicle; en route to customer doorstep.</div>
+            <div class="opt-desc">Package handed to driver; en route to customer doorstep.</div>
           </div>
         </div>
 
@@ -258,10 +257,10 @@
     </div>
   </div>
 
-  <script src="/customer/js/app.js"></script>
-  <script src="/shared/js/auth.js"></script>
-  <script src="/shared/js/api.js"></script>
-  <script src="/supervisor/js/supervisor.js"></script>
+  <script src="../customer/js/app.js"></script>
+  <script src="../shared/js/auth.js"></script>
+  <script src="../shared/js/api.js"></script>
+  <script src="js/supervisor.js"></script>
   <script>
     let myOrders = [];
     let currentTableFilter = 'ALL';
@@ -331,7 +330,7 @@
       if (orders.length === 0) {
         tbody.innerHTML = `
           <tr>
-            <td colspan="9" style="text-align: center; padding: 48px; color: var(--admin-text-muted);">
+            <td colspan="9" style="text-align: center; padding: 48px; color: var(--sup-text-muted);">
               <i class="fa-solid fa-inbox fa-2x" style="color: #CBD5E1; margin-bottom: 8px;"></i>
               <p style="font-weight: 600; color: #475569;">No assigned orders match your filter criteria.</p>
             </td>
@@ -345,7 +344,7 @@
         try {
           const cart = typeof order.cartJson === 'string' ? JSON.parse(order.cartJson) : order.cartJson;
           if (Array.isArray(cart)) {
-            itemsSummary = cart.map(i => `${i.name} Ã— ${i.quantity}`).join(', ');
+            itemsSummary = cart.map(i => `${i.name} × ${i.quantity}`).join(', ');
           }
         } catch {
           itemsSummary = order.cartJson || 'Order Items';
@@ -377,7 +376,7 @@
         } else {
           actionBtn = `
             <button class="admin-btn admin-btn-primary admin-btn-sm" style="width: 100%; justify-content: center;" onclick="openStatusModal(${order.id}, '${order.orderStatus || 'PREPARING'}', '${escapeHtml(order.name || 'Customer')}', '${escapeHtml(order.address || '')}')">
-              <i class="fa-solid fa-sliders"></i> Update Status
+              <i class="fa-solid fa-sliders"></i> Stage
             </button>
           `;
         }
@@ -399,7 +398,7 @@
                 ${itemsSummary}
               </div>
             </td>
-            <td class="col-price">â‚¹${parseFloat(order.totalAmount || 0).toFixed(2)}</td>
+            <td class="col-price">₹${parseFloat(order.totalAmount || 0).toFixed(2)}</td>
             <td class="col-payment">${paymentBadge}</td>
             <td>
               <span class="sup-badge ${badgeClass}">
@@ -423,7 +422,7 @@
 
       if (orders.length === 0) {
         mobileList.innerHTML = `
-          <div style="text-align: center; padding: 36px; background: white; border-radius: 16px; border: 1px solid var(--admin-border); color: var(--admin-text-muted);">
+          <div style="text-align: center; padding: 36px; background: white; border-radius: 16px; border: 1px solid var(--sup-border); color: var(--sup-text-muted);">
             <i class="fa-solid fa-inbox fa-2x" style="color: #CBD5E1; margin-bottom: 8px;"></i>
             <p style="font-weight: 600; color: #475569;">No assigned orders match criteria.</p>
           </div>
@@ -436,7 +435,7 @@
         try {
           const cart = typeof order.cartJson === 'string' ? JSON.parse(order.cartJson) : order.cartJson;
           if (Array.isArray(cart)) {
-            itemsSummary = cart.map(i => `${i.name} Ã— ${i.quantity}`).join(', ');
+            itemsSummary = cart.map(i => `${i.name} × ${i.quantity}`).join(', ');
           }
         } catch {
           itemsSummary = order.cartJson || 'Order Items';
@@ -455,53 +454,72 @@
           badgeIcon = '<i class="fa-solid fa-circle-check"></i>';
         }
 
+        let actionHtml = '';
+        if (order.orderStatus === 'PREPARING' || order.orderStatus === 'CONFIRMED' || order.orderStatus === 'PENDING') {
+          actionHtml = `
+            <button class="admin-btn admin-btn-primary admin-btn-sm" style="width: 100%; justify-content: center;" onclick="updateOrderStatus(${order.id}, 'OUT_FOR_DELIVERY')">
+              <i class="fa-solid fa-motorcycle"></i> Dispatch (Out for Delivery)
+            </button>
+          `;
+        } else if (order.orderStatus === 'OUT_FOR_DELIVERY') {
+          actionHtml = `
+            <button class="admin-btn admin-btn-success admin-btn-sm" style="width: 100%; justify-content: center;" onclick="updateOrderStatus(${order.id}, 'DELIVERED')">
+              <i class="fa-solid fa-circle-check"></i> Mark as Delivered
+            </button>
+          `;
+        } else {
+          actionHtml = `
+            <div style="text-align: center; font-size: 0.82rem; font-weight: 700; color: var(--sup-success); padding: 8px; background: var(--sup-success-soft); border-radius: 8px;">
+              <i class="fa-solid fa-circle-check"></i> Delivered Successfully
+            </div>
+          `;
+        }
+
         return `
-          <div class="mobile-order-card">
-            <div class="mobile-order-head">
-              <span class="order-head-id">#FE-${order.id}</span>
-              <span class="sup-badge ${badgeClass}">${badgeIcon} ${(order.orderStatus || 'PREPARING').replace(/_/g, ' ')}</span>
-            </div>
-
-            <div class="customer-box" style="margin: 0;">
-              <div class="customer-name-row">
-                <strong>${order.name || 'Customer'}</strong>
-                ${order.phone ? `<a href="tel:${order.phone}" class="btn-quick-call"><i class="fa-solid fa-phone"></i> Call</a>` : ''}
+          <div class="delivery-work-card">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <span class="order-head-id">#FE-${order.id}</span>
+                <span class="sup-badge ${badgeClass}">${badgeIcon} ${(order.orderStatus || 'PREPARING').replace(/_/g, ' ')}</span>
               </div>
-              <div class="address-row">
-                <i class="fa-solid fa-location-dot" style="color: var(--admin-primary); margin-top: 2px;"></i>
-                <span>${order.address || 'Standard Address'}</span>
-              </div>
-            </div>
 
-            <div class="mobile-order-field">
-              <span class="label">Items:</span>
-              <span class="value">${itemsSummary}</span>
-            </div>
-
-            <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 8px; border-top: 1px dashed var(--admin-border);">
-              <div>
-                <span style="font-size: 0.72rem; color: var(--admin-text-muted); display: block;">Total Bill</span>
-                <strong style="font-size: 1.15rem; color: var(--admin-primary);">â‚¹${parseFloat(order.totalAmount || 0).toFixed(2)}</strong>
-              </div>
-              <div>
-                <span style="font-size: 0.72rem; color: var(--admin-text-muted); display: block;">Payment</span>
-                <strong style="font-size: 0.85rem; color: #1E293B;">${order.paymentMethod || 'COD'}</strong>
-              </div>
-            </div>
-
-            <div style="display: flex; gap: 8px; margin-top: 4px;">
-              ${order.orderStatus !== 'DELIVERED' ? `
-                <button class="admin-btn admin-btn-primary admin-btn-sm" style="flex: 1; justify-content: center;" onclick="openStatusModal(${order.id}, '${order.orderStatus || 'PREPARING'}', '${escapeHtml(order.name || 'Customer')}', '${escapeHtml(order.address || '')}')">
-                  <i class="fa-solid fa-sliders"></i> Update Status
-                </button>
-              ` : `
-                <div style="flex:1; text-align:center; font-size:0.82rem; font-weight:700; color:#16A34A; padding:6px; background:#DCFCE7; border-radius:8px;">
-                  <i class="fa-solid fa-circle-check"></i> Delivered
+              <div class="customer-box">
+                <div class="customer-name-row">
+                  <strong>${order.name || 'Customer'}</strong>
+                  ${order.phone ? `<a href="tel:${order.phone}" class="btn-quick-call"><i class="fa-solid fa-phone"></i> Call</a>` : ''}
                 </div>
-              `}
-              <a href="order-details.html?id=${order.id}" class="admin-btn admin-btn-outline admin-btn-sm" style="flex: 1; justify-content: center;">
-                <i class="fa-solid fa-eye"></i> View
-              </a>
+                <div class="address-row">
+                  <i class="fa-solid fa-location-dot" style="color: var(--sup-primary); margin-top: 2px;"></i>
+                  <span>${order.address || 'Standard Delivery Location'}</span>
+                </div>
+              </div>
+
+              <div style="font-size: 0.82rem; color: #475569; margin-bottom: 12px; line-height: 1.4;">
+                <strong style="color: #1E293B;">Items:</strong> ${itemsSummary}
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 10px; border-top: 1px dashed var(--sup-border);">
+                <div>
+                  <span style="font-size: 0.75rem; color: var(--sup-text-muted); display: block;">Total Amount</span>
+                  <strong style="font-size: 1.15rem; color: var(--sup-primary);">₹${parseFloat(order.totalAmount || 0).toFixed(2)}</strong>
+                </div>
+                <div style="text-align: right;">
+                  <span style="font-size: 0.75rem; color: var(--sup-text-muted); display: block;">Payment</span>
+                  <span style="font-size: 0.84rem; font-weight: 700; color: #1E293B;">${order.paymentMethod || 'COD'}</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px;">
+              ${actionHtml}
+              <div style="display: flex; gap: 8px;">
+                <button class="admin-btn admin-btn-outline admin-btn-sm" style="flex: 1; justify-content: center;" onclick="openStatusModal(${order.id}, '${order.orderStatus || 'PREPARING'}', '${escapeHtml(order.name || 'Customer')}', '${escapeHtml(order.address || '')}')">
+                  <i class="fa-solid fa-sliders"></i> Stage
+                </button>
+                <a href="order-details.html?id=${order.id}" class="admin-btn admin-btn-outline admin-btn-sm" style="flex: 1; justify-content: center;">
+                  <i class="fa-solid fa-file-invoice"></i> Manifest
+                </a>
+              </div>
             </div>
           </div>
         `;
@@ -582,6 +600,33 @@
       } finally {
         btn.disabled = false;
         btn.innerHTML = originalText;
+      }
+    }
+
+    async function updateOrderStatus(orderId, newStatus) {
+      const confirmed = await FoodieApp.confirmModal({
+        title: `Advance Delivery Status?`,
+        message: `Mark Order #FE-${orderId} as ${newStatus.replace(/_/g, ' ')}? This updates the customer live tracking timeline.`,
+        confirmText: `Confirm ${newStatus.replace(/_/g, ' ')}`,
+        type: 'primary'
+      });
+      if (!confirmed) return;
+
+      try {
+        const res = await SupervisorApp.authFetch(`/api/supervisor/orders/${orderId}/status`, {
+          method: 'PUT',
+          body: JSON.stringify({ status: newStatus })
+        });
+        if (res.ok) {
+          FoodieApp.showToast(`Order #FE-${orderId} is now ${newStatus.replace(/_/g, ' ')}!`, 'success', 'Status Updated');
+          loadSupervisorOrders();
+        } else {
+          const err = await res.json();
+          FoodieApp.showToast(err.error || 'Failed to update order status.', 'error');
+        }
+      } catch (err) {
+        console.error(err);
+        FoodieApp.showToast('Server error updating order status.', 'error');
       }
     }
   </script>

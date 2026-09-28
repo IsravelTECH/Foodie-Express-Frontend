@@ -76,7 +76,7 @@ const AuthService = (() => {
   /**
    * Handle Unified Login Submit
    * Evaluates role from response / JWT and redirects accordingly:
-   * - ROLE_ADMIN -> admin-dashboard.html
+   * - ROLE_ADMIN -> admin/dashboard.html
    * - ROLE_CUSTOMER -> index.html
    */
   const handleLogin = async (e) => {
@@ -140,9 +140,9 @@ const AuthService = (() => {
         // Automatic Unified Role Redirection
         setTimeout(() => {
           if (userRole === 'ROLE_ADMIN' || userRole === 'ADMIN') {
-            window.location.href = 'admin-dashboard.html';
+            window.location.href = 'admin/dashboard.html';
           } else if (userRole === 'ROLE_SUPERVISOR' || userRole === 'SUPERVISOR') {
-            window.location.href = 'supervisor-dashboard.html';
+            window.location.href = 'supervisor/dashboard.html';
           } else {
             window.location.href = 'index.html';
           }
@@ -279,9 +279,9 @@ const AuthService = (() => {
         FoodieApp.showToast('You are not authorized to access this page.', 'error', 'Access Denied');
         setTimeout(() => {
           if (role === 'ROLE_SUPERVISOR' || role === 'SUPERVISOR') {
-            window.location.href = 'supervisor-dashboard.html';
+            window.location.href = 'supervisor/dashboard.html';
           } else if (role === 'ROLE_ADMIN' || role === 'ADMIN') {
-            window.location.href = 'admin-dashboard.html';
+            window.location.href = 'admin/dashboard.html';
           } else {
             window.location.href = 'index.html';
           }

@@ -1,18 +1,17 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/supervisor/">
-  <link rel="icon" type="image/png" href="/supervisor/images/foodie-logo.png">
+    <link rel="icon" type="image/png" href="images/foodie-logo.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Supervisor Dashboard â€” Foodie Express Delivery Portal</title>
+  <title>Supervisor Dashboard — Foodie Express Delivery Portal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="/shared/css/global.css">
-  <link rel="stylesheet" href="/shared/css/components.css">
-  <link rel="stylesheet" href="/supervisor/css/supervisor.css">
+  <link rel="stylesheet" href="../shared/css/global.css">
+  <link rel="stylesheet" href="../shared/css/components.css">
+  <link rel="stylesheet" href="css/supervisor.css">
 </head>
 <body>
   <div class="admin-layout">
@@ -30,7 +29,7 @@
         <a href="dashboard.html" class="admin-nav-link active">
           <i class="fa-solid fa-chart-pie"></i><span>Dashboard</span>
         </a>
-        <a href="assigned-orders.html" class="admin-nav-link">
+        <a href="orders.html" class="admin-nav-link">
           <i class="fa-solid fa-boxes-stacked"></i><span>Assigned Orders</span>
         </a>
       </nav>
@@ -74,7 +73,7 @@
         </div>
 
         <div class="topbar-actions">
-          <a href="assigned-orders.html" class="topbar-btn" title="View Assigned Queue">
+          <a href="orders.html" class="topbar-btn" title="View Assigned Queue">
             <i class="fa-solid fa-boxes-stacked"></i>
           </a>
           <div class="admin-profile-dropdown-wrap">
@@ -92,7 +91,7 @@
               <a href="profile.html" class="dropdown-item">
                 <i class="fa-solid fa-user-gear"></i> My Profile
               </a>
-              <a href="assigned-orders.html" class="dropdown-item">
+              <a href="orders.html" class="dropdown-item">
                 <i class="fa-solid fa-receipt"></i> Assigned Orders
               </a>
               <a href="../customer/index.html" class="dropdown-item" target="_blank">
@@ -178,7 +177,7 @@
         <div style="margin-top: 32px;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 12px;">
             <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--admin-navy);">Live Delivery Pipeline</h2>
-            <a href="assigned-orders.html" class="admin-btn admin-btn-outline admin-btn-sm">
+            <a href="orders.html" class="admin-btn admin-btn-outline admin-btn-sm">
               <i class="fa-solid fa-table-list"></i> Table View &rarr;
             </a>
           </div>
@@ -280,10 +279,10 @@
     </div>
   </div>
 
-  <script src="/customer/js/app.js"></script>
-  <script src="/shared/js/auth.js"></script>
-  <script src="/shared/js/api.js"></script>
-  <script src="/supervisor/js/supervisor.js"></script>
+  <script src="../customer/js/app.js"></script>
+  <script src="../shared/js/auth.js"></script>
+  <script src="../shared/js/api.js"></script>
+  <script src="js/supervisor.js"></script>
   <script>
     let allOrders = [];
     let currentFilter = 'ALL';
@@ -366,7 +365,7 @@
         try {
           const cart = typeof order.cartJson === 'string' ? JSON.parse(order.cartJson) : order.cartJson;
           if (Array.isArray(cart)) {
-            itemsSummary = cart.map(i => `${i.name} Ã— ${i.quantity}`).join(', ');
+            itemsSummary = cart.map(i => `${i.name} × ${i.quantity}`).join(', ');
           }
         } catch {
           itemsSummary = order.cartJson || 'Order Items';
@@ -433,7 +432,7 @@
               <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 10px; border-top: 1px dashed var(--admin-border);">
                 <div>
                   <span style="font-size: 0.75rem; color: var(--admin-text-muted); display: block;">Total Amount</span>
-                  <strong style="font-size: 1.15rem; color: var(--admin-primary);">â‚¹${parseFloat(order.totalAmount || 0).toFixed(2)}</strong>
+                  <strong style="font-size: 1.15rem; color: var(--admin-primary);">₹${parseFloat(order.totalAmount || 0).toFixed(2)}</strong>
                 </div>
                 <div style="text-align: right;">
                   <span style="font-size: 0.75rem; color: var(--admin-text-muted); display: block;">Payment</span>

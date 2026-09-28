@@ -1,16 +1,15 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/customer/">
-  <link rel="icon" type="image/png" href="/customer/images/foodie-logo.png">
+    <link rel="icon" type="image/png" href="images/foodie-logo.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Table Reservation â€” Foodie Express</title>
+  <title>Table Reservation — Foodie Express</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="/customer/css/customer.css">
+  <link rel="stylesheet" href="css/customer.css">
 </head>
 <body class="has-bottom-nav">
   <!-- Mobile Slide Drawer Backdrop -->
@@ -30,11 +29,11 @@
     <nav style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
       <a href="index.html" class="nav-link"><i class="fa-solid fa-house" style="width: 24px;"></i> Home</a>
       <a href="menu.html" class="nav-link"><i class="fa-solid fa-utensils" style="width: 24px;"></i> All Menu</a>
-      <a href="veg.html" class="nav-link"><i class="fa-solid fa-leaf" style="color: var(--cust-success); width: 24px;"></i> Pure Veg</a>
-      <a href="nonveg.html" class="nav-link"><i class="fa-solid fa-drumstick-bite" style="color: var(--cust-danger); width: 24px;"></i> Non-Veg</a>
-      <a href="indian.html" class="nav-link"><i class="fa-solid fa-bowl-food" style="color: var(--cust-primary); width: 24px;"></i> Indian Special</a>
-      <a href="snacks.html" class="nav-link"><i class="fa-solid fa-burger" style="color: var(--cust-warning); width: 24px;"></i> Snacks & Chaat</a>
-      <a href="dessert.html" class="nav-link"><i class="fa-solid fa-ice-cream" style="color: #EC4899; width: 24px;"></i> Desserts</a>
+      <a href="menu.html?cat=Veg" class="nav-link"><i class="fa-solid fa-leaf" style="color: var(--cust-success); width: 24px;"></i> Pure Veg</a>
+      <a href="menu.html?cat=Non-Veg" class="nav-link"><i class="fa-solid fa-drumstick-bite" style="color: var(--cust-danger); width: 24px;"></i> Non-Veg</a>
+      <a href="menu.html?cat=Indian" class="nav-link"><i class="fa-solid fa-bowl-food" style="color: var(--cust-primary); width: 24px;"></i> Indian Special</a>
+      <a href="menu.html?cat=Snacks" class="nav-link"><i class="fa-solid fa-burger" style="color: var(--cust-warning); width: 24px;"></i> Snacks & Chaat</a>
+      <a href="menu.html?cat=Desserts" class="nav-link"><i class="fa-solid fa-ice-cream" style="color: #EC4899; width: 24px;"></i> Desserts</a>
       <a href="reservations.html" class="nav-link active"><i class="fa-solid fa-calendar-check" style="width: 24px;"></i> Book Table</a>
       <a href="orders.html" class="nav-link"><i class="fa-solid fa-receipt" style="width: 24px;"></i> My Orders</a>
       <a href="wishlist.html" class="nav-link"><i class="fa-solid fa-heart" style="color: #E11D48; width: 24px;"></i> Saved Dishes</a>
@@ -63,11 +62,11 @@
           </a>
           <div class="nav-dropdown-menu">
             <a href="menu.html" class="nav-dropdown-item"><i class="fa-solid fa-utensils"></i> All Dishes</a>
-            <a href="indian.html" class="nav-dropdown-item"><i class="fa-solid fa-bowl-food"></i> Indian Cuisine</a>
-            <a href="veg.html" class="nav-dropdown-item"><i class="fa-solid fa-leaf" style="color: #16A34A;"></i> Pure Veg</a>
-            <a href="nonveg.html" class="nav-dropdown-item"><i class="fa-solid fa-drumstick-bite" style="color: #DC2626;"></i> Non-Veg</a>
-            <a href="snacks.html" class="nav-dropdown-item"><i class="fa-solid fa-cookie-bite" style="color: #D97706;"></i> Snacks</a>
-            <a href="dessert.html" class="nav-dropdown-item"><i class="fa-solid fa-ice-cream" style="color: #EC4899;"></i> Desserts</a>
+            <a href="menu.html?cat=Indian" class="nav-dropdown-item"><i class="fa-solid fa-bowl-food"></i> Indian Cuisine</a>
+            <a href="menu.html?cat=Veg" class="nav-dropdown-item"><i class="fa-solid fa-leaf" style="color: #16A34A;"></i> Pure Veg</a>
+            <a href="menu.html?cat=Non-Veg" class="nav-dropdown-item"><i class="fa-solid fa-drumstick-bite" style="color: #DC2626;"></i> Non-Veg</a>
+            <a href="menu.html?cat=Snacks" class="nav-dropdown-item"><i class="fa-solid fa-cookie-bite" style="color: #D97706;"></i> Snacks</a>
+            <a href="menu.html?cat=Desserts" class="nav-dropdown-item"><i class="fa-solid fa-ice-cream" style="color: #EC4899;"></i> Desserts</a>
           </div>
         </div>
         <a href="reservations.html" class="nav-link">Reservations</a>
@@ -244,9 +243,9 @@
           <h4>Explore</h4>
           <ul class="footer-links">
             <li><a href="menu.html">Full Menu</a></li>
-            <li><a href="veg.html">Pure Veg</a></li>
-            <li><a href="nonveg.html">Non Veg</a></li>
-            <li><a href="indian.html">Indian Heritage</a></li>
+            <li><a href="menu.html?cat=Veg">Pure Veg</a></li>
+            <li><a href="menu.html?cat=Non-Veg">Non Veg</a></li>
+            <li><a href="menu.html?cat=Indian">Indian Heritage</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -260,8 +259,8 @@
         </div>
         <div class="footer-col">
           <h4>Reservation Hours</h4>
-          <p style="color: #9CA3AF; font-size: 0.9rem;"><strong>Lunch:</strong> 12:00 PM â€“ 03:30 PM</p>
-          <p style="color: #9CA3AF; font-size: 0.9rem;"><strong>Dinner:</strong> 07:00 PM â€“ 11:30 PM</p>
+          <p style="color: #9CA3AF; font-size: 0.9rem;"><strong>Lunch:</strong> 12:00 PM – 03:30 PM</p>
+          <p style="color: #9CA3AF; font-size: 0.9rem;"><strong>Dinner:</strong> 07:00 PM – 11:30 PM</p>
           <p style="color: #9CA3AF; font-size: 0.9rem; margin-top: 8px;">123 Gourmet Boulevard, Bangalore</p>
         </div>
       </div>
@@ -300,9 +299,9 @@
   </nav>
 
   <!-- Scripts -->
-  <script src="/customer/js/app.js"></script>
-  <script src="/shared/js/api.js"></script>
-  <script src="/customer/js/customer.js"></script>
+  <script src="js/app.js"></script>
+  <script src="../shared/js/api.js"></script>
+  <script src="js/customer.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const user = JSON.parse(localStorage.getItem('user'));

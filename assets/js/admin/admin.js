@@ -26,7 +26,7 @@ const AdminApp = (() => {
         }
         setTimeout(() => {
           if (user.role === 'ROLE_SUPERVISOR' || user.role === 'SUPERVISOR') {
-            window.location.href = 'supervisor-dashboard.html';
+            window.location.href = 'supervisor/dashboard.html';
           } else {
             window.location.href = 'index.html';
           }
@@ -209,7 +209,7 @@ const AdminApp = (() => {
 })();
 
 document.addEventListener('DOMContentLoaded', () => {
-  if (!window.location.pathname.endsWith('admin-login.html') && !window.location.pathname.endsWith('login.html')) {
+  if (!window.location.pathname.endsWith('admin/login.html') && !window.location.pathname.endsWith('login.html')) {
     AdminApp.init();
   }
 });

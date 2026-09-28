@@ -38,7 +38,7 @@ const DashboardController = (() => {
                 </span>
               </td>
               <td>
-                <a href="admin-order-details.html?id=${order.id}" class="admin-btn admin-btn-outline admin-btn-sm">
+                <a href="admin/order-details.html?id=${order.id}" class="admin-btn admin-btn-outline admin-btn-sm">
                   View Details
                 </a>
               </td>

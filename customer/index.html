@@ -1,16 +1,15 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/customer/">
-  <link rel="icon" type="image/png" href="/customer/images/foodie-logo.png">
+    <link rel="icon" type="image/png" href="images/foodie-logo.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Foodie Express â€” Delicious Food Delivered Fast</title>
+  <title>Foodie Express — Delicious Food Delivered Fast</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="/customer/css/customer.css">
+  <link rel="stylesheet" href="css/customer.css">
 </head>
 <body class="has-bottom-nav">
   <!-- 1. Sticky Storefront Header -->
@@ -30,11 +29,11 @@
           </a>
           <div class="nav-dropdown-menu">
             <a href="menu.html" class="nav-dropdown-item"><i class="fa-solid fa-utensils"></i> All Dishes</a>
-            <a href="indian.html" class="nav-dropdown-item"><i class="fa-solid fa-bowl-food"></i> Indian Cuisine</a>
-            <a href="veg.html" class="nav-dropdown-item"><i class="fa-solid fa-leaf" style="color: #16A34A;"></i> Pure Veg</a>
-            <a href="nonveg.html" class="nav-dropdown-item"><i class="fa-solid fa-drumstick-bite" style="color: #DC2626;"></i> Non-Veg</a>
-            <a href="snacks.html" class="nav-dropdown-item"><i class="fa-solid fa-cookie-bite" style="color: #D97706;"></i> Snacks</a>
-            <a href="dessert.html" class="nav-dropdown-item"><i class="fa-solid fa-ice-cream" style="color: #EC4899;"></i> Desserts</a>
+            <a href="menu.html?cat=Indian" class="nav-dropdown-item"><i class="fa-solid fa-bowl-food"></i> Indian Cuisine</a>
+            <a href="menu.html?cat=Veg" class="nav-dropdown-item"><i class="fa-solid fa-leaf" style="color: #16A34A;"></i> Pure Veg</a>
+            <a href="menu.html?cat=Non-Veg" class="nav-dropdown-item"><i class="fa-solid fa-drumstick-bite" style="color: #DC2626;"></i> Non-Veg</a>
+            <a href="menu.html?cat=Snacks" class="nav-dropdown-item"><i class="fa-solid fa-cookie-bite" style="color: #D97706;"></i> Snacks</a>
+            <a href="menu.html?cat=Desserts" class="nav-dropdown-item"><i class="fa-solid fa-ice-cream" style="color: #EC4899;"></i> Desserts</a>
           </div>
         </div>
         <a href="reservations.html" class="nav-link">Reservations</a>
@@ -66,7 +65,7 @@
       <div class="hero-grid">
         <div>
           <div class="hero-badge">
-            <i class="fa-solid fa-fire" style="color: var(--cust-primary);"></i> FRESH â€¢ FAST â€¢ DELICIOUS
+            <i class="fa-solid fa-fire" style="color: var(--cust-primary);"></i> FRESH • FAST • DELICIOUS
           </div>
           <h1 class="hero-title">
             Your cravings,<br>delivered with <span>love.</span>
@@ -106,7 +105,7 @@
               <i class="fa-solid fa-bolt"></i>
             </div>
             <div>
-              <div style="font-weight: 800; font-size: 0.95rem; color: var(--cust-navy);">25â€“35 min</div>
+              <div style="font-weight: 800; font-size: 0.95rem; color: var(--cust-navy);">25–35 min</div>
               <div style="font-size: 0.75rem; color: var(--cust-text-muted);">Superfast Delivery</div>
             </div>
           </div>
@@ -117,7 +116,7 @@
             </div>
             <div>
               <div style="font-weight: 800; font-size: 0.95rem; color: var(--cust-navy);">Free Delivery</div>
-              <div style="font-size: 0.75rem; color: var(--cust-text-muted);">Orders over â‚¹500</div>
+              <div style="font-size: 0.75rem; color: var(--cust-text-muted);">Orders over ₹500</div>
             </div>
           </div>
 
@@ -126,7 +125,7 @@
               <i class="fa-solid fa-star"></i>
             </div>
             <div>
-              <div style="font-weight: 800; font-size: 0.95rem; color: var(--cust-navy);">4.9 â˜… Rating</div>
+              <div style="font-weight: 800; font-size: 0.95rem; color: var(--cust-navy);">4.9 ★ Rating</div>
               <div style="font-size: 0.75rem; color: var(--cust-text-muted);">10,000+ Happy Foodies</div>
             </div>
           </div>
@@ -165,27 +164,27 @@
       </div>
 
       <div class="categories-strip">
-        <a href="indian.html" class="category-card">
+        <a href="menu.html?cat=Indian" class="category-card">
           <div class="category-icon-circle"><i class="fa-solid fa-bowl-food" style="color: var(--cust-primary);"></i></div>
           <span class="category-title">Indian Cuisine</span>
         </a>
 
-        <a href="veg.html" class="category-card">
+        <a href="menu.html?cat=Veg" class="category-card">
           <div class="category-icon-circle"><i class="fa-solid fa-leaf" style="color: #16A34A;"></i></div>
           <span class="category-title">Pure Veg</span>
         </a>
 
-        <a href="nonveg.html" class="category-card">
+        <a href="menu.html?cat=Non-Veg" class="category-card">
           <div class="category-icon-circle"><i class="fa-solid fa-drumstick-bite" style="color: #DC2626;"></i></div>
           <span class="category-title">Non-Veg Special</span>
         </a>
 
-        <a href="snacks.html" class="category-card">
+        <a href="menu.html?cat=Snacks" class="category-card">
           <div class="category-icon-circle"><i class="fa-solid fa-cookie-bite" style="color: #D97706;"></i></div>
           <span class="category-title">Snacks & Fast Food</span>
         </a>
 
-        <a href="dessert.html" class="category-card">
+        <a href="menu.html?cat=Desserts" class="category-card">
           <div class="category-icon-circle"><i class="fa-solid fa-ice-cream" style="color: #EC4899;"></i></div>
           <span class="category-title">Sweet Desserts</span>
         </a>
@@ -259,7 +258,7 @@
               Crafted with Passion.<br>Delivered with Precision.
             </h2>
             <p style="color: var(--cust-text-secondary); font-size: 0.96rem; line-height: 1.65; margin-bottom: 22px;">
-              Step behind the scenes into our state-of-the-art hygienic kitchen. Watch master chefs sautÃ©ing hand-picked farm spices, slow-cooking rich curries, and preparing every dish to golden perfection.
+              Step behind the scenes into our state-of-the-art hygienic kitchen. Watch master chefs sautéing hand-picked farm spices, slow-cooking rich curries, and preparing every dish to golden perfection.
             </p>
 
             <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 26px;">
@@ -273,7 +272,7 @@
               </div>
               <div style="display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--cust-navy); font-weight: 600;">
                 <i class="fa-solid fa-circle-check" style="color: var(--cust-success); font-size: 1.05rem;"></i>
-                <span>Direct Kitchen Dispatch in 25â€“35 Minutes</span>
+                <span>Direct Kitchen Dispatch in 25–35 Minutes</span>
               </div>
             </div>
 
@@ -404,7 +403,7 @@
 
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
         <div style="background: #FFFFFF; border-radius: var(--cust-radius-lg); padding: 24px; border: 1px solid var(--cust-border); box-shadow: var(--cust-shadow-sm);">
-          <div style="color: #F59E0B; margin-bottom: 12px;">â˜…â˜…â˜…â˜…â˜…</div>
+          <div style="color: #F59E0B; margin-bottom: 12px;">★★★★★</div>
           <p style="font-size: 0.92rem; color: var(--cust-text); line-height: 1.6; margin-bottom: 16px;">
             "The Chicken Biryani arrived steaming hot in just 22 minutes! Super aromatic rice and tender meat. My go-to food delivery app now."
           </p>
@@ -418,7 +417,7 @@
         </div>
 
         <div style="background: #FFFFFF; border-radius: var(--cust-radius-lg); padding: 24px; border: 1px solid var(--cust-border); box-shadow: var(--cust-shadow-sm);">
-          <div style="color: #F59E0B; margin-bottom: 12px;">â˜…â˜…â˜…â˜…â˜…</div>
+          <div style="color: #F59E0B; margin-bottom: 12px;">★★★★★</div>
           <p style="font-size: 0.92rem; color: var(--cust-text); line-height: 1.6; margin-bottom: 16px;">
             "Booked a table for my parents' anniversary. The hospitality was unmatched and the Paneer Butter Masala was heavenly. 10/10!"
           </p>
@@ -432,7 +431,7 @@
         </div>
 
         <div style="background: #FFFFFF; border-radius: var(--cust-radius-lg); padding: 24px; border: 1px solid var(--cust-border); box-shadow: var(--cust-shadow-sm);">
-          <div style="color: #F59E0B; margin-bottom: 12px;">â˜…â˜…â˜…â˜…â˜…</div>
+          <div style="color: #F59E0B; margin-bottom: 12px;">★★★★★</div>
           <p style="font-size: 0.92rem; color: var(--cust-text); line-height: 1.6; margin-bottom: 16px;">
             "Clean UI, smooth checkout, and very reliable order tracking. Even the snacks and desserts are packaged impeccably."
           </p>
@@ -465,11 +464,11 @@
         <div class="footer-col">
           <h4>Explore Menu</h4>
           <ul class="footer-links">
-            <li><a href="indian.html">Indian Cuisine</a></li>
-            <li><a href="veg.html">Pure Vegetarian</a></li>
-            <li><a href="nonveg.html">Non-Veg Delights</a></li>
-            <li><a href="snacks.html">Crispy Snacks</a></li>
-            <li><a href="dessert.html">Sweet Desserts</a></li>
+            <li><a href="menu.html?cat=Indian">Indian Cuisine</a></li>
+            <li><a href="menu.html?cat=Veg">Pure Vegetarian</a></li>
+            <li><a href="menu.html?cat=Non-Veg">Non-Veg Delights</a></li>
+            <li><a href="menu.html?cat=Snacks">Crispy Snacks</a></li>
+            <li><a href="menu.html?cat=Desserts">Sweet Desserts</a></li>
           </ul>
         </div>
 
@@ -489,7 +488,7 @@
           <h4>Operations</h4>
           <ul class="footer-links">
             <li><a href="../admin/login.html" style="color: var(--cust-primary); font-weight: 700;"><i class="fa-solid fa-lock"></i> Staff &amp; Admin Portal</a></li>
-            <li><span style="color: #9CA3AF; font-size: 0.88rem;"><i class="fa-solid fa-clock"></i> 10:00 AM â€“ 11:30 PM</span></li>
+            <li><span style="color: #9CA3AF; font-size: 0.88rem;"><i class="fa-solid fa-clock"></i> 10:00 AM – 11:30 PM</span></li>
             <li><span style="color: #9CA3AF; font-size: 0.88rem;"><i class="fa-solid fa-phone"></i> +91 98765 43210</span></li>
             <li><span style="color: #9CA3AF; font-size: 0.88rem;"><i class="fa-solid fa-envelope"></i> support@foodie.com</span></li>
           </ul>
@@ -535,11 +534,11 @@
   </nav>
 
   <!-- Core Scripts -->
-  <script src="/customer/js/app.js"></script>
-  <script src="/shared/js/api.js"></script>
-  <script src="/customer/js/customer.js"></script>
-  <script src="/customer/js/cart.js"></script>
-  <script src="/customer/js/wishlist.js"></script>
+  <script src="js/app.js"></script>
+  <script src="../shared/js/api.js"></script>
+  <script src="js/customer.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/wishlist.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       loadHomePopularDishes();
@@ -599,17 +598,17 @@
             <div class="food-card-body">
               <div class="food-card-header">
                 <h3 class="food-card-title">${dish.name}</h3>
-                <div class="food-card-rating">â˜… ${dish.rating || 4.8}</div>
+                <div class="food-card-rating">★ ${dish.rating || 4.8}</div>
               </div>
               <p class="food-card-desc">${dish.description || 'Prepared fresh with premium ingredients, aromatic herbs, and rich spices.'}</p>
               <div class="food-card-footer">
                 <div class="food-price">
                   <span class="food-price-label">Price</span>
-                  <span class="food-price-val">â‚¹${price}</span>
+                  <span class="food-price-val">₹${price}</span>
                 </div>
                 <div class="flex items-center gap-2">
                   <div class="qty-counter">
-                    <button class="qty-btn" onclick="changeQty(this, -1)">âˆ’</button>
+                    <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
                     <span class="qty-value">1</span>
                     <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
                   </div>
@@ -651,7 +650,7 @@
       CartService.addToCart(name, price, qty, img);
 
       const originalText = btn.innerHTML;
-      btn.innerHTML = 'âœ“ Added!';
+      btn.innerHTML = '✓ Added!';
       btn.classList.add('btn-secondary');
       btn.classList.remove('btn-primary');
 

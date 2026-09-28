@@ -127,7 +127,7 @@ const OrdersController = (() => {
           </td>
           <td>
             <div style="display:flex;gap:6px;">
-              <a href="admin-order-details.html?id=${order.id}" class="admin-btn admin-btn-outline admin-btn-sm" title="View details">
+              <a href="admin/order-details.html?id=${order.id}" class="admin-btn admin-btn-outline admin-btn-sm" title="View details">
                 👁️ View
               </a>
               <button onclick="OrdersController.deleteOrder(${order.id})" class="admin-btn admin-btn-danger admin-btn-sm" title="Delete order">

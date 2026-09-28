@@ -26,7 +26,7 @@ const SupervisorApp = (() => {
         }
         setTimeout(() => {
           if (user.role === 'ROLE_ADMIN' || user.role === 'ADMIN') {
-            window.location.href = 'admin-dashboard.html';
+            window.location.href = 'admin/dashboard.html';
           } else {
             window.location.href = 'index.html';
           }

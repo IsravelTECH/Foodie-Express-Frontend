@@ -142,7 +142,7 @@ function syncUserState() {
     if (role === 'ROLE_ADMIN' || role === 'ADMIN') {
       // 2. ADMIN STOREFRONT NAVIGATION
       headerActions.innerHTML = `
-        <a href="admin-dashboard.html" class="btn btn-primary btn-sm" style="text-decoration: none; padding: 8px 14px; background: #E85D04;">
+        <a href="admin/dashboard.html" class="btn btn-primary btn-sm" style="text-decoration: none; padding: 8px 14px; background: #E85D04;">
           <i class="fa-solid fa-arrow-left"></i> Admin Dashboard
         </a>
         <button class="header-icon-btn" onclick="AuthService.logout()" title="Sign Out">
@@ -152,7 +152,7 @@ function syncUserState() {
     } else if (role === 'ROLE_SUPERVISOR' || role === 'SUPERVISOR') {
       // 3. SUPERVISOR STOREFRONT NAVIGATION
       headerActions.innerHTML = `
-        <a href="supervisor-dashboard.html" class="btn btn-primary btn-sm" style="text-decoration: none; padding: 8px 14px; background: #4338CA;">
+        <a href="supervisor/dashboard.html" class="btn btn-primary btn-sm" style="text-decoration: none; padding: 8px 14px; background: #4338CA;">
           <i class="fa-solid fa-arrow-left"></i> Supervisor Dashboard
         </a>
         <button class="header-icon-btn" onclick="AuthService.logout()" title="Sign Out">
