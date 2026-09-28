@@ -1,38 +1,4 @@
 {
   "cleanUrls": true,
-  "rewrites": [
-    { "source": "/menu", "destination": "/customer/menu.html" },
-    { "source": "/cart", "destination": "/customer/cart.html" },
-    { "source": "/payment", "destination": "/customer/payment.html" },
-    { "source": "/orders", "destination": "/customer/orders.html" },
-    { "source": "/order-details", "destination": "/customer/order-details.html" },
-    { "source": "/reservations", "destination": "/customer/reservations.html" },
-    { "source": "/profile", "destination": "/customer/profile.html" },
-    { "source": "/wishlist", "destination": "/customer/wishlist.html" },
-    { "source": "/login", "destination": "/customer/login.html" },
-    { "source": "/signup", "destination": "/customer/signup.html" },
-    { "source": "/logout", "destination": "/customer/logout.html" },
-    { "source": "/about", "destination": "/customer/about.html" },
-    { "source": "/contact", "destination": "/customer/contact.html" },
-    { "source": "/success", "destination": "/customer/success.html" },
-
-    { "source": "/veg", "destination": "/customer/menu.html?cat=Veg" },
-    { "source": "/customer/veg", "destination": "/customer/menu.html?cat=Veg" },
-    { "source": "/nonveg", "destination": "/customer/menu.html?cat=Non-Veg" },
-    { "source": "/customer/nonveg", "destination": "/customer/menu.html?cat=Non-Veg" },
-    { "source": "/indian", "destination": "/customer/menu.html?cat=Indian" },
-    { "source": "/customer/indian", "destination": "/customer/menu.html?cat=Indian" },
-    { "source": "/snacks", "destination": "/customer/menu.html?cat=Snacks" },
-    { "source": "/customer/snacks", "destination": "/customer/menu.html?cat=Snacks" },
-    { "source": "/dessert", "destination": "/customer/menu.html?cat=Desserts" },
-    { "source": "/desserts", "destination": "/customer/menu.html?cat=Desserts" },
-    { "source": "/customer/dessert", "destination": "/customer/menu.html?cat=Desserts" },
-    { "source": "/customer/desserts", "destination": "/customer/menu.html?cat=Desserts" },
-
-    { "source": "/customer", "destination": "/customer/index.html" },
-    { "source": "/admin", "destination": "/admin/dashboard.html" },
-    { "source": "/admin-dashboard", "destination": "/admin/dashboard.html" },
-    { "source": "/supervisor", "destination": "/supervisor/dashboard.html" },
-    { "source": "/supervisor-dashboard", "destination": "/supervisor/dashboard.html" }
-  ]
+  "trailingSlash": false
 }
