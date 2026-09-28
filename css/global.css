@@ -1,0 +1,267 @@
+/* ==========================================================================
+   Foodie Express - Unified Design System Variables & Global Reset
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+:root {
+  /* Brand Primary Colors */
+  --primary: #e85d04;
+  --primary-dark: #c94d00;
+  --primary-light: #fff1e8;
+  --primary-subtle: rgba(232, 93, 4, 0.08);
+
+  --secondary: #f48c06;
+
+  /* Neutrals & Dark Tones */
+  --dark: #171717;
+  --dark-soft: #262626;
+
+  --text: #252525;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+
+  /* Surfaces & Backgrounds */
+  --background: #fffdf9;
+  --surface: #ffffff;
+  --surface-soft: #faf8f5;
+
+  --border: #ece8e3;
+
+  /* Status Colors */
+  --success: #16a34a;
+  --success-light: #ecfdf3;
+
+  --warning: #f59e0b;
+  --warning-light: #fffbeb;
+
+  --danger: #dc2626;
+  --danger-light: #fef2f2;
+
+  --info: #2563eb;
+  --info-light: #eff6ff;
+
+  /* Border Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+
+  /* Box Shadows */
+  --shadow-sm: 0 2px 8px rgba(23, 23, 23, 0.05);
+  --shadow-md: 0 8px 24px rgba(23, 23, 23, 0.08);
+  --shadow-lg: 0 20px 50px rgba(23, 23, 23, 0.12);
+
+  /* Transitions */
+  --transition: 180ms ease;
+  --header-height: 72px;
+  --bottom-nav-height: 68px;
+}
+
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+  user-select: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+/* Typography Hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--dark);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+h1 {
+  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+/* Standardized Containers */
+.container {
+  width: min(1200px, calc(100% - 40px));
+  margin-inline: auto;
+}
+
+@media (min-width: 1440px) {
+  .container {
+    width: min(1280px, calc(100% - 64px));
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    width: min(100% - 28px, 1200px);
+  }
+}
+
+/* Reusable Form Controls */
+.form-control {
+  width: 100%;
+  height: 50px;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--dark);
+  font-size: 0.92rem;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.form-control:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(232, 93, 4, 0.10);
+  outline: none;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 6px;
+}
+
+/* Reusable Button System */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.92rem;
+  transition: all var(--transition);
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(232, 93, 4, 0.25);
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(232, 93, 4, 0.35);
+}
+
+.btn-secondary {
+  background: var(--surface);
+  color: var(--dark);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--primary-light);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--dark);
+}
+
+.btn-ghost:hover {
+  background: var(--surface-soft);
+  color: var(--primary);
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: #ffffff;
+}
+
+.btn-danger:hover {
+  background: #b91c1c;
+}
+
+.btn-success {
+  background: var(--success);
+  color: #ffffff;
+}
+
+.btn-success:hover {
+  background: #15803d;
+}
+
+.btn-sm {
+  min-height: 36px;
+  padding: 8px 14px;
+  font-size: 0.84rem;
+  border-radius: var(--radius-sm);
+}
+
+.btn-lg {
+  min-height: 52px;
+  padding: 14px 28px;
+  font-size: 1rem;
+  border-radius: var(--radius-md);
+}
+
+.btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  pointer-events: none;
+}
