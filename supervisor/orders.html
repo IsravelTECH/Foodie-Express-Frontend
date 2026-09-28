@@ -1,16 +1,18 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/png" href="images/foodie-logo.png">
+  <base href="/supervisor/">
+  <link rel="icon" type="image/png" href="/supervisor/images/foodie-logo.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Assigned Orders — Foodie Express Delivery Portal</title>
+  <title>Assigned Orders â€” Foodie Express Delivery Portal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="../shared/css/global.css">
-  <link rel="stylesheet" href="../shared/css/components.css">
+  <link rel="stylesheet" href="/shared/css/global.css">
+  <link rel="stylesheet" href="/shared/css/components.css">
+  <link rel="stylesheet" href="/supervisor/css/supervisor.css">
   <link rel="stylesheet" href="css/supervisor.css">
 </head>
 <body>
@@ -257,10 +259,10 @@
     </div>
   </div>
 
-  <script src="../customer/js/app.js"></script>
-  <script src="../shared/js/auth.js"></script>
-  <script src="../shared/js/api.js"></script>
-  <script src="js/supervisor.js"></script>
+  <script src="/customer/js/app.js"></script>
+  <script src="/shared/js/auth.js"></script>
+  <script src="/shared/js/api.js"></script>
+  <script src="/supervisor/js/supervisor.js"></script>
   <script>
     let myOrders = [];
     let currentTableFilter = 'ALL';
@@ -344,7 +346,7 @@
         try {
           const cart = typeof order.cartJson === 'string' ? JSON.parse(order.cartJson) : order.cartJson;
           if (Array.isArray(cart)) {
-            itemsSummary = cart.map(i => `${i.name} × ${i.quantity}`).join(', ');
+            itemsSummary = cart.map(i => `${i.name} Ã— ${i.quantity}`).join(', ');
           }
         } catch {
           itemsSummary = order.cartJson || 'Order Items';
@@ -398,7 +400,7 @@
                 ${itemsSummary}
               </div>
             </td>
-            <td class="col-price">₹${parseFloat(order.totalAmount || 0).toFixed(2)}</td>
+            <td class="col-price">â‚¹${parseFloat(order.totalAmount || 0).toFixed(2)}</td>
             <td class="col-payment">${paymentBadge}</td>
             <td>
               <span class="sup-badge ${badgeClass}">
@@ -435,7 +437,7 @@
         try {
           const cart = typeof order.cartJson === 'string' ? JSON.parse(order.cartJson) : order.cartJson;
           if (Array.isArray(cart)) {
-            itemsSummary = cart.map(i => `${i.name} × ${i.quantity}`).join(', ');
+            itemsSummary = cart.map(i => `${i.name} Ã— ${i.quantity}`).join(', ');
           }
         } catch {
           itemsSummary = order.cartJson || 'Order Items';
@@ -480,7 +482,7 @@
             <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 8px; border-top: 1px dashed var(--admin-border);">
               <div>
                 <span style="font-size: 0.72rem; color: var(--admin-text-muted); display: block;">Total Bill</span>
-                <strong style="font-size: 1.15rem; color: var(--admin-primary);">₹${parseFloat(order.totalAmount || 0).toFixed(2)}</strong>
+                <strong style="font-size: 1.15rem; color: var(--admin-primary);">â‚¹${parseFloat(order.totalAmount || 0).toFixed(2)}</strong>
               </div>
               <div>
                 <span style="font-size: 0.72rem; color: var(--admin-text-muted); display: block;">Payment</span>

@@ -1,14 +1,16 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/png" href="images/foodie-logo.png">
+  <base href="/admin/">
+  <link rel="icon" type="image/png" href="/admin/images/foodie-logo.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Order Details — Foodie Express</title>
+  <title>Order Details â€” Foodie Express</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/admin/css/admin.css">
   <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
@@ -162,8 +164,8 @@
     </div>
   </div>
 
-  <script src="../shared/js/api.js"></script>
-  <script src="js/admin.js"></script>
+  <script src="/shared/js/api.js"></script>
+  <script src="/admin/js/admin.js"></script>
   <script>
     let activeSupervisorsList = [];
     let currentOrderId = null;
@@ -246,9 +248,9 @@
                               </div>
                             </div>
                           </td>
-                          <td>₹${parseFloat(item.price || 0).toFixed(2)}</td>
-                          <td><strong>× ${item.quantity || 1}</strong></td>
-                          <td><strong>₹${(parseFloat(item.price || 0) * (item.quantity || 1)).toFixed(2)}</strong></td>
+                          <td>â‚¹${parseFloat(item.price || 0).toFixed(2)}</td>
+                          <td><strong>Ã— ${item.quantity || 1}</strong></td>
+                          <td><strong>â‚¹${(parseFloat(item.price || 0) * (item.quantity || 1)).toFixed(2)}</strong></td>
                         </tr>
                       `).join('') : `<tr><td colspan="4" style="text-align:center;padding:16px;">${order.cartJson || 'No structured items'}</td></tr>`}
                     </tbody>
@@ -258,7 +260,7 @@
                 <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--admin-border); display: flex; flex-direction: column; gap: 8px; align-items: flex-end;">
                   <div style="display: flex; justify-content: space-between; width: 240px; font-size: 0.9rem; color: var(--admin-text-muted);">
                     <span>Subtotal:</span>
-                    <span>₹${parseFloat(order.totalAmount || 0).toFixed(2)}</span>
+                    <span>â‚¹${parseFloat(order.totalAmount || 0).toFixed(2)}</span>
                   </div>
                   <div style="display: flex; justify-content: space-between; width: 240px; font-size: 0.9rem; color: var(--admin-text-muted);">
                     <span>Delivery Fee:</span>
@@ -266,7 +268,7 @@
                   </div>
                   <div style="display: flex; justify-content: space-between; width: 240px; font-size: 1.15rem; font-weight: 800; color: var(--admin-text-main); margin-top: 6px; padding-top: 8px; border-top: 1px dashed var(--admin-border);">
                     <span>Total Amount:</span>
-                    <span style="color: var(--admin-primary);">₹${parseFloat(order.totalAmount || 0).toFixed(2)}</span>
+                    <span style="color: var(--admin-primary);">â‚¹${parseFloat(order.totalAmount || 0).toFixed(2)}</span>
                   </div>
                 </div>
               </div>

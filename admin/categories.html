@@ -1,14 +1,16 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/png" href="images/foodie-logo.png">
+  <base href="/admin/">
+  <link rel="icon" type="image/png" href="/admin/images/foodie-logo.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Categories — Foodie Express</title>
+  <title>Categories â€” Foodie Express</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/admin/css/admin.css">
   <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
@@ -187,7 +189,7 @@
           </div>
           <div class="admin-form-group">
             <label class="admin-label">Icon / Emoji</label>
-            <input type="text" id="catIcon" class="admin-input" placeholder="🍛 or 🍕">
+            <input type="text" id="catIcon" class="admin-input" placeholder="ðŸ› or ðŸ•">
           </div>
           <div class="admin-form-group">
             <label class="admin-label">Description</label>
@@ -206,9 +208,9 @@
     </div>
   </div>
 
-  <script src="../shared/js/api.js"></script>
-  <script src="js/admin.js"></script>
-  <script src="js/categories.js"></script>
+  <script src="/shared/js/api.js"></script>
+  <script src="/admin/js/admin.js"></script>
+  <script src="/admin/js/categories.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       CategoriesAdminController.loadCategories();

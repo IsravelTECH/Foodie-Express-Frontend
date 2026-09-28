@@ -1,14 +1,16 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/png" href="images/foodie-logo.png">
+  <base href="/admin/">
+  <link rel="icon" type="image/png" href="/admin/images/foodie-logo.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Store Settings — Foodie Express</title>
+  <title>Store Settings â€” Foodie Express</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/admin/css/admin.css">
   <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
@@ -166,7 +168,7 @@
 
                 <div class="form-group">
                   <label class="form-label" for="restHours">Operating Hours</label>
-                  <input type="text" id="restHours" class="form-input" placeholder="Mon – Sun: 10:00 AM – 11:00 PM">
+                  <input type="text" id="restHours" class="form-input" placeholder="Mon â€“ Sun: 10:00 AM â€“ 11:00 PM">
                 </div>
 
                 <div class="form-group col-span-2">
@@ -184,12 +186,12 @@
 
               <div class="settings-grid-3">
                 <div class="form-group">
-                  <label class="form-label" for="deliveryFee">Base Delivery Fee (₹)</label>
+                  <label class="form-label" for="deliveryFee">Base Delivery Fee (â‚¹)</label>
                   <input type="number" id="deliveryFee" class="form-input" step="1" min="0" placeholder="40">
                 </div>
 
                 <div class="form-group">
-                  <label class="form-label" for="freeDeliveryMin">Free Delivery Over (₹)</label>
+                  <label class="form-label" for="freeDeliveryMin">Free Delivery Over (â‚¹)</label>
                   <input type="number" id="freeDeliveryMin" class="form-input" step="1" min="0" placeholder="500">
                 </div>
 
@@ -201,7 +203,7 @@
 
               <div class="form-group" style="margin-top: 6px; max-width: 220px;">
                 <label class="form-label" for="currencySymbol">Currency Symbol</label>
-                <input type="text" id="currencySymbol" class="form-input" value="₹" placeholder="₹">
+                <input type="text" id="currencySymbol" class="form-input" value="â‚¹" placeholder="â‚¹">
               </div>
 
               <!-- Accepting Orders Toggle Box -->
@@ -226,9 +228,9 @@
     </main>
   </div>
 
-  <script src="../shared/js/api.js"></script>
-  <script src="js/admin.js"></script>
-  <script src="js/settings.js"></script>
+  <script src="/shared/js/api.js"></script>
+  <script src="/admin/js/admin.js"></script>
+  <script src="/admin/js/settings.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       SettingsAdminController.loadSettings();

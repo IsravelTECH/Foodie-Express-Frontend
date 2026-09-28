@@ -1,14 +1,16 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/png" href="images/foodie-logo.png">
+  <base href="/admin/">
+  <link rel="icon" type="image/png" href="/admin/images/foodie-logo.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Portal Sign In — Foodie Express</title>
+  <title>Admin Portal Sign In â€” Foodie Express</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/admin/css/admin.css">
   <link rel="stylesheet" href="css/admin.css">
   <style>
     .admin-auth-wrapper {
@@ -80,7 +82,7 @@
       </div>
 
       <div style="font-size: 0.85rem; color: rgba(255,255,255,0.75); position: relative; z-index: 2;">
-        Foodie Express Enterprise • Secure RBAC Portal
+        Foodie Express Enterprise â€¢ Secure RBAC Portal
       </div>
     </div>
 
@@ -103,7 +105,7 @@
 
           <div class="admin-form-group" style="margin-bottom: 24px;">
             <label class="admin-label">Password</label>
-            <input type="password" id="adminPassword" value="Admin@123" required placeholder="••••••••" class="admin-input">
+            <input type="password" id="adminPassword" value="Admin@123" required placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" class="admin-input">
           </div>
 
           <button type="submit" id="adminLoginBtn" class="admin-btn admin-btn-primary" style="width: 100%; height: 48px; font-size: 1rem; margin-bottom: 20px;">
@@ -120,8 +122,8 @@
     </div>
   </div>
 
-  <script src="../shared/js/api.js"></script>
-  <script src="js/admin.js"></script>
+  <script src="/shared/js/api.js"></script>
+  <script src="/admin/js/admin.js"></script>
   <script>
     async function handleAdminLogin(e) {
       e.preventDefault();
