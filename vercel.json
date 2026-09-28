@@ -1,4 +1,45 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": false
+  "version": 2,
+  "routes": [
+    { "handle": "filesystem" },
+
+    { "src": "^/veg(?:\\.html)?$", "dest": "/customer/menu.html?cat=Veg" },
+    { "src": "^/customer/veg(?:\\.html)?$", "dest": "/customer/menu.html?cat=Veg" },
+    { "src": "^/nonveg(?:\\.html)?$", "dest": "/customer/menu.html?cat=Non-Veg" },
+    { "src": "^/customer/nonveg(?:\\.html)?$", "dest": "/customer/menu.html?cat=Non-Veg" },
+    { "src": "^/indian(?:\\.html)?$", "dest": "/customer/menu.html?cat=Indian" },
+    { "src": "^/customer/indian(?:\\.html)?$", "dest": "/customer/menu.html?cat=Indian" },
+    { "src": "^/snacks(?:\\.html)?$", "dest": "/customer/menu.html?cat=Snacks" },
+    { "src": "^/customer/snacks(?:\\.html)?$", "dest": "/customer/menu.html?cat=Snacks" },
+    { "src": "^/dessert(?:s)?(?:\\.html)?$", "dest": "/customer/menu.html?cat=Desserts" },
+    { "src": "^/customer/dessert(?:s)?(?:\\.html)?$", "dest": "/customer/menu.html?cat=Desserts" },
+
+    { "src": "^/menu(?:\\.html)?$", "dest": "/customer/menu.html" },
+    { "src": "^/cart(?:\\.html)?$", "dest": "/customer/cart.html" },
+    { "src": "^/payment(?:\\.html)?$", "dest": "/customer/payment.html" },
+    { "src": "^/orders(?:\\.html)?$", "dest": "/customer/orders.html" },
+    { "src": "^/order-details(?:\\.html)?$", "dest": "/customer/order-details.html" },
+    { "src": "^/reservations(?:\\.html)?$", "dest": "/customer/reservations.html" },
+    { "src": "^/profile(?:\\.html)?$", "dest": "/customer/profile.html" },
+    { "src": "^/wishlist(?:\\.html)?$", "dest": "/customer/wishlist.html" },
+    { "src": "^/login(?:\\.html)?$", "dest": "/customer/login.html" },
+    { "src": "^/signup(?:\\.html)?$", "dest": "/customer/signup.html" },
+    { "src": "^/logout(?:\\.html)?$", "dest": "/customer/logout.html" },
+    { "src": "^/about(?:\\.html)?$", "dest": "/customer/about.html" },
+    { "src": "^/contact(?:\\.html)?$", "dest": "/customer/contact.html" },
+    { "src": "^/success(?:\\.html)?$", "dest": "/customer/success.html" },
+
+    { "src": "^/customer/?$", "dest": "/customer/index.html" },
+    { "src": "^/customer/([^/]+?)(?:\\.html)?$", "dest": "/customer/$1.html" },
+
+    { "src": "^/admin/?$", "dest": "/admin/dashboard.html" },
+    { "src": "^/admin-dashboard/?$", "dest": "/admin/dashboard.html" },
+    { "src": "^/admin/([^/]+?)(?:\\.html)?$", "dest": "/admin/$1.html" },
+
+    { "src": "^/supervisor/?$", "dest": "/supervisor/dashboard.html" },
+    { "src": "^/supervisor-dashboard/?$", "dest": "/supervisor/dashboard.html" },
+    { "src": "^/supervisor/([^/]+?)(?:\\.html)?$", "dest": "/supervisor/$1.html" },
+
+    { "src": "^/(.*)$", "dest": "/$1" }
+  ]
 }
