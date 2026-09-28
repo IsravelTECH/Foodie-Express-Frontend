@@ -268,16 +268,25 @@
 
     function filterMenu() {
       const search = document.getElementById('menuSearchInput').value.toLowerCase().trim();
+      const cat = currentCategory.toLowerCase();
+
       const filtered = allDishes.filter(dish => {
+        const dishCat = (dish.category || '').toLowerCase();
+        const dishType = (dish.foodType || '').toLowerCase();
+        const dishName = (dish.name || '').toLowerCase();
+
         const matchesCategory = (currentCategory === 'ALL') ||
-          (dish.category && dish.category.toLowerCase() === currentCategory.toLowerCase()) ||
-          (currentCategory === 'Veg' && (dish.foodType === 'VEG' || dish.category === 'Veg')) ||
-          (currentCategory === 'Non-Veg' && (dish.foodType === 'NON_VEG' || dish.category === 'Non-Veg'));
+          (dishCat === cat) ||
+          (cat === 'veg' && (dishType === 'veg' || dishCat.includes('veg') || dishName.includes('paneer') || dishName.includes('gobi') || dishName.includes('dal'))) ||
+          (cat === 'non-veg' && (dishType === 'non_veg' || dishCat.includes('non') || dishName.includes('chicken') || dishName.includes('mutton') || dishName.includes('fish') || dishName.includes('prawn') || dishName.includes('egg'))) ||
+          (cat === 'indian' && (dishCat.includes('indian') || dishName.includes('biryani') || dishName.includes('masala') || dishName.includes('curry') || dishName.includes('dosa') || dishName.includes('idly') || dishName.includes('roti') || dishName.includes('naan'))) ||
+          (cat === 'snacks' && (dishCat.includes('snack') || dishName.includes('burger') || dishName.includes('puff') || dishName.includes('bonda') || dishName.includes('bajji') || dishName.includes('samosa') || dishName.includes('vadapav') || dishName.includes('nuggets') || dishName.includes('panipuri'))) ||
+          (cat.includes('dessert') && (dishCat.includes('dessert') || dishName.includes('jamun') || dishName.includes('rabri') || dishName.includes('rasgulla') || dishName.includes('rasmalai') || dishName.includes('cake') || dishName.includes('ice cream') || dishName.includes('shake') || dishName.includes('brownie') || dishName.includes('affogato')));
 
         const matchesSearch = !search ||
-          (dish.name && dish.name.toLowerCase().includes(search)) ||
+          (dish.name && dishName.includes(search)) ||
           (dish.description && dish.description.toLowerCase().includes(search)) ||
-          (dish.category && dish.category.toLowerCase().includes(search));
+          (dish.category && dishCat.includes(search));
 
         return matchesCategory && matchesSearch;
       });
