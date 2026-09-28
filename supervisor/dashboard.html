@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="images/foodie-logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supervisor Dashboard — Foodie Express Delivery Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../shared/css/global.css">
+  <link rel="stylesheet" href="../shared/css/components.css">
+  <link rel="stylesheet" href="css/supervisor.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <!-- 1. Fixed Supervisor Sidebar -->
+    <aside class="admin-sidebar" id="supervisorSidebar">
+      <div class="admin-brand">
+        <img src="images/foodie-logo.png" alt="Foodie Express" class="logo-img">
+        <div class="brand-text">
+          <h2>Foodie Express</h2>
+        </div>
+      </div>
+
+      <div class="sidebar-section-title">DELIVERY OPERATIONS</div>
+      <nav class="admin-nav">
+        <a href="dashboard.html" class="admin-nav-link active">
+          <i class="fa-solid fa-chart-pie"></i><span>Dashboard</span>
+        </a>
+        <a href="assigned-orders.html" class="admin-nav-link">
+          <i class="fa-solid fa-boxes-stacked"></i><span>Assigned Orders</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-section-title">ACCOUNT</div>
+      <nav class="admin-nav">
+        <a href="profile.html" class="admin-nav-link">
+          <i class="fa-solid fa-user-gear"></i><span>My Profile</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-section-title">SYSTEM</div>
+      <nav class="admin-nav">
+        <a href="../customer/index.html" class="admin-nav-link" target="_blank">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i><span>Live Storefront</span>
+        </a>
+      </nav>
+
+      <div class="admin-sidebar-footer">
+        <div class="admin-user-profile">
+          <div class="admin-avatar" id="supervisorUserInitial">V</div>
+          <div class="admin-user-details">
+            <h4 id="supervisorUserName">Vikram Singh</h4>
+            <span id="supervisorUserEmail">supervisor@foodie.com</span>
+            <span class="admin-role-badge" id="supervisorUserRole">Supervisor</span>
+          </div>
+        </div>
+        <button class="admin-btn admin-btn-outline admin-btn-sm" style="width: 100%; justify-content: center;" onclick="SupervisorApp.logout()">
+          <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- 2. Main Content Area with Fixed Topbar -->
+    <main class="admin-main">
+      <header class="admin-topbar">
+        <div class="topbar-left-content">
+          <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle Sidebar"><i class="fa-solid fa-bars"></i></button>
+          <span class="topbar-page-title">Delivery Command Center</span>
+          <span class="sup-live-tag"><span class="sup-live-dot"></span> Live</span>
+        </div>
+
+        <div class="topbar-actions">
+          <a href="assigned-orders.html" class="topbar-btn" title="View Assigned Queue">
+            <i class="fa-solid fa-boxes-stacked"></i>
+          </a>
+          <div class="admin-profile-dropdown-wrap">
+            <div class="topbar-avatar" id="topbarAvatar" onclick="SupervisorApp.toggleProfileDropdown(event)" title="Account Profile">V</div>
+            <div class="admin-profile-dropdown" id="supervisorProfileDropdown">
+              <div class="dropdown-header">
+                <div class="dropdown-avatar" id="dropdownAvatar">V</div>
+                <div class="dropdown-info">
+                  <h4 id="dropdownName">Vikram Singh</h4>
+                  <span id="dropdownEmail">supervisor@foodie.com</span>
+                  <span class="dropdown-role" id="dropdownRole">Supervisor</span>
+                </div>
+              </div>
+              <div class="dropdown-divider"></div>
+              <a href="profile.html" class="dropdown-item">
+                <i class="fa-solid fa-user-gear"></i> My Profile
+              </a>
+              <a href="assigned-orders.html" class="dropdown-item">
+                <i class="fa-solid fa-receipt"></i> Assigned Orders
+              </a>
+              <a href="../customer/index.html" class="dropdown-item" target="_blank">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Storefront
+              </a>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item dropdown-logout" onclick="SupervisorApp.logout()">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="admin-content">
+        <!-- Breadcrumb -->
+        <div class="admin-breadcrumb">
+          <i class="fa-solid fa-house"></i>
+          <a href="dashboard.html">Dashboard</a>
+        </div>
+
+        <!-- Hero Summary Banner -->
+        <div class="sup-hero-card">
+          <div class="sup-hero-card-left">
+            <h1 id="welcomeGreeting">Welcome back, Vikram Singh!</h1>
+            <p>Here is your real-time delivery pipeline. Advance kitchen orders, coordinate dispatchers, and confirm customer handoffs.</p>
+          </div>
+          <div class="sup-hero-card-right">
+            <button class="admin-btn admin-btn-primary" onclick="loadDashboardStats()">
+              <i class="fa-solid fa-rotate"></i> Refresh Dispatch Queue
+            </button>
+          </div>
+        </div>
+
+        <!-- 4 Metric KPI Cards Grid -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-info">
+              <span class="stat-title">Assigned Deliveries</span>
+              <h3 class="stat-value" id="statTotalAssigned">0</h3>
+              <span class="stat-badge badge-neutral">Active Total</span>
+            </div>
+            <div class="stat-icon icon-bg-blue">
+              <i class="fa-solid fa-boxes-packing"></i>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <span class="stat-title">In Kitchen</span>
+              <h3 class="stat-value" id="statPreparing">0</h3>
+              <span class="stat-badge badge-warning">Preparing</span>
+            </div>
+            <div class="stat-icon icon-bg-orange">
+              <i class="fa-solid fa-fire-burner"></i>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <span class="stat-title">Out for Delivery</span>
+              <h3 class="stat-value" id="statOutForDelivery">0</h3>
+              <span class="stat-badge badge-info">On Road</span>
+            </div>
+            <div class="stat-icon icon-bg-teal">
+              <i class="fa-solid fa-motorcycle"></i>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <span class="stat-title">Delivered Today</span>
+              <h3 class="stat-value" id="statDeliveredToday">0</h3>
+              <span class="stat-badge badge-success">Completed</span>
+            </div>
+            <div class="stat-icon icon-bg-green">
+              <i class="fa-solid fa-circle-check"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Delivery Pipeline Section -->
+        <div style="margin-top: 32px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 12px;">
+            <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--admin-navy);">Live Delivery Pipeline</h2>
+            <a href="assigned-orders.html" class="admin-btn admin-btn-outline admin-btn-sm">
+              <i class="fa-solid fa-table-list"></i> Table View &rarr;
+            </a>
+          </div>
+
+          <div class="dispatch-toolbar">
+            <div class="dispatch-pills">
+              <button class="dispatch-pill active" onclick="setDashboardFilter('ALL', this)">
+                <i class="fa-solid fa-layer-group"></i> All Active (<span id="pillCountAll">0</span>)
+              </button>
+              <button class="dispatch-pill" onclick="setDashboardFilter('PREPARING', this)">
+                <i class="fa-solid fa-fire-burner"></i> In Kitchen (<span id="pillCountPrep">0</span>)
+              </button>
+              <button class="dispatch-pill" onclick="setDashboardFilter('OUT_FOR_DELIVERY', this)">
+                <i class="fa-solid fa-motorcycle"></i> On The Road (<span id="pillCountOut">0</span>)
+              </button>
+              <button class="dispatch-pill" onclick="setDashboardFilter('DELIVERED', this)">
+                <i class="fa-solid fa-circle-check"></i> Delivered (<span id="pillCountDeliv">0</span>)
+              </button>
+            </div>
+          </div>
+
+          <!-- Active Deliveries Work Grid -->
+          <div id="deliveryCardContainer" class="delivery-card-grid">
+            <div style="grid-column: 1/-1; text-align: center; padding: 48px; color: var(--admin-text-muted); background: white; border-radius: 16px; border: 1px solid var(--admin-border);">
+              <i class="fa-solid fa-spinner fa-spin fa-2x"></i>
+              <p style="margin-top: 10px; font-weight: 600;">Loading active delivery queue...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Aligned Status Modal Overlay -->
+  <div class="status-modal-overlay" id="statusModalOverlay" onclick="closeStatusModal(event)">
+    <div class="status-modal-dialog" onclick="event.stopPropagation()">
+      <div class="status-modal-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <i class="fa-solid fa-truck-ramp-box" style="color: var(--admin-primary); font-size: 1.25rem;"></i>
+          <h3>Update Delivery Status</h3>
+        </div>
+        <button type="button" style="background:none;border:none;font-size:1.2rem;color:#94A3B8;cursor:pointer;" onclick="closeStatusModal()">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="status-modal-body">
+        <div style="background: #F8FAFC; border-radius: 12px; border: 1px solid #E2E8F0; padding: 14px 16px; margin-bottom: 20px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+            <span style="font-weight: 800; font-size: 1rem; color: #0F172A;" id="modalOrderId">#FE-000</span>
+            <span class="sup-badge badge-pending" id="modalCurrentBadge">Current Status</span>
+          </div>
+          <div style="font-size: 0.85rem; color: #475569; margin-bottom: 2px;" id="modalCustomerName">Customer Name</div>
+          <div style="font-size: 0.8rem; color: #64748B;" id="modalAddress">Delivery Address</div>
+        </div>
+
+        <div style="font-size: 0.82rem; font-weight: 700; color: #64748B; text-transform: uppercase; margin-bottom: 12px; letter-spacing: 0.5px;">
+          Select Next Pipeline Stage:
+        </div>
+
+        <!-- Option Cards -->
+        <div class="status-option-card" data-status="PREPARING" onclick="selectStatusOption('PREPARING')">
+          <div class="icon-wrap" style="background: #FFF1E8; color: #EA580C;">
+            <i class="fa-solid fa-fire-burner"></i>
+          </div>
+          <div>
+            <div class="opt-title">In Kitchen (Preparing)</div>
+            <div class="opt-desc">Chef is actively cooking and assembling items.</div>
+          </div>
+        </div>
+
+        <div class="status-option-card" data-status="OUT_FOR_DELIVERY" onclick="selectStatusOption('OUT_FOR_DELIVERY')">
+          <div class="icon-wrap" style="background: #DBEAFE; color: #2563EB;">
+            <i class="fa-solid fa-motorcycle"></i>
+          </div>
+          <div>
+            <div class="opt-title">Out for Delivery</div>
+            <div class="opt-desc">Order dispatched on vehicle; en route to customer doorstep.</div>
+          </div>
+        </div>
+
+        <div class="status-option-card" data-status="DELIVERED" onclick="selectStatusOption('DELIVERED')">
+          <div class="icon-wrap" style="background: #DCFCE7; color: #16A34A;">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+          <div>
+            <div class="opt-title">Delivered (Completed)</div>
+            <div class="opt-desc">Customer received food and payment is confirmed.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="status-modal-footer">
+        <button class="admin-btn admin-btn-outline" onclick="closeStatusModal()">Cancel</button>
+        <button class="admin-btn admin-btn-primary" id="btnSaveStatus" onclick="submitStatusUpdate()">
+          <i class="fa-solid fa-check"></i> Save &amp; Update Status
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../customer/js/app.js"></script>
+  <script src="../shared/js/auth.js"></script>
+  <script src="../shared/js/api.js"></script>
+  <script src="js/supervisor.js"></script>
+  <script>
+    let allOrders = [];
+    let currentFilter = 'ALL';
+    let targetOrderId = null;
+    let selectedStatus = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadDashboardStats();
+    });
+
+    async function loadDashboardStats() {
+      try {
+        const res = await SupervisorApp.authFetch('/api/supervisor/dashboard');
+        if (!res.ok) throw new Error('Failed to load dashboard data');
+        const data = await res.json();
+
+        if (data.supervisorName) {
+          document.getElementById('welcomeGreeting').textContent = `Welcome back, ${data.supervisorName}!`;
+        }
+
+        document.getElementById('statTotalAssigned').textContent = data.totalAssigned || 0;
+        document.getElementById('statPreparing').textContent = data.preparingCount || 0;
+        document.getElementById('statOutForDelivery').textContent = data.outForDeliveryCount || 0;
+        document.getElementById('statDeliveredToday').textContent = data.deliveredTodayCount || 0;
+
+        // Fetch all assigned orders to support filtering
+        const ordersRes = await SupervisorApp.authFetch('/api/supervisor/orders');
+        if (ordersRes.ok) {
+          allOrders = await ordersRes.json();
+          updatePillCounts();
+          renderFilteredCards();
+        } else {
+          allOrders = data.recentOrders || [];
+          renderFilteredCards();
+        }
+      } catch (err) {
+        console.error(err);
+        FoodieApp.showToast('Unable to load supervisor metrics.', 'error', 'Error');
+      }
+    }
+
+    function updatePillCounts() {
+      document.getElementById('pillCountAll').textContent = allOrders.length;
+      document.getElementById('pillCountPrep').textContent = allOrders.filter(o => o.orderStatus === 'PREPARING' || o.orderStatus === 'CONFIRMED' || o.orderStatus === 'PENDING').length;
+      document.getElementById('pillCountOut').textContent = allOrders.filter(o => o.orderStatus === 'OUT_FOR_DELIVERY').length;
+      document.getElementById('pillCountDeliv').textContent = allOrders.filter(o => o.orderStatus === 'DELIVERED').length;
+    }
+
+    function setDashboardFilter(status, btn) {
+      currentFilter = status;
+      document.querySelectorAll('.dispatch-pill').forEach(p => p.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      renderFilteredCards();
+    }
+
+    function renderFilteredCards() {
+      const container = document.getElementById('deliveryCardContainer');
+      if (!container) return;
+
+      let filtered = allOrders;
+      if (currentFilter === 'PREPARING') {
+        filtered = allOrders.filter(o => o.orderStatus === 'PREPARING' || o.orderStatus === 'CONFIRMED' || o.orderStatus === 'PENDING');
+      } else if (currentFilter !== 'ALL') {
+        filtered = allOrders.filter(o => o.orderStatus === currentFilter);
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column: 1/-1; text-align: center; padding: 48px; color: var(--admin-text-muted); background: white; border-radius: 16px; border: 1px solid var(--admin-border);">
+            <i class="fa-solid fa-box-open fa-2x" style="color: #CBD5E1; margin-bottom: 12px;"></i>
+            <h3 style="font-size: 1.1rem; color: #1E293B;">No deliveries in this stage</h3>
+            <p style="font-size: 0.88rem; margin-top: 4px;">Orders matching "${currentFilter.replace(/_/g, ' ')}" will appear here automatically.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(order => {
+        let itemsSummary = '';
+        try {
+          const cart = typeof order.cartJson === 'string' ? JSON.parse(order.cartJson) : order.cartJson;
+          if (Array.isArray(cart)) {
+            itemsSummary = cart.map(i => `${i.name} × ${i.quantity}`).join(', ');
+          }
+        } catch {
+          itemsSummary = order.cartJson || 'Order Items';
+        }
+
+        let badgeClass = 'badge-preparing';
+        let badgeIcon = '<i class="fa-solid fa-fire-burner"></i>';
+        if (order.orderStatus === 'OUT_FOR_DELIVERY') {
+          badgeClass = 'badge-out';
+          badgeIcon = '<i class="fa-solid fa-motorcycle"></i>';
+        } else if (order.orderStatus === 'DELIVERED') {
+          badgeClass = 'badge-delivered';
+          badgeIcon = '<i class="fa-solid fa-circle-check"></i>';
+        }
+
+        let actionHtml = '';
+        if (order.orderStatus === 'PREPARING' || order.orderStatus === 'CONFIRMED' || order.orderStatus === 'PENDING') {
+          actionHtml = `
+            <button class="admin-btn admin-btn-sm" style="background:#2563EB; color:white; width:100%; justify-content:center;" onclick="updateOrderStatus(${order.id}, 'OUT_FOR_DELIVERY')">
+              <i class="fa-solid fa-motorcycle"></i> Advance to Out for Delivery
+            </button>
+          `;
+        } else if (order.orderStatus === 'OUT_FOR_DELIVERY') {
+          actionHtml = `
+            <button class="admin-btn admin-btn-success admin-btn-sm" style="width:100%; justify-content:center;" onclick="updateOrderStatus(${order.id}, 'DELIVERED')">
+              <i class="fa-solid fa-circle-check"></i> Confirm Doorstep Hand-off
+            </button>
+          `;
+        } else {
+          actionHtml = `
+            <div style="text-align:center; font-size:0.85rem; font-weight:700; color:#16A34A; padding:6px; background:#DCFCE7; border-radius:8px;">
+              <i class="fa-solid fa-circle-check"></i> Order Delivered Successfully
+            </div>
+          `;
+        }
+
+        return `
+          <div class="delivery-work-card">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <span class="order-head-id">#FE-${order.id}</span>
+                <span class="sup-badge ${badgeClass}">${badgeIcon} ${order.orderStatus ? order.orderStatus.replace(/_/g, ' ') : 'PREPARING'}</span>
+              </div>
+
+              <div class="order-time-tag">
+                <i class="fa-regular fa-clock"></i> Placed ${order.createdAt ? new Date(order.createdAt).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : 'Recently'}
+              </div>
+
+              <div class="customer-box">
+                <div class="customer-name-row">
+                  <strong>${order.name || 'Customer'}</strong>
+                  ${order.phone ? `<a href="tel:${order.phone}" class="btn-quick-call"><i class="fa-solid fa-phone"></i> Call</a>` : ''}
+                </div>
+                <div class="address-row">
+                  <i class="fa-solid fa-location-dot" style="color: var(--admin-primary); margin-top: 2px;"></i>
+                  <span>${order.address || 'Standard Delivery Location'}</span>
+                </div>
+              </div>
+
+              <div style="font-size: 0.82rem; color: #475569; margin-bottom: 12px; line-height: 1.4;">
+                <strong style="color: #1E293B;">Items:</strong> ${itemsSummary}
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 10px; border-top: 1px dashed var(--admin-border);">
+                <div>
+                  <span style="font-size: 0.75rem; color: var(--admin-text-muted); display: block;">Total Amount</span>
+                  <strong style="font-size: 1.15rem; color: var(--admin-primary);">₹${parseFloat(order.totalAmount || 0).toFixed(2)}</strong>
+                </div>
+                <div style="text-align: right;">
+                  <span style="font-size: 0.75rem; color: var(--admin-text-muted); display: block;">Payment</span>
+                  <span style="font-size: 0.84rem; font-weight: 700; color: #1E293B;">${order.paymentMethod || 'COD'}</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px;">
+              ${actionHtml}
+              <div style="display: flex; gap: 8px;">
+                <button class="admin-btn admin-btn-outline admin-btn-sm" style="flex: 1; justify-content: center;" onclick="openStatusModal(${order.id}, '${order.orderStatus || 'PREPARING'}', '${escapeHtml(order.name || 'Customer')}', '${escapeHtml(order.address || '')}')">
+                  <i class="fa-solid fa-sliders"></i> Stage
+                </button>
+                <a href="order-details.html?id=${order.id}" class="admin-btn admin-btn-outline admin-btn-sm" style="flex: 2; justify-content: center;">
+                  <i class="fa-solid fa-file-invoice"></i> Manifest
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    /* Modal Overlay Functions */
+    function openStatusModal(orderId, currentStatus, customerName, address) {
+      targetOrderId = orderId;
+      selectedStatus = currentStatus;
+
+      document.getElementById('modalOrderId').textContent = `#FE-${orderId}`;
+      document.getElementById('modalCustomerName').textContent = `Customer: ${customerName}`;
+      document.getElementById('modalAddress').textContent = address || 'Standard Address';
+
+      const currentBadge = document.getElementById('modalCurrentBadge');
+      currentBadge.textContent = currentStatus.replace(/_/g, ' ');
+      currentBadge.className = `sup-badge ${currentStatus === 'DELIVERED' ? 'badge-delivered' : currentStatus === 'OUT_FOR_DELIVERY' ? 'badge-out' : 'badge-preparing'}`;
+
+      selectStatusOption(currentStatus);
+
+      document.getElementById('statusModalOverlay').classList.add('active');
+    }
+
+    function closeStatusModal(e) {
+      if (e && e.target && e.target !== document.getElementById('statusModalOverlay')) {
+        return;
+      }
+      document.getElementById('statusModalOverlay').classList.remove('active');
+      targetOrderId = null;
+      selectedStatus = null;
+    }
+
+    function selectStatusOption(status) {
+      selectedStatus = status;
+      document.querySelectorAll('.status-option-card').forEach(card => {
+        if (card.getAttribute('data-status') === status) {
+          card.classList.add('selected');
+        } else {
+          card.classList.remove('selected');
+        }
+      });
+    }
+
+    async function submitStatusUpdate() {
+      if (!targetOrderId || !selectedStatus) {
+        FoodieApp.showToast('Please select a delivery stage.', 'warning');
+        return;
+      }
+
+      const btn = document.getElementById('btnSaveStatus');
+      const originalText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Updating...`;
+
+      try {
+        const res = await SupervisorApp.authFetch(`/api/supervisor/orders/${targetOrderId}/status`, {
+          method: 'PUT',
+          body: JSON.stringify({ status: selectedStatus })
+        });
+
+        if (res.ok) {
+          FoodieApp.showToast(`Order #FE-${targetOrderId} moved to ${selectedStatus.replace(/_/g, ' ')}!`, 'success', 'Status Updated');
+          closeStatusModal();
+          await loadDashboardStats();
+        } else {
+          const err = await res.json();
+          FoodieApp.showToast(err.error || 'Failed to update order status.', 'error');
+        }
+      } catch (err) {
+        console.error(err);
+        FoodieApp.showToast('Server error updating status.', 'error');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+      }
+    }
+
+    async function updateOrderStatus(orderId, newStatus) {
+      const confirmed = await FoodieApp.confirmModal({
+        title: `Advance Delivery Status?`,
+        message: `Mark Order #FE-${orderId} as ${newStatus.replace(/_/g, ' ')}? This updates the customer live tracking timeline.`,
+        confirmText: `Confirm ${newStatus.replace(/_/g, ' ')}`,
+        type: 'primary'
+      });
+      if (!confirmed) return;
+
+      try {
+        const res = await SupervisorApp.authFetch(`/api/supervisor/orders/${orderId}/status`, {
+          method: 'PUT',
+          body: JSON.stringify({ status: newStatus })
+        });
+        if (res.ok) {
+          FoodieApp.showToast(`Order #FE-${orderId} is now ${newStatus.replace(/_/g, ' ')}!`, 'success', 'Status Updated');
+          loadDashboardStats();
+        } else {
+          const err = await res.json();
+          FoodieApp.showToast(err.error || 'Failed to update order status.', 'error');
+        }
+      } catch (err) {
+        console.error(err);
+        FoodieApp.showToast('Server error updating order status.', 'error');
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="images/foodie-logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foodie Express — Delicious Food Delivered Fast</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/customer.css">
+</head>
+<body class="has-bottom-nav">
+  <!-- 1. Sticky Storefront Header -->
+  <header class="site-header">
+    <div class="header-container container">
+      <a href="index.html" class="brand-logo">
+        <img src="images/foodie-logo.png" alt="Foodie Express Logo" class="logo-img">
+        <span class="brand-title">Foodie<span>Express</span></span>
+      </a>
+
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="menu.html" class="nav-link">Menu</a>
+        <a href="indian.html" class="nav-link">Indian</a>
+        <a href="veg.html" class="nav-link">Veg</a>
+        <a href="nonveg.html" class="nav-link">Non-Veg</a>
+        <a href="snacks.html" class="nav-link">Snacks</a>
+        <a href="dessert.html" class="nav-link">Desserts</a>
+        <a href="reservations.html" class="nav-link">Reservations</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="wishlist.html" class="header-icon-btn" title="Wishlist">
+          <i class="fa-regular fa-heart"></i>
+          <span class="header-badge wishlist-count-badge" style="display: none;">0</span>
+        </a>
+        <a href="cart.html" class="header-icon-btn" title="Cart">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="header-badge cart-count-badge" style="display: none;">0</span>
+        </a>
+        <a href="login.html" class="btn btn-primary btn-sm">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In
+        </a>
+        <button class="hamburger-btn" id="mobileDrawerBtn" aria-label="Open Navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-badge">
+            <i class="fa-solid fa-fire" style="color: var(--cust-primary);"></i> FRESH • FAST • DELICIOUS
+          </div>
+          <h1 class="hero-title">
+            Your cravings,<br>delivered with <span>love.</span>
+          </h1>
+          <p class="hero-desc">
+            Discover delicious handcrafted cuisines from master chefs, ordered in seconds and delivered piping hot to your doorstep.
+          </p>
+          <div class="hero-cta-group">
+            <a href="menu.html" class="btn btn-primary btn-lg">
+              <i class="fa-solid fa-utensils"></i> Explore Menu
+            </a>
+            <a href="reservations.html" class="btn btn-outline btn-lg">
+              <i class="fa-solid fa-chair"></i> Book a Table
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-img-wrap">
+          <img src="images/indianfood.jpg" alt="Delicious Foodie Spread" class="hero-main-img" onerror="this.src='images/indian-desserts.jpg'">
+
+          <div class="floating-card card-1">
+            <div style="width: 38px; height: 38px; border-radius: 50%; background: #FEF3C7; color: #D97706; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
+            <div>
+              <div style="font-weight: 800; font-size: 0.95rem; color: var(--cust-navy);">25–35 min</div>
+              <div style="font-size: 0.75rem; color: var(--cust-text-muted);">Superfast Delivery</div>
+            </div>
+          </div>
+
+          <div class="floating-card card-2">
+            <div style="width: 38px; height: 38px; border-radius: 50%; background: #DCFCE7; color: #16A34A; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">
+              <i class="fa-solid fa-truck-fast"></i>
+            </div>
+            <div>
+              <div style="font-weight: 800; font-size: 0.95rem; color: var(--cust-navy);">Free Delivery</div>
+              <div style="font-size: 0.75rem; color: var(--cust-text-muted);">Orders over ₹500</div>
+            </div>
+          </div>
+
+          <div class="floating-card card-3">
+            <div style="width: 38px; height: 38px; border-radius: 50%; background: #FEF3C7; color: #D97706; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <div>
+              <div style="font-weight: 800; font-size: 0.95rem; color: var(--cust-navy);">4.9 ★ Rated</div>
+              <div style="font-size: 0.75rem; color: var(--cust-text-muted);">15,000+ Foodies</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Prominent Search Bar Experience -->
+  <section style="padding: 12px 0 28px 0;">
+    <div class="container">
+      <div style="background: #FFFFFF; border-radius: var(--cust-radius-xl); padding: 18px 24px; border: 1.5px solid var(--cust-border); box-shadow: var(--cust-shadow-sm); display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 12px; flex: 1; min-width: 260px;">
+          <i class="fa-solid fa-magnifying-glass" style="color: var(--cust-primary); font-size: 1.2rem;"></i>
+          <input type="text" id="homeSearchInput" placeholder="Search for biryani, butter chicken, dosa, burgers, desserts..." style="border: none; background: transparent; width: 100%; font-size: 1rem; color: var(--cust-navy); outline: none;">
+        </div>
+        <button class="btn btn-primary" onclick="handleHomeSearch()">
+          <i class="fa-solid fa-magnifying-glass"></i> Search Menu
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Category Section Rail -->
+  <section style="padding: 32px 0 48px 0;">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <span class="section-tag" style="background: var(--cust-primary-soft); color: var(--cust-primary);">
+            <i class="fa-solid fa-layer-group"></i> Cravings
+          </span>
+          <h2 class="section-title">Explore Categories</h2>
+          <p class="section-subtitle">Curated specialty menus prepared fresh upon every single order.</p>
+        </div>
+        <a href="menu.html" class="btn btn-outline btn-sm">View All Menu &rarr;</a>
+      </div>
+
+      <div class="categories-strip">
+        <a href="indian.html" class="category-card">
+          <div class="category-icon-circle">🍛</div>
+          <span class="category-title">Indian Cuisine</span>
+        </a>
+
+        <a href="veg.html" class="category-card">
+          <div class="category-icon-circle">🌿</div>
+          <span class="category-title">Pure Veg</span>
+        </a>
+
+        <a href="nonveg.html" class="category-card">
+          <div class="category-icon-circle">🍗</div>
+          <span class="category-title">Non-Veg Special</span>
+        </a>
+
+        <a href="snacks.html" class="category-card">
+          <div class="category-icon-circle">🍔</div>
+          <span class="category-title">Snacks & Fast Food</span>
+        </a>
+
+        <a href="dessert.html" class="category-card">
+          <div class="category-icon-circle">🍨</div>
+          <span class="category-title">Sweet Desserts</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Popular Dishes Near You -->
+  <section style="padding: 24px 0 56px 0;">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <span class="section-tag" style="background: var(--cust-teal-soft); color: var(--cust-teal);">
+            <i class="fa-solid fa-thumbs-up"></i> Top Rated
+          </span>
+          <h2 class="section-title">Popular Near You</h2>
+          <p class="section-subtitle">Customer-favorite recipes ordered thousands of times this week.</p>
+        </div>
+        <a href="menu.html" class="btn btn-secondary btn-sm">Full Menu</a>
+      </div>
+
+      <div class="food-grid" id="featuredGrid">
+        <div style="grid-column: 1 / -1; text-align: center; padding: 48px 0; color: var(--cust-text-muted);">
+          <i class="fa-solid fa-spinner fa-spin fa-2x"></i>
+          <p style="margin-top: 12px; font-weight: 600;">Loading freshly prepared dishes...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Special Offers Banner -->
+  <section style="padding: 16px 0 48px 0;">
+    <div class="container">
+      <div style="background: linear-gradient(135deg, #101828 0%, #1F2937 100%); border-radius: var(--cust-radius-xl); padding: 42px; color: #FFFFFF; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; position: relative; overflow: hidden;">
+        <div style="z-index: 2; max-width: 580px;">
+          <span style="background: rgba(255, 107, 0, 0.2); color: var(--cust-primary); border: 1px solid var(--cust-primary); padding: 4px 12px; border-radius: var(--cust-radius-full); font-size: 0.8rem; font-weight: 800; text-transform: uppercase;">
+            <i class="fa-solid fa-gift"></i> FESTIVE SPECIAL OFFER
+          </span>
+          <h2 style="color: #FFFFFF; font-size: clamp(1.8rem, 3vw, 2.4rem); margin: 12px 0 8px 0; font-weight: 800;">
+            Get 20% OFF on your first 3 orders!
+          </h2>
+          <p style="color: #9CA3AF; font-size: 1rem; line-height: 1.5; margin-bottom: 20px;">
+            Use code <strong style="color: #FFFFFF; background: rgba(255, 255, 255, 0.1); padding: 3px 8px; border-radius: 6px; letter-spacing: 1px;">FOODIE20</strong> at checkout and enjoy signature dishes delivered free.
+          </p>
+          <a href="menu.html" class="btn btn-primary btn-lg">
+            <i class="fa-solid fa-bag-shopping"></i> Order with Discount
+          </a>
+        </div>
+        <div style="z-index: 2;">
+          <div style="width: 140px; height: 140px; border-radius: 50%; background: radial-gradient(circle, var(--cust-primary) 0%, var(--cust-primary-dark) 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: var(--cust-shadow-orange); text-align: center; border: 4px solid rgba(255, 255, 255, 0.2);">
+            <span style="font-size: 0.82rem; font-weight: 700; text-transform: uppercase;">FLAT</span>
+            <strong style="font-size: 2.2rem; line-height: 1; font-weight: 800;">20%</strong>
+            <span style="font-size: 0.78rem; font-weight: 700;">OFF</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Why Foodie Express Value Props -->
+  <section style="padding: 40px 0 60px 0;">
+    <div class="container">
+      <div class="section-header text-center" style="display: block; text-align: center; margin-bottom: 40px;">
+        <span class="section-tag" style="background: var(--cust-primary-soft); color: var(--cust-primary);">
+          <i class="fa-solid fa-medal"></i> THE FOODIE PROMISE
+        </span>
+        <h2 class="section-title">Why Choose Foodie Express?</h2>
+        <p class="section-subtitle">We combine culinary excellence with lightning-fast delivery logistics.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px;">
+        <div style="background: #FFFFFF; border: 1px solid var(--cust-border); border-radius: var(--cust-radius-lg); padding: 28px 24px; text-align: center; box-shadow: var(--cust-shadow-sm);">
+          <div style="width: 56px; height: 56px; border-radius: 16px; background: #FFF1E8; color: var(--cust-primary); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin: 0 auto 16px auto;">
+            <i class="fa-solid fa-motorcycle"></i>
+          </div>
+          <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 8px;">Express 30-Min Delivery</h3>
+          <p style="font-size: 0.88rem; color: var(--cust-text-secondary); line-height: 1.5;">Direct dispatch routing ensures food reaches your doorstep piping hot.</p>
+        </div>
+
+        <div style="background: #FFFFFF; border: 1px solid var(--cust-border); border-radius: var(--cust-radius-lg); padding: 28px 24px; text-align: center; box-shadow: var(--cust-shadow-sm);">
+          <div style="width: 56px; height: 56px; border-radius: 16px; background: #DCFCE7; color: #16A34A; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin: 0 auto 16px auto;">
+            <i class="fa-solid fa-leaf"></i>
+          </div>
+          <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 8px;">100% Fresh Ingredients</h3>
+          <p style="font-size: 0.88rem; color: var(--cust-text-secondary); line-height: 1.5;">Farm-sourced vegetables, premium cuts, and authentic natural spices.</p>
+        </div>
+
+        <div style="background: #FFFFFF; border: 1px solid var(--cust-border); border-radius: var(--cust-radius-lg); padding: 28px 24px; text-align: center; box-shadow: var(--cust-shadow-sm);">
+          <div style="width: 56px; height: 56px; border-radius: 16px; background: #EFF6FF; color: #2563EB; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin: 0 auto 16px auto;">
+            <i class="fa-solid fa-utensils"></i>
+          </div>
+          <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 8px;">Master Chef Recipes</h3>
+          <p style="font-size: 0.88rem; color: var(--cust-text-secondary); line-height: 1.5;">Traditional heritage marinades perfected over decades of restaurant craft.</p>
+        </div>
+
+        <div style="background: #FFFFFF; border: 1px solid var(--cust-border); border-radius: var(--cust-radius-lg); padding: 28px 24px; text-align: center; box-shadow: var(--cust-shadow-sm);">
+          <div style="width: 56px; height: 56px; border-radius: 16px; background: #FEF3C7; color: #D97706; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin: 0 auto 16px auto;">
+            <i class="fa-solid fa-calendar-check"></i>
+          </div>
+          <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 8px;">Instant Table Booking</h3>
+          <p style="font-size: 0.88rem; color: var(--cust-text-secondary); line-height: 1.5;">Reserve your favorite dining table online with zero waiting time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Table Reservation Section Promo -->
+  <section style="padding: 24px 0 60px 0;">
+    <div class="container">
+      <div style="background: #FFFFFF; border-radius: var(--cust-radius-xl); border: 1px solid var(--cust-border); padding: 40px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 36px; align-items: center; box-shadow: var(--cust-shadow-sm);">
+        <div>
+          <span class="section-tag" style="background: var(--cust-primary-soft); color: var(--cust-primary);">
+            <i class="fa-solid fa-chair"></i> DINE-IN EXPERIENCE
+          </span>
+          <h2 style="font-size: clamp(1.8rem, 3vw, 2.3rem); font-weight: 800; color: var(--cust-navy); margin: 10px 0 14px 0;">
+            Planning a celebration or romantic dinner?
+          </h2>
+          <p style="color: var(--cust-text-secondary); line-height: 1.6; margin-bottom: 24px;">
+            Reserve your designated window booth, family banquet, or terrace seating at Foodie Express with live slot confirmation.
+          </p>
+          <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+            <a href="reservations.html" class="btn btn-primary btn-lg">
+              <i class="fa-solid fa-calendar-plus"></i> Reserve a Table Now
+            </a>
+            <a href="about.html" class="btn btn-outline btn-lg">
+              <i class="fa-solid fa-circle-info"></i> Restaurant Story
+            </a>
+          </div>
+        </div>
+        <div>
+          <img src="images/indianfood.jpg" alt="Dining Ambience" style="width: 100%; height: 280px; object-fit: cover; border-radius: var(--cust-radius-lg); border: 1px solid var(--cust-border);">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Customer Testimonials -->
+  <section style="padding: 24px 0 60px 0; background: #FAF5F0;">
+    <div class="container">
+      <div class="section-header text-center" style="display: block; text-align: center; margin-bottom: 40px;">
+        <span class="section-tag" style="background: var(--cust-primary-soft); color: var(--cust-primary);">
+          <i class="fa-solid fa-heart"></i> REVIEWS &amp; LOVE
+        </span>
+        <h2 class="section-title">What Foodies Say About Us</h2>
+        <p class="section-subtitle">Real experiences from our community across Chennai, Bangalore, and beyond.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+        <div style="background: #FFFFFF; border-radius: var(--cust-radius-lg); padding: 24px; border: 1px solid var(--cust-border); box-shadow: var(--cust-shadow-sm);">
+          <div style="color: #F59E0B; margin-bottom: 12px;">★★★★★</div>
+          <p style="font-size: 0.92rem; color: var(--cust-text); line-height: 1.6; margin-bottom: 16px;">
+            "The Chicken Biryani arrived steaming hot in just 22 minutes! Super aromatic rice and tender meat. My go-to food delivery app now."
+          </p>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: #EFF6FF; color: #2563EB; display: flex; align-items: center; justify-content: center; font-weight: 800;">A</div>
+            <div>
+              <strong style="font-size: 0.92rem; color: var(--cust-navy);">Ananya Ramesh</strong>
+              <span style="font-size: 0.78rem; color: var(--cust-text-muted); display: block;">Verified Customer</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="background: #FFFFFF; border-radius: var(--cust-radius-lg); padding: 24px; border: 1px solid var(--cust-border); box-shadow: var(--cust-shadow-sm);">
+          <div style="color: #F59E0B; margin-bottom: 12px;">★★★★★</div>
+          <p style="font-size: 0.92rem; color: var(--cust-text); line-height: 1.6; margin-bottom: 16px;">
+            "Booked a table for my parents' anniversary. The hospitality was unmatched and the Paneer Butter Masala was heavenly. 10/10!"
+          </p>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: #DCFCE7; color: #16A34A; display: flex; align-items: center; justify-content: center; font-weight: 800;">R</div>
+            <div>
+              <strong style="font-size: 0.92rem; color: var(--cust-navy);">Rahul Sharma</strong>
+              <span style="font-size: 0.78rem; color: var(--cust-text-muted); display: block;">Table Guest</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="background: #FFFFFF; border-radius: var(--cust-radius-lg); padding: 24px; border: 1px solid var(--cust-border); box-shadow: var(--cust-shadow-sm);">
+          <div style="color: #F59E0B; margin-bottom: 12px;">★★★★★</div>
+          <p style="font-size: 0.92rem; color: var(--cust-text); line-height: 1.6; margin-bottom: 16px;">
+            "Clean UI, smooth checkout, and very reliable order tracking. Even the snacks and desserts are packaged impeccably."
+          </p>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: #FFF1E8; color: var(--cust-primary); display: flex; align-items: center; justify-content: center; font-weight: 800;">K</div>
+            <div>
+              <strong style="font-size: 0.92rem; color: var(--cust-navy);">Kavitha Sundaram</strong>
+              <span style="font-size: 0.78rem; color: var(--cust-text-muted); display: block;">Food Enthusiast</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Multi-Column Customer Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
+            <img src="images/foodie-logo.png" alt="Logo" style="height: 38px; border-radius: 6px;">
+            <h3 style="margin: 0;">Foodie<span>Express</span></h3>
+          </div>
+          <p>
+            Delivering authentic culinary joy, fresh farm ingredients, and unforgettable restaurant moments straight to you.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Explore Menu</h4>
+          <ul class="footer-links">
+            <li><a href="indian.html">Indian Cuisine</a></li>
+            <li><a href="veg.html">Pure Vegetarian</a></li>
+            <li><a href="nonveg.html">Non-Veg Delights</a></li>
+            <li><a href="snacks.html">Crispy Snacks</a></li>
+            <li><a href="dessert.html">Sweet Desserts</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="menu.html">Full Menu</a></li>
+            <li><a href="reservations.html">Table Booking</a></li>
+            <li><a href="orders.html">Track My Orders</a></li>
+            <li><a href="wishlist.html">Saved Favorites</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Customer Support</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Operations</h4>
+          <ul class="footer-links">
+            <li><a href="../admin/login.html" style="color: var(--cust-primary); font-weight: 700;"><i class="fa-solid fa-lock"></i> Staff &amp; Admin Portal</a></li>
+            <li><span style="color: #9CA3AF; font-size: 0.88rem;"><i class="fa-solid fa-clock"></i> 10:00 AM – 11:30 PM</span></li>
+            <li><span style="color: #9CA3AF; font-size: 0.88rem;"><i class="fa-solid fa-phone"></i> +91 98765 43210</span></li>
+            <li><span style="color: #9CA3AF; font-size: 0.88rem;"><i class="fa-solid fa-envelope"></i> support@foodie.com</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; 2026 Foodie Express Inc. All rights reserved. Crafted with passion for food lovers.</span>
+        <div style="display: flex; gap: 16px;">
+          <a href="#" style="color: #9CA3AF;"><i class="fa-brands fa-instagram fa-lg"></i></a>
+          <a href="#" style="color: #9CA3AF;"><i class="fa-brands fa-facebook fa-lg"></i></a>
+          <a href="#" style="color: #9CA3AF;"><i class="fa-brands fa-twitter fa-lg"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 11. Mobile Fixed Bottom Navigation -->
+  <nav class="mobile-bottom-nav">
+    <div class="mobile-nav-grid">
+      <a href="index.html" class="mobile-nav-item active">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+      </a>
+      <a href="menu.html" class="mobile-nav-item">
+        <i class="fa-solid fa-utensils"></i>
+        <span>Menu</span>
+      </a>
+      <a href="orders.html" class="mobile-nav-item">
+        <i class="fa-solid fa-receipt"></i>
+        <span>Orders</span>
+      </a>
+      <a href="cart.html" class="mobile-nav-item">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span>Cart</span>
+        <span class="mobile-badge cart-count-badge" style="display: none;">0</span>
+      </a>
+      <a href="profile.html" class="mobile-nav-item">
+        <i class="fa-solid fa-user"></i>
+        <span>Profile</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Core Scripts -->
+  <script src="js/app.js"></script>
+  <script src="../shared/js/api.js"></script>
+  <script src="js/customer.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/wishlist.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      loadHomePopularDishes();
+    });
+
+    function handleHomeSearch() {
+      const q = document.getElementById('homeSearchInput').value.trim();
+      if (q) {
+        window.location.href = `menu.html?search=${encodeURIComponent(q)}`;
+      } else {
+        window.location.href = 'menu.html';
+      }
+    }
+
+    document.getElementById('homeSearchInput')?.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') handleHomeSearch();
+    });
+
+    async function loadHomePopularDishes() {
+      const grid = document.getElementById('featuredGrid');
+      if (!grid) return;
+
+      try {
+        const res = await fetch(`${FoodieApp.API_BASE}/api/menu`);
+        if (res.ok) {
+          const dishes = await res.json();
+          const popular = dishes.slice(0, 8);
+          renderDishes(popular);
+        } else {
+          renderFallbackDishes();
+        }
+      } catch (err) {
+        console.warn('API dishes unavailable, loading local catalog:', err);
+        renderFallbackDishes();
+      }
+    }
+
+    function renderDishes(dishes) {
+      const grid = document.getElementById('featuredGrid');
+      grid.innerHTML = dishes.map(dish => {
+        const img = dish.imageUrl || (typeof FoodieApp !== 'undefined' ? FoodieApp.getDishImage(dish.name) : 'images/indianfood.jpg');
+        const isVeg = dish.foodType === 'VEG' || dish.category === 'Veg' || dish.category === 'VEG';
+        const isFav = WishlistService.isFavorite(dish.name);
+        const price = parseFloat(dish.price || 199).toFixed(2);
+
+        return `
+          <div class="food-card">
+            <div class="food-card-image-wrap">
+              <span class="card-badge ${isVeg ? 'badge-veg' : 'badge-nonveg'}">
+                ${isVeg ? '🌿 Pure Veg' : '🍗 Non-Veg'}
+              </span>
+              <img src="${img}" alt="${dish.name}" onerror="this.src='images/indianfood.jpg'">
+              <button class="card-wishlist-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${dish.name.replace(/'/g, "\\'")}', ${price}, '${img}')" title="Save to Wishlist">
+                ${isFav ? '❤️' : '♡'}
+              </button>
+            </div>
+            <div class="food-card-body">
+              <div class="food-card-header">
+                <h3 class="food-card-title">${dish.name}</h3>
+                <div class="food-card-rating">★ ${dish.rating || 4.8}</div>
+              </div>
+              <p class="food-card-desc">${dish.description || 'Prepared fresh with premium ingredients, aromatic herbs, and rich spices.'}</p>
+              <div class="food-card-footer">
+                <div class="food-price">
+                  <span class="food-price-label">Price</span>
+                  <span class="food-price-val">₹${price}</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <div class="qty-counter">
+                    <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+                    <span class="qty-value">1</span>
+                    <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+                  </div>
+                  <button class="btn btn-primary btn-sm" onclick="addDishToCart(this, '${dish.name.replace(/'/g, "\\'")}', ${price}, '${img}')">
+                    + Add
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderFallbackDishes() {
+      const sample = [
+        { name: 'Chicken Biryani', price: 280, rating: 4.9, category: 'Non-Veg', foodType: 'NON_VEG', description: 'Royal aromatic basmati rice layered with tender spiced chicken pieces and saffron.' },
+        { name: 'Paneer Butter Masala', price: 240, rating: 4.8, category: 'Veg', foodType: 'VEG', description: 'Fresh cottage cheese cubes simmered in a velvety tomato, cashew, and butter gravy.' },
+        { name: 'Crispy Cheese Burger', price: 160, rating: 4.7, category: 'Snacks', foodType: 'VEG', description: 'Golden toasted bun packed with crispy patty, melted cheddar, lettuce, and secret sauce.' },
+        { name: 'Gulab Jamun with Rabri', price: 120, rating: 4.9, category: 'Desserts', foodType: 'VEG', description: 'Warm khoya dumplings soaked in rose-cardamom syrup served alongside chilled rabri.' }
+      ];
+      renderDishes(sample);
+    }
+
+    function changeQty(btn, delta) {
+      const span = btn.parentElement.querySelector('.qty-value');
+      if (span) {
+        let val = parseInt(span.textContent) || 1;
+        val = Math.max(1, val + delta);
+        span.textContent = val;
+      }
+    }
+
+    function addDishToCart(btn, name, price, img) {
+      const card = btn.closest('.food-card');
+      const qtySpan = card ? card.querySelector('.qty-value') : null;
+      const qty = qtySpan ? parseInt(qtySpan.textContent) || 1 : 1;
+
+      CartService.addToCart(name, price, qty, img);
+
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '✓ Added!';
+      btn.classList.add('btn-secondary');
+      btn.classList.remove('btn-primary');
+
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.classList.add('btn-primary');
+        btn.classList.remove('btn-secondary');
+      }, 1200);
+    }
+  </script>
+</body>
+</html>

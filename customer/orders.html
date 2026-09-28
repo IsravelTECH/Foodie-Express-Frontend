@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="images/foodie-logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Orders — Foodie Express</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/customer.css">
+</head>
+<body class="has-bottom-nav">
+  <!-- Mobile Slide Drawer Backdrop -->
+  <div class="mobile-drawer-backdrop" id="mobileDrawerBackdrop" onclick="FoodieCustomer.toggleMobileDrawer()"></div>
+
+  <!-- Mobile Slide Drawer -->
+  <aside class="mobile-drawer" id="mobileDrawer">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--cust-border); padding-bottom: 16px;">
+      <a href="index.html" class="brand-logo">
+        <img src="images/foodie-logo.png" alt="Foodie Express Logo" class="logo-img">
+        <span class="brand-title">Foodie<span>Express</span></span>
+      </a>
+      <button onclick="FoodieCustomer.toggleMobileDrawer()" style="font-size: 1.2rem; color: var(--cust-navy);">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <nav style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
+      <a href="index.html" class="nav-link"><i class="fa-solid fa-house" style="width: 24px;"></i> Home</a>
+      <a href="menu.html" class="nav-link"><i class="fa-solid fa-utensils" style="width: 24px;"></i> All Menu</a>
+      <a href="reservations.html" class="nav-link"><i class="fa-solid fa-calendar-check" style="width: 24px;"></i> Book Table</a>
+      <a href="orders.html" class="nav-link active"><i class="fa-solid fa-receipt" style="width: 24px;"></i> My Orders</a>
+      <a href="wishlist.html" class="nav-link"><i class="fa-solid fa-heart" style="color: #E11D48; width: 24px;"></i> Saved Dishes</a>
+      <a href="cart.html" class="nav-link"><i class="fa-solid fa-bag-shopping" style="width: 24px;"></i> Cart</a>
+    </nav>
+  </aside>
+
+  <!-- Sticky Storefront Header -->
+  <header class="site-header">
+    <div class="header-container container">
+      <div class="flex items-center gap-3">
+        <button class="hamburger-btn" onclick="FoodieCustomer.toggleMobileDrawer()" title="Open Navigation Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <a href="index.html" class="brand-logo">
+          <img src="images/foodie-logo.png" alt="Foodie Express Logo" class="logo-img">
+          <span class="brand-title">Foodie<span>Express</span></span>
+        </a>
+      </div>
+
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="menu.html" class="nav-link">Menu</a>
+        <a href="reservations.html" class="nav-link">Reservations</a>
+        <a href="orders.html" class="nav-link active">Orders</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="wishlist.html" class="header-icon-btn" title="Wishlist">
+          <i class="fa-regular fa-heart"></i>
+          <span class="header-badge wishlist-count-badge" style="display: none;">0</span>
+        </a>
+        <a href="cart.html" class="header-icon-btn" title="Cart">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="header-badge cart-count-badge" style="display: none;">0</span>
+        </a>
+
+        <!-- User Dropdown -->
+        <div class="user-dropdown-wrap">
+          <button class="user-menu-btn" id="userProfileBtn" onclick="FoodieCustomer.toggleUserDropdown()">
+            <div class="user-avatar-circle" id="headerUserAvatar">👤</div>
+            <span id="headerUserName">Account</span>
+            <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem; color: var(--cust-text-muted);"></i>
+          </button>
+          <div class="user-dropdown-menu" id="userDropdownMenu">
+            <div id="userDropdownContent">
+              <a href="profile.html" class="dropdown-item"><i class="fa-solid fa-user"></i> My Profile</a>
+              <a href="orders.html" class="dropdown-item"><i class="fa-solid fa-receipt"></i> Orders & Receipts</a>
+              <div class="dropdown-divider"></div>
+              <a href="logout.html" class="dropdown-item" style="color: var(--cust-danger);"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Hero Header -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-badge">
+        <i class="fa-solid fa-clock-rotate-left"></i> ORDER TIMELINE
+      </div>
+      <h1 class="page-hero-title">My Orders & Receipts</h1>
+      <p class="page-hero-desc">Track real-time kitchen status, delivery progress, and past culinary transactions.</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container" style="max-width: 860px; margin-top: 36px; margin-bottom: 60px; min-height: 50vh;">
+    <div id="ordersContainer">
+      <div style="text-align: center; padding: 60px 0; color: var(--cust-text-muted);">
+        <i class="fa-solid fa-circle-notch fa-spin fa-2x" style="color: var(--cust-primary);"></i>
+        <p style="margin-top: 14px; font-weight: 600;">Fetching your placed orders...</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modern Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>Foodie<span>Express</span></h3>
+          <p>Delivering hot, hygienic, authentic culinary delights from gourmet kitchens straight to your doorstep.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="menu.html">Explore Menu</a></li>
+            <li><a href="reservations.html">Book a Table</a></li>
+            <li><a href="orders.html">Orders</a></li>
+            <li><a href="wishlist.html">Saved Dishes</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>About</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="contact.html">Customer Support</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Kitchen Address</h4>
+          <p style="color: #9CA3AF; font-size: 0.9rem; line-height: 1.6;">123 Gourmet Food Boulevard, Indiranagar, Bangalore</p>
+          <p style="color: #9CA3AF; font-size: 0.9rem; margin-top: 6px;"><strong>Call:</strong> +91 98765 43210</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Foodie Express Inc.</span>
+        <span>Made with love for food lovers.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Bottom App Bar -->
+  <nav class="mobile-bottom-nav">
+    <div class="mobile-nav-grid">
+      <a href="index.html" class="mobile-nav-item">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+      </a>
+      <a href="menu.html" class="mobile-nav-item">
+        <i class="fa-solid fa-utensils"></i>
+        <span>Menu</span>
+      </a>
+      <a href="orders.html" class="mobile-nav-item active">
+        <i class="fa-solid fa-receipt"></i>
+        <span>Orders</span>
+      </a>
+      <a href="cart.html" class="mobile-nav-item">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span>Cart</span>
+        <span class="mobile-badge cart-count-badge" style="display: none;">0</span>
+      </a>
+      <a href="profile.html" class="mobile-nav-item">
+        <i class="fa-solid fa-user"></i>
+        <span>Profile</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Scripts -->
+  <script src="../shared/js/api.js"></script>
+  <script src="js/customer.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = JSON.parse(localStorage.getItem('user'));
+      const token = localStorage.getItem('token');
+      const container = document.getElementById('ordersContainer');
+
+      if (!user) {
+        container.innerHTML = `
+          <div class="card" style="text-align: center; padding: 56px 24px;">
+            <div style="width: 72px; height: 72px; border-radius: 50%; background: var(--cust-primary-soft); color: var(--cust-primary); display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 16px auto;">
+              <i class="fa-solid fa-lock"></i>
+            </div>
+            <h3 style="font-size: 1.3rem; color: var(--cust-navy); margin-bottom: 8px;">Please Sign In</h3>
+            <p style="color: var(--cust-text-secondary); margin-bottom: 24px; max-width: 380px; margin-left: auto; margin-right: auto;">Log in with your customer credentials to review your placed orders and live dispatch tracks.</p>
+            <a href="login.html" class="btn btn-primary btn-lg">Sign In / Register</a>
+          </div>
+        `;
+        return;
+      }
+
+      try {
+        const headers = {};
+        if (token) headers['Authorization'] = `Bearer ${token}`;
+
+        const res = await fetch(`${FoodieApp.API_BASE}/api/orders/my-orders?email=${encodeURIComponent(user.email || '')}`, { headers });
+        if (!res.ok) throw new Error('Failed to load orders');
+        const orders = await res.json();
+
+        if (orders.length === 0) {
+          container.innerHTML = `
+            <div class="card" style="text-align: center; padding: 64px 24px;">
+              <div style="width: 72px; height: 72px; border-radius: 50%; background: var(--cust-primary-soft); color: var(--cust-primary); display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 16px auto;">
+                <i class="fa-solid fa-receipt"></i>
+              </div>
+              <h3 style="font-size: 1.35rem; color: var(--cust-navy); margin-bottom: 8px;">No Orders Placed Yet</h3>
+              <p style="color: var(--cust-text-secondary); margin-bottom: 24px; max-width: 400px; margin-left: auto; margin-right: auto;">Your order history is clean! Browse our mouthwatering menu to place your first order.</p>
+              <a href="menu.html" class="btn btn-primary btn-lg">
+                <i class="fa-solid fa-utensils"></i> Explore Menu
+              </a>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = orders.map(order => {
+          let items = [];
+          try {
+            items = typeof order.cartJson === 'string' ? JSON.parse(order.cartJson) : order.cartJson;
+          } catch (e) {
+            items = [];
+          }
+
+          const statusKey = (order.orderStatus || 'pending').toLowerCase();
+          const formattedDate = order.createdAt ? new Date(order.createdAt).toLocaleDateString('en-IN', {
+            year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+          }) : 'Recent';
+
+          return `
+            <div class="order-card">
+              <div class="order-card-header">
+                <div>
+                  <div style="font-weight: 800; font-size: 1.2rem; color: var(--cust-navy);">
+                    Order #FE-${order.id}
+                  </div>
+                  <div style="font-size: 0.82rem; color: var(--cust-text-muted); margin-top: 4px;">
+                    <i class="fa-regular fa-clock"></i> Placed on ${formattedDate}
+                  </div>
+                </div>
+                <span class="status-pill ${statusKey}">
+                  ${(order.orderStatus || 'PENDING').replace(/_/g, ' ')}
+                </span>
+              </div>
+
+              <div class="order-items-list">
+                ${Array.isArray(items) && items.length > 0 ? items.map(i => `
+                  <div class="order-item-line">
+                    <span><strong style="color: var(--cust-primary);">${i.quantity || 1} ×</strong> ${i.name}</span>
+                    <span style="font-weight: 700; color: var(--cust-navy);">₹${(parseFloat(i.price || 0) * (i.quantity || 1)).toFixed(2)}</span>
+                  </div>
+                `).join('') : `<p style="font-size: 0.9rem; color: var(--cust-text-muted);">${order.cartJson || 'Ordered Dishes'}</p>`}
+              </div>
+
+              <div class="order-card-footer">
+                <div>
+                  <span style="color: var(--cust-text-muted); font-size: 0.78rem; display: block; text-transform: uppercase; font-weight: 700;">Payment via ${order.paymentMethod || 'COD'}</span>
+                  <strong style="font-size: 1.1rem; color: var(--cust-navy);">Total Paid: ₹${parseFloat(order.totalAmount || 0).toFixed(2)}</strong>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                  <a href="order-details.html?id=${order.id}" class="btn btn-primary btn-sm">
+                    <i class="fa-solid fa-truck-fast"></i> Live Tracking & Invoice
+                  </a>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+      } catch (err) {
+        console.error('Fetch orders error:', err);
+        container.innerHTML = `
+          <div class="card" style="text-align: center; padding: 48px; border-color: var(--cust-danger);">
+            <i class="fa-solid fa-triangle-exclamation fa-2x" style="color: var(--cust-danger); margin-bottom: 12px;"></i>
+            <p style="color: var(--cust-danger); font-weight: 600;">Could not load order history. Please check your network connection.</p>
+          </div>
+        `;
+      }
+    });
+  </script>
+</body>
+</html>

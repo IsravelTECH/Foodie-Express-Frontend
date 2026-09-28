@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="images/foodie-logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sweet Treats &amp; Desserts — Foodie Express</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/customer.css">
+</head>
+<body class="has-bottom-nav">
+  <!-- 1. Storefront Header -->
+  <header class="site-header">
+    <div class="header-container container">
+      <a href="index.html" class="brand-logo">
+        <img src="images/foodie-logo.png" alt="Foodie Express Logo" class="logo-img">
+        <span class="brand-title">Foodie<span>Express</span></span>
+      </a>
+
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="menu.html" class="nav-link">Menu</a>
+        <a href="indian.html" class="nav-link">Indian</a>
+        <a href="veg.html" class="nav-link">Veg</a>
+        <a href="nonveg.html" class="nav-link">Non-Veg</a>
+        <a href="snacks.html" class="nav-link">Snacks</a>
+        <a href="dessert.html" class="nav-link active">Desserts</a>
+        <a href="reservations.html" class="nav-link">Reservations</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="wishlist.html" class="header-icon-btn" title="Wishlist">
+          <i class="fa-regular fa-heart"></i>
+          <span class="header-badge wishlist-count-badge" style="display: none;">0</span>
+        </a>
+        <a href="cart.html" class="header-icon-btn" title="Cart">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="header-badge cart-count-badge" style="display: none;">0</span>
+        </a>
+        <a href="login.html" class="btn btn-primary btn-sm">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In
+        </a>
+        <button class="hamburger-btn" id="mobileDrawerBtn" aria-label="Open Navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. Category Hero -->
+  <section style="background: radial-gradient(circle at 50% 0%, rgba(236, 72, 153, 0.08) 0%, rgba(255, 249, 245, 0) 70%); padding: 48px 0 32px 0; border-bottom: 1px solid var(--cust-border); text-align: center;">
+    <div class="container">
+      <span class="section-tag" style="background: #FDF2F8; color: #DB2777; border: 1px solid #FBCFE8;">
+        <i class="fa-solid fa-ice-cream"></i> SWEET INDULGENCE &amp; DRINKS
+      </span>
+      <h1 style="font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 800; color: var(--cust-navy); margin: 8px 0;">
+        Heavenly Desserts &amp; Shakes
+      </h1>
+      <p style="color: var(--cust-text-secondary); max-width: 600px; margin: 0 auto; font-size: 1rem;">
+        Melt-in-mouth Indian sweets, rich chocolate gateaux, thick milkshakes, and refreshing chilled beverages.
+      </p>
+    </div>
+  </section>
+
+  <!-- 3. Toolbar & Grid -->
+  <main class="container" style="padding-top: 32px;">
+    <div class="menu-toolbar">
+      <div class="search-box-wrap">
+        <i class="fa-solid fa-magnifying-glass" style="color: var(--cust-primary);"></i>
+        <input type="text" id="searchBox" placeholder="Search gulab jamun, cake, milkshake, rasmalai..." oninput="MenuController.filterBySearch('searchBox', '.food-card')">
+      </div>
+
+      <div class="filter-pills">
+        <button class="filter-pill active" onclick="MenuController.filterByCategory('all', this, '.food-card')">All Treats</button>
+        <button class="filter-pill" onclick="MenuController.filterByCategory('sweets', this, '.food-card')">Indian Sweets</button>
+        <button class="filter-pill" onclick="MenuController.filterByCategory('cakes', this, '.food-card')">Cakes &amp; Pastries</button>
+        <button class="filter-pill" onclick="MenuController.filterByCategory('shakes', this, '.food-card')">Milkshakes</button>
+      </div>
+
+      <select id="sortDishes" class="sort-select" onchange="MenuController.sortDishes('sortDishes', 'dessertMenuGrid', '.food-card')">
+        <option value="default">Sort by: Recommended</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="rating-desc">Highest Rated</option>
+        <option value="name-asc">Name: A to Z</option>
+      </select>
+    </div>
+
+    <div class="food-grid" id="dessertMenuGrid">
+      <!-- 1. Warm Gulab Jamun -->
+      <div class="food-card" data-category="sweets" data-price="90" data-rating="4.9">
+        <div class="food-card-image-wrap">
+          <span class="card-badge badge-special">🍯 All-Time Favorite</span>
+          <img src="images/desserts/gualab.jpg" alt="Gulab Jamun" onerror="this.src='images/indianfood.jpg'">
+          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Gulab Jamun', 90, 'images/desserts/gualab.jpg')" title="Save to Wishlist">♡</button>
+        </div>
+        <div class="food-card-body">
+          <div class="food-card-header">
+            <h3 class="food-card-title">Warm Gulab Jamun (2 Pcs)</h3>
+            <div class="food-card-rating">★ 4.9</div>
+          </div>
+          <p class="food-card-desc">Soft fried milk dough dumplings soaked in fragrant rose and cardamom sugar syrup.</p>
+          <div class="food-card-footer">
+            <div class="food-price">
+              <span class="food-price-label">Price</span>
+              <span class="food-price-val">₹90.00</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="qty-counter">
+                <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+                <span class="qty-value">1</span>
+                <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="MenuController.addCardToCart(this, 'Gulab Jamun', 90, 'images/desserts/gualab.jpg')">
+                + Add
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Royal Rasmalai -->
+      <div class="food-card" data-category="sweets" data-price="140" data-rating="4.9">
+        <div class="food-card-image-wrap">
+          <span class="card-badge badge-special">🍯 Royal Sweet</span>
+          <img src="images/desserts/rasmalai.jpg" alt="Rasmalai" onerror="this.src='images/indianfood.jpg'">
+          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Royal Rasmalai', 140, 'images/desserts/rasmalai.jpg')" title="Save to Wishlist">♡</button>
+        </div>
+        <div class="food-card-body">
+          <div class="food-card-header">
+            <h3 class="food-card-title">Royal Rasmalai (2 Pcs)</h3>
+            <div class="food-card-rating">★ 4.9</div>
+          </div>
+          <p class="food-card-desc">Delicate cottage cheese patties steeped in thick saffron milk, garnished with pistachios and almonds.</p>
+          <div class="food-card-footer">
+            <div class="food-price">
+              <span class="food-price-label">Price</span>
+              <span class="food-price-val">₹140.00</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="qty-counter">
+                <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+                <span class="qty-value">1</span>
+                <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="MenuController.addCardToCart(this, 'Royal Rasmalai', 140, 'images/desserts/rasmalai.jpg')">
+                + Add
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Chocolate Fudge Cake -->
+      <div class="food-card" data-category="cakes" data-price="180" data-rating="4.8">
+        <div class="food-card-image-wrap">
+          <span class="card-badge badge-veg">🍰 Bakery Special</span>
+          <img src="images/desserts/cake.jpg" alt="Chocolate Fudge Cake" onerror="this.src='images/indianfood.jpg'">
+          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Chocolate Fudge Cake', 180, 'images/desserts/cake.jpg')" title="Save to Wishlist">♡</button>
+        </div>
+        <div class="food-card-body">
+          <div class="food-card-header">
+            <h3 class="food-card-title">Dutch Chocolate Fudge Pastry</h3>
+            <div class="food-card-rating">★ 4.8</div>
+          </div>
+          <p class="food-card-desc">Decadent moist dark chocolate sponge layered with rich Belgian chocolate ganache.</p>
+          <div class="food-card-footer">
+            <div class="food-price">
+              <span class="food-price-label">Price</span>
+              <span class="food-price-val">₹180.00</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="qty-counter">
+                <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+                <span class="qty-value">1</span>
+                <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="MenuController.addCardToCart(this, 'Dutch Chocolate Fudge Pastry', 180, 'images/desserts/cake.jpg')">
+                + Add
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Choco Milkshake -->
+      <div class="food-card" data-category="shakes" data-price="130" data-rating="4.7">
+        <div class="food-card-image-wrap">
+          <span class="card-badge badge-special">🥤 Thick Shake</span>
+          <img src="images/desserts/chocomilkshake.jpg" alt="Chocolate Milkshake" onerror="this.src='images/indianfood.jpg'">
+          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Choco Milkshake', 130, 'images/desserts/chocomilkshake.jpg')" title="Save to Wishlist">♡</button>
+        </div>
+        <div class="food-card-body">
+          <div class="food-card-header">
+            <h3 class="food-card-title">Belgian Chocolate Milkshake</h3>
+            <div class="food-card-rating">★ 4.7</div>
+          </div>
+          <p class="food-card-desc">Thick and creamy blended shake topped with chocolate syrup drizzle and chocolate chips.</p>
+          <div class="food-card-footer">
+            <div class="food-price">
+              <span class="food-price-label">Price</span>
+              <span class="food-price-val">₹130.00</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="qty-counter">
+                <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+                <span class="qty-value">1</span>
+                <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="MenuController.addCardToCart(this, 'Belgian Chocolate Milkshake', 130, 'images/desserts/chocomilkshake.jpg')">
+                + Add
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Rasgulla -->
+      <div class="food-card" data-category="sweets" data-price="80" data-rating="4.8">
+        <div class="food-card-image-wrap">
+          <span class="card-badge badge-veg">🍯 Bengali Sweet</span>
+          <img src="images/desserts/rasgulla.jpg" alt="Rasgulla" onerror="this.src='images/indianfood.jpg'">
+          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Kolkata Spongy Rasgulla', 80, 'images/desserts/rasgulla.jpg')" title="Save to Wishlist">♡</button>
+        </div>
+        <div class="food-card-body">
+          <div class="food-card-header">
+            <h3 class="food-card-title">Kolkata Spongy Rasgulla (2 Pcs)</h3>
+            <div class="food-card-rating">★ 4.8</div>
+          </div>
+          <p class="food-card-desc">Authentic spongy chenna dumplings soaked in light aromatic sugar cardamom syrup.</p>
+          <div class="food-card-footer">
+            <div class="food-price">
+              <span class="food-price-label">Price</span>
+              <span class="food-price-val">₹80.00</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="qty-counter">
+                <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+                <span class="qty-value">1</span>
+                <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="MenuController.addCardToCart(this, 'Kolkata Spongy Rasgulla', 80, 'images/desserts/rasgulla.jpg')">
+                + Add
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. Strawberry Cake -->
+      <div class="food-card" data-category="cakes" data-price="160" data-rating="4.8">
+        <div class="food-card-image-wrap">
+          <span class="card-badge badge-veg">🍰 Fresh Berry</span>
+          <img src="images/desserts/strawberry cake.jpg" alt="Strawberry Cake" onerror="this.src='images/indianfood.jpg'">
+          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Strawberry Cream Pastry', 160, 'images/desserts/strawberry cake.jpg')" title="Save to Wishlist">♡</button>
+        </div>
+        <div class="food-card-body">
+          <div class="food-card-header">
+            <h3 class="food-card-title">Strawberry Cream Pastry</h3>
+            <div class="food-card-rating">★ 4.8</div>
+          </div>
+          <p class="food-card-desc">Light vanilla sponge layered with whipped cream and fresh wild strawberry compote.</p>
+          <div class="food-card-footer">
+            <div class="food-price">
+              <span class="food-price-label">Price</span>
+              <span class="food-price-val">₹160.00</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="qty-counter">
+                <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+                <span class="qty-value">1</span>
+                <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="MenuController.addCardToCart(this, 'Strawberry Cream Pastry', 160, 'images/desserts/strawberry cake.jpg')">
+                + Add
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="noResultsMsg" style="display: none; text-align: center; padding: 60px 0;">
+      <i class="fa-solid fa-magnifying-glass fa-3x" style="color: var(--cust-primary); margin-bottom: 16px;"></i>
+      <h3 style="font-size: 1.4rem; color: var(--cust-navy);">No matching desserts found</h3>
+      <p style="color: var(--cust-text-muted); margin-top: 4px;">Try searching for another dish or clearing the filter.</p>
+    </div>
+  </main>
+
+  <!-- 4. Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
+            <img src="images/foodie-logo.png" alt="Logo" style="height: 38px; border-radius: 6px;">
+            <h3 style="margin: 0;">Foodie<span>Express</span></h3>
+          </div>
+          <p>Delivering authentic culinary joy, fresh farm ingredients, and unforgettable restaurant moments straight to you.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Explore Menu</h4>
+          <ul class="footer-links">
+            <li><a href="indian.html">Indian Cuisine</a></li>
+            <li><a href="veg.html">Pure Vegetarian</a></li>
+            <li><a href="nonveg.html">Non-Veg Delights</a></li>
+            <li><a href="snacks.html">Crispy Snacks</a></li>
+            <li><a href="dessert.html">Sweet Desserts</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="menu.html">Full Menu</a></li>
+            <li><a href="reservations.html">Table Booking</a></li>
+            <li><a href="orders.html">Track My Orders</a></li>
+            <li><a href="wishlist.html">Saved Favorites</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Customer Support</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Operations</h4>
+          <ul class="footer-links">
+            <li><a href="../admin/login.html" style="color: var(--cust-primary); font-weight: 700;"><i class="fa-solid fa-lock"></i> Staff &amp; Admin Portal</a></li>
+            <li><span style="color: #9CA3AF; font-size: 0.88rem;"><i class="fa-solid fa-clock"></i> 10:00 AM – 11:30 PM</span></li>
+            <li><span style="color: #9CA3AF; font-size: 0.88rem;"><i class="fa-solid fa-phone"></i> +91 98765 43210</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; 2026 Foodie Express Inc. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 5. Mobile Bottom Navigation -->
+  <nav class="mobile-bottom-nav">
+    <div class="mobile-nav-grid">
+      <a href="index.html" class="mobile-nav-item">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+      </a>
+      <a href="menu.html" class="mobile-nav-item active">
+        <i class="fa-solid fa-utensils"></i>
+        <span>Menu</span>
+      </a>
+      <a href="orders.html" class="mobile-nav-item">
+        <i class="fa-solid fa-receipt"></i>
+        <span>Orders</span>
+      </a>
+      <a href="cart.html" class="mobile-nav-item">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span>Cart</span>
+        <span class="mobile-badge cart-count-badge" style="display: none;">0</span>
+      </a>
+      <a href="profile.html" class="mobile-nav-item">
+        <i class="fa-solid fa-user"></i>
+        <span>Profile</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Scripts -->
+  <script src="js/app.js"></script>
+  <script src="../shared/js/api.js"></script>
+  <script src="js/customer.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/wishlist.js"></script>
+  <script src="js/menu.js"></script>
+</body>
+</html>

@@ -138,19 +138,61 @@ const SupervisorApp = (() => {
   };
 
   /**
+   * Toggle Header Profile Dropdown
+   */
+  const toggleProfileDropdown = (e) => {
+    if (e) e.stopPropagation();
+    const dropdown = document.getElementById('supervisorProfileDropdown') || document.getElementById('adminProfileDropdown');
+    if (dropdown) {
+      dropdown.classList.toggle('show');
+    }
+  };
+
+  /**
+   * Close dropdown on outside click
+   */
+  document.addEventListener('click', (e) => {
+    const dropdown = document.getElementById('supervisorProfileDropdown') || document.getElementById('adminProfileDropdown');
+    const toggle = document.getElementById('topbarAvatar');
+    if (dropdown && dropdown.classList.contains('show')) {
+      if (!dropdown.contains(e.target) && (!toggle || !toggle.contains(e.target))) {
+        dropdown.classList.remove('show');
+      }
+    }
+  });
+
+  /**
    * Initialize layout info
    */
   const init = () => {
     const auth = checkAuth();
     if (auth) {
+      const name = auth.user.name || 'Supervisor Staff';
+      const email = auth.user.email || 'supervisor@foodie.com';
+      const roleStr = (auth.user.role || 'SUPERVISOR').replace('ROLE_', '');
+      const initial = (name ? name.charAt(0) : 'S').toUpperCase();
+
+      // Sidebar Profile Info
       const nameEl = document.getElementById('supervisorUserName');
-      if (nameEl) nameEl.textContent = auth.user.name || 'Supervisor';
+      if (nameEl) nameEl.textContent = name;
       const emailEl = document.getElementById('supervisorUserEmail');
-      if (emailEl) emailEl.textContent = auth.user.email || '';
+      if (emailEl) emailEl.textContent = email;
+      const roleEl = document.getElementById('supervisorUserRole');
+      if (roleEl) roleEl.textContent = roleStr;
       const initialEl = document.getElementById('supervisorUserInitial');
-      if (initialEl) initialEl.textContent = (auth.user.name ? auth.user.name.charAt(0) : 'S').toUpperCase();
+      if (initialEl) initialEl.textContent = initial;
+
+      // Topbar Avatar & Dropdown Info
       const topbarAvatarEl = document.getElementById('topbarAvatar');
-      if (topbarAvatarEl) topbarAvatarEl.textContent = (auth.user.name ? auth.user.name.charAt(0) : 'S').toUpperCase();
+      if (topbarAvatarEl) topbarAvatarEl.textContent = initial;
+      const dropdownAvatarEl = document.getElementById('dropdownAvatar');
+      if (dropdownAvatarEl) dropdownAvatarEl.textContent = initial;
+      const dropdownNameEl = document.getElementById('dropdownName');
+      if (dropdownNameEl) dropdownNameEl.textContent = name;
+      const dropdownEmailEl = document.getElementById('dropdownEmail');
+      if (dropdownEmailEl) dropdownEmailEl.textContent = email;
+      const dropdownRoleEl = document.getElementById('dropdownRole');
+      if (dropdownRoleEl) dropdownRoleEl.textContent = roleStr;
     }
     setupMobileNav();
   };
@@ -161,6 +203,7 @@ const SupervisorApp = (() => {
     authFetch,
     showToast,
     logout,
+    toggleProfileDropdown,
     init
   };
 })();

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting to Admin Portal...</title>
+  <script>
+    const userStr = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+    try {
+      const user = userStr ? JSON.parse(userStr) : null;
+      const role = user ? (user.role || '').replace('ROLE_', '').toUpperCase() : '';
+      if (token && role === 'ADMIN') {
+        window.location.replace('dashboard.html');
+      } else {
+        window.location.replace('login.html');
+      }
+    } catch {
+      window.location.replace('login.html');
+    }
+  </script>
+</head>
+<body>
+  <p style="font-family: sans-serif; text-align: center; margin-top: 50px;">Redirecting to Foodie Express Admin Console...</p>
+</body>
+</html>

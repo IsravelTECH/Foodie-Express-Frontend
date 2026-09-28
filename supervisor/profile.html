@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="images/foodie-logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supervisor Profile — Foodie Express Delivery Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../shared/css/global.css">
+  <link rel="stylesheet" href="../shared/css/components.css">
+  <link rel="stylesheet" href="css/supervisor.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <!-- 1. Fixed Supervisor Sidebar -->
+    <aside class="admin-sidebar" id="supervisorSidebar">
+      <div class="admin-brand">
+        <img src="images/foodie-logo.png" alt="Foodie Express" class="logo-img">
+        <div class="brand-text">
+          <h2>Foodie Express</h2>
+        </div>
+      </div>
+
+      <div class="sidebar-section-title">DELIVERY OPERATIONS</div>
+      <nav class="admin-nav">
+        <a href="dashboard.html" class="admin-nav-link">
+          <i class="fa-solid fa-chart-pie"></i><span>Dashboard</span>
+        </a>
+        <a href="assigned-orders.html" class="admin-nav-link">
+          <i class="fa-solid fa-boxes-stacked"></i><span>Assigned Orders</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-section-title">ACCOUNT</div>
+      <nav class="admin-nav">
+        <a href="profile.html" class="admin-nav-link active">
+          <i class="fa-solid fa-user-gear"></i><span>My Profile</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-section-title">SYSTEM</div>
+      <nav class="admin-nav">
+        <a href="../customer/index.html" class="admin-nav-link" target="_blank">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i><span>Live Storefront</span>
+        </a>
+      </nav>
+
+      <div class="admin-sidebar-footer">
+        <div class="admin-user-profile">
+          <div class="admin-avatar" id="supervisorUserInitial">V</div>
+          <div class="admin-user-details">
+            <h4 id="supervisorUserName">Vikram Singh</h4>
+            <span id="supervisorUserEmail">supervisor@foodie.com</span>
+            <span class="admin-role-badge" id="supervisorUserRole">Supervisor</span>
+          </div>
+        </div>
+        <button class="admin-btn admin-btn-outline admin-btn-sm" style="width: 100%; justify-content: center;" onclick="SupervisorApp.logout()">
+          <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- 2. Main Content Area with Fixed Topbar -->
+    <main class="admin-main">
+      <header class="admin-topbar">
+        <div class="topbar-left-content">
+          <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle Sidebar"><i class="fa-solid fa-bars"></i></button>
+          <span class="topbar-page-title">Supervisor Account Profile</span>
+          <span class="sup-live-tag"><span class="sup-live-dot"></span> Active</span>
+        </div>
+
+        <div class="topbar-actions">
+          <a href="dashboard.html" class="topbar-btn" title="Dashboard">
+            <i class="fa-solid fa-chart-pie"></i>
+          </a>
+          <a href="assigned-orders.html" class="topbar-btn" title="Assigned Queue">
+            <i class="fa-solid fa-boxes-stacked"></i>
+          </a>
+          <div class="admin-profile-dropdown-wrap">
+            <div class="topbar-avatar" id="topbarAvatar" onclick="SupervisorApp.toggleProfileDropdown(event)" title="Account Profile">V</div>
+            <div class="admin-profile-dropdown" id="supervisorProfileDropdown">
+              <div class="dropdown-header">
+                <div class="dropdown-avatar" id="dropdownAvatar">V</div>
+                <div class="dropdown-info">
+                  <h4 id="dropdownName">Vikram Singh</h4>
+                  <span id="dropdownEmail">supervisor@foodie.com</span>
+                  <span class="dropdown-role" id="dropdownRole">Supervisor</span>
+                </div>
+              </div>
+              <div class="dropdown-divider"></div>
+              <a href="profile.html" class="dropdown-item">
+                <i class="fa-solid fa-user-gear"></i> My Profile
+              </a>
+              <a href="dashboard.html" class="dropdown-item">
+                <i class="fa-solid fa-chart-pie"></i> Dashboard
+              </a>
+              <a href="assigned-orders.html" class="dropdown-item">
+                <i class="fa-solid fa-boxes-stacked"></i> Assigned Orders
+              </a>
+              <a href="../customer/index.html" class="dropdown-item" target="_blank">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Storefront
+              </a>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item dropdown-logout" onclick="SupervisorApp.logout()">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="admin-content">
+        <!-- Breadcrumb -->
+        <div class="admin-breadcrumb">
+          <i class="fa-solid fa-house"></i>
+          <a href="dashboard.html">Dashboard</a>
+          <i class="fa-solid fa-chevron-right"></i>
+          <span>My Profile</span>
+        </div>
+
+        <!-- Page Header -->
+        <div class="admin-page-header">
+          <div>
+            <h1>Supervisor Profile</h1>
+            <p>Manage your delivery portal identity, operational contact info, and active dispatch overview.</p>
+          </div>
+        </div>
+
+        <div class="profile-layout-grid">
+          <!-- Left Column: Supervisor Summary & Metrics -->
+          <div>
+            <div class="profile-card">
+              <div class="profile-avatar-large" id="profileLargeAvatar">V</div>
+              <div class="profile-hero-center">
+                <h3 id="profileHeroName">Vikram Singh</h3>
+                <p id="profileHeroEmail">supervisor@foodie.com</p>
+                <span class="sup-badge badge-preparing" style="font-size: 0.82rem; padding: 4px 12px;" id="profileHeroRole">
+                  <i class="fa-solid fa-shield-halved"></i> Delivery Supervisor
+                </span>
+              </div>
+
+              <div class="profile-metric-pill-list">
+                <div class="profile-metric-row">
+                  <span>Assigned Deliveries</span>
+                  <strong id="profStatTotal">0</strong>
+                </div>
+                <div class="profile-metric-row">
+                  <span>In Kitchen</span>
+                  <strong style="color: #EA580C;" id="profStatPrep">0</strong>
+                </div>
+                <div class="profile-metric-row">
+                  <span>Out For Delivery</span>
+                  <strong style="color: #2563EB;" id="profStatOut">0</strong>
+                </div>
+                <div class="profile-metric-row">
+                  <span>Completed Deliveries</span>
+                  <strong style="color: #16A34A;" id="profStatDeliv">0</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="profile-card">
+              <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--sup-navy); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                <i class="fa-solid fa-bolt" style="color: var(--sup-primary);"></i> Quick Actions
+              </h4>
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <a href="dashboard.html" class="admin-btn admin-btn-outline admin-btn-sm" style="width: 100%; justify-content: flex-start;">
+                  <i class="fa-solid fa-chart-pie"></i> Open Command Dashboard
+                </a>
+                <a href="assigned-orders.html" class="admin-btn admin-btn-outline admin-btn-sm" style="width: 100%; justify-content: flex-start;">
+                  <i class="fa-solid fa-boxes-stacked"></i> View Assigned Queue
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Profile Edit Form & Security -->
+          <div>
+            <div class="profile-card">
+              <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--sup-navy); margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                <i class="fa-solid fa-id-badge" style="color: var(--sup-primary);"></i> Personal &amp; Operational Information
+              </h3>
+
+              <form id="supervisorProfileForm" onsubmit="handleProfileUpdate(event)">
+                <div class="form-grid-2">
+                  <div class="admin-form-group">
+                    <label class="admin-label" for="profileName">Full Name</label>
+                    <input type="text" id="profileName" class="admin-input" required placeholder="Enter full name">
+                  </div>
+
+                  <div class="admin-form-group">
+                    <label class="admin-label" for="profileEmail">Email Address (Read-only)</label>
+                    <input type="email" id="profileEmail" class="admin-input" readonly style="background: #F1F5F9; color: #64748B; cursor: not-allowed;">
+                  </div>
+                </div>
+
+                <div class="form-grid-2">
+                  <div class="admin-form-group">
+                    <label class="admin-label" for="profilePhone">Contact Phone Number</label>
+                    <input type="tel" id="profilePhone" class="admin-input" placeholder="+91 9876543210">
+                  </div>
+
+                  <div class="admin-form-group">
+                    <label class="admin-label" for="profileRoleDisplay">System Role</label>
+                    <input type="text" id="profileRoleDisplay" class="admin-input" readonly value="Supervisor" style="background: #F1F5F9; color: #64748B; cursor: not-allowed;">
+                  </div>
+                </div>
+
+                <div class="admin-form-group">
+                  <label class="admin-label" for="profileAddress">Assigned Delivery Hub / Operating Address</label>
+                  <textarea id="profileAddress" class="admin-textarea" rows="3" placeholder="Enter assigned dispatch zone or hub address"></textarea>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; margin-top: 10px;">
+                  <button type="submit" class="admin-btn admin-btn-primary" id="btnSaveProfile">
+                    <i class="fa-solid fa-floppy-disk"></i> Save Profile Changes
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div class="profile-card">
+              <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--sup-navy); margin-bottom: 16px; display: flex; align-items: center; gap: 10px;">
+                <i class="fa-solid fa-lock" style="color: #64748B;"></i> Security &amp; Access Permissions
+              </h3>
+              <p style="font-size: 0.88rem; color: var(--sup-text-muted); line-height: 1.5; margin-bottom: 16px;">
+                Your account holds operational privileges for advancing kitchen food preparation stages, coordinating dispatchers, and confirming doorstep customer handoffs in Foodie Express.
+              </p>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; background: #F8FAFC; border-radius: 12px; border: 1px solid var(--sup-border);">
+                <div>
+                  <strong style="font-size: 0.92rem; color: #0F172A; display: block;">Session Security</strong>
+                  <span style="font-size: 0.8rem; color: var(--sup-text-muted);">Signed in with JWT Token Session</span>
+                </div>
+                <button type="button" class="admin-btn admin-btn-outline admin-btn-sm" style="color: #DC2626; border-color: #FECDD3;" onclick="SupervisorApp.logout()">
+                  <i class="fa-solid fa-right-from-bracket"></i> Sign Out of Portal
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../customer/js/app.js"></script>
+  <script src="../shared/js/auth.js"></script>
+  <script src="../shared/js/api.js"></script>
+  <script src="js/supervisor.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      loadProfileData();
+      loadOperationalMetrics();
+    });
+
+    async function loadProfileData() {
+      try {
+        const res = await SupervisorApp.authFetch('/api/users/profile');
+        if (!res.ok) throw new Error('Failed to load profile');
+        const user = await res.json();
+
+        document.getElementById('profileName').value = user.name || '';
+        document.getElementById('profileEmail').value = user.email || '';
+        document.getElementById('profilePhone').value = user.phone || '';
+        document.getElementById('profileAddress').value = user.address || '';
+
+        document.getElementById('profileHeroName').textContent = user.name || 'Supervisor Staff';
+        document.getElementById('profileHeroEmail').textContent = user.email || 'supervisor@foodie.com';
+
+        const initial = (user.name ? user.name.charAt(0) : 'S').toUpperCase();
+        document.getElementById('profileLargeAvatar').textContent = initial;
+
+        // Also update localStorage so header matches
+        const cachedUser = JSON.parse(localStorage.getItem('user') || '{}');
+        cachedUser.name = user.name;
+        cachedUser.phone = user.phone;
+        cachedUser.address = user.address;
+        localStorage.setItem('user', JSON.stringify(cachedUser));
+      } catch (err) {
+        console.error(err);
+        const auth = SupervisorApp.checkAuth();
+        if (auth && auth.user) {
+          document.getElementById('profileName').value = auth.user.name || '';
+          document.getElementById('profileEmail').value = auth.user.email || '';
+          document.getElementById('profilePhone').value = auth.user.phone || '';
+          document.getElementById('profileHeroName').textContent = auth.user.name || 'Supervisor Staff';
+          document.getElementById('profileHeroEmail').textContent = auth.user.email || 'supervisor@foodie.com';
+        }
+      }
+    }
+
+    async function loadOperationalMetrics() {
+      try {
+        const res = await SupervisorApp.authFetch('/api/supervisor/dashboard');
+        if (res.ok) {
+          const data = await res.json();
+          document.getElementById('profStatTotal').textContent = data.totalAssigned || 0;
+          document.getElementById('profStatPrep').textContent = data.preparingCount || 0;
+          document.getElementById('profStatOut').textContent = data.outForDeliveryCount || 0;
+          document.getElementById('profStatDeliv').textContent = data.deliveredTodayCount || 0;
+        }
+      } catch (e) {
+        console.warn('Could not load supervisor dashboard metrics for profile', e);
+      }
+    }
+
+    async function handleProfileUpdate(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnSaveProfile');
+      const originalText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Saving...`;
+
+      const name = document.getElementById('profileName').value.trim();
+      const phone = document.getElementById('profilePhone').value.trim();
+      const address = document.getElementById('profileAddress').value.trim();
+
+      try {
+        const res = await SupervisorApp.authFetch('/api/users/profile', {
+          method: 'PUT',
+          body: JSON.stringify({ name, phone, address })
+        });
+
+        if (res.ok) {
+          const updated = await res.json();
+          FoodieApp.showToast('Profile updated successfully!', 'success', 'Profile Saved');
+
+          document.getElementById('profileHeroName').textContent = updated.name || name;
+          const initial = (name ? name.charAt(0) : 'S').toUpperCase();
+          document.getElementById('profileLargeAvatar').textContent = initial;
+
+          // Update cached user in storage
+          const user = JSON.parse(localStorage.getItem('user') || '{}');
+          user.name = updated.name || name;
+          user.phone = updated.phone || phone;
+          user.address = updated.address || address;
+          localStorage.setItem('user', JSON.stringify(user));
+
+          // Re-init layout header info
+          SupervisorApp.init();
+        } else {
+          const err = await res.json();
+          FoodieApp.showToast(err.error || 'Failed to update profile.', 'error');
+        }
+      } catch (err) {
+        console.error(err);
+        FoodieApp.showToast('Server error updating profile.', 'error');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+      }
+    }
+  </script>
+</body>
+</html>

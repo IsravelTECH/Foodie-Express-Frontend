@@ -15,20 +15,47 @@ document.addEventListener('DOMContentLoaded', () => {
  * Initialize Navbar Events & Mobile Drawer
  */
 function initNavbar() {
-  const hamburgerBtn = document.querySelector('.hamburger-btn');
+  const headerContainer = document.querySelector('.header-container');
+  let hamburgerBtn = document.querySelector('.hamburger-btn');
   const navMenu = document.querySelector('.nav-menu');
 
+  if (headerContainer && navMenu && !hamburgerBtn) {
+    hamburgerBtn = document.createElement('button');
+    hamburgerBtn.className = 'hamburger-btn';
+    hamburgerBtn.setAttribute('aria-label', 'Toggle Navigation Menu');
+    hamburgerBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+    
+    // Insert before header actions or append
+    const headerActions = document.querySelector('.header-actions');
+    if (headerActions) {
+      headerContainer.insertBefore(hamburgerBtn, headerActions);
+    } else {
+      headerContainer.appendChild(hamburgerBtn);
+    }
+  }
+
   if (hamburgerBtn && navMenu) {
-    hamburgerBtn.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
-      hamburgerBtn.classList.toggle('active');
-    });
+    hamburgerBtn.onclick = (e) => {
+      e.stopPropagation();
+      const isActive = navMenu.classList.toggle('active');
+      hamburgerBtn.classList.toggle('active', isActive);
+      hamburgerBtn.innerHTML = isActive ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+    };
 
     document.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', () => {
         navMenu.classList.remove('active');
         hamburgerBtn.classList.remove('active');
+        hamburgerBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
       });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!navMenu.contains(e.target) && !hamburgerBtn.contains(e.target) && navMenu.classList.contains('active')) {
+        navMenu.classList.remove('active');
+        hamburgerBtn.classList.remove('active');
+        hamburgerBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+      }
     });
   }
 

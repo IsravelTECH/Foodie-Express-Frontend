@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="images/foodie-logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — Foodie Express</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="admin-brand">
+        <img src="images/foodie-logo.png" alt="Foodie Express" class="logo-img">
+        <div class="brand-text">
+          <h2>Foodie Express</h2>
+        </div>
+      </div>
+
+      <div class="sidebar-section-title">OVERVIEW</div>
+      <nav class="admin-nav">
+        <a href="dashboard.html" class="admin-nav-link active">
+          <i class="fa-solid fa-chart-pie"></i>
+          <span>Dashboard</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-section-title">MANAGEMENT</div>
+      <nav class="admin-nav">
+        <a href="orders.html" class="admin-nav-link">
+          <i class="fa-solid fa-receipt"></i>
+          <span>Orders</span>
+        </a>
+        <a href="menu-items.html" class="admin-nav-link">
+          <i class="fa-solid fa-bowl-food"></i>
+          <span>Menu Items</span>
+        </a>
+        <a href="categories.html" class="admin-nav-link">
+          <i class="fa-solid fa-tags"></i>
+          <span>Categories</span>
+        </a>
+        <a href="customers.html" class="admin-nav-link">
+          <i class="fa-solid fa-users"></i>
+          <span>Customers</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-section-title">FINANCE & BOOKINGS</div>
+      <nav class="admin-nav">
+        <a href="payments.html" class="admin-nav-link">
+          <i class="fa-solid fa-credit-card"></i>
+          <span>Payments</span>
+        </a>
+        <a href="reservations.html" class="admin-nav-link">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>Reservations</span>
+        </a>
+        <a href="inquiries.html" class="admin-nav-link">
+          <i class="fa-solid fa-envelope"></i>
+          <span>Inquiries</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-section-title">SYSTEM</div>
+      <nav class="admin-nav">
+        <a href="store-settings.html" class="admin-nav-link">
+          <i class="fa-solid fa-sliders"></i>
+          <span>Store Settings</span>
+        </a>
+        <a href="../customer/index.html" class="admin-nav-link" target="_blank">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          <span>Live Storefront</span>
+        </a>
+      </nav>
+
+      <div class="admin-sidebar-footer">
+        <div class="admin-user-profile">
+          <div class="admin-avatar" id="adminUserInitial">F</div>
+          <div class="admin-user-details">
+            <h4 id="adminUserName">Foodie Admin</h4>
+            <span id="adminUserEmail">admin@foodie.com</span>
+            <span class="admin-role-badge" id="adminUserRole">Admin</span>
+          </div>
+        </div>
+        <button class="admin-btn admin-btn-outline admin-btn-sm" style="width: 100%; justify-content: center;" onclick="AdminApp.logout()">
+          <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Container -->
+    <main class="admin-main">
+      <!-- Top Navbar -->
+      <header class="admin-topbar">
+        <div class="topbar-left-content">
+          <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle Sidebar">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div class="topbar-page-title">Executive Dashboard</div>
+        </div>
+        <div class="topbar-search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search orders, dishes, customers..." aria-label="Search">
+        </div>
+        <div class="topbar-actions">
+          <a href="orders.html" class="topbar-btn" title="Pending Orders">
+            <i class="fa-solid fa-bell"></i>
+          </a>
+          <a href="store-settings.html" class="topbar-btn" title="Settings">
+            <i class="fa-solid fa-gear"></i>
+          </a>
+          <div class="admin-profile-dropdown-wrap">
+            <div class="topbar-avatar" id="topbarAvatar" onclick="AdminApp.toggleProfileDropdown(event)" title="Account Profile">F</div>
+            <div class="admin-profile-dropdown" id="adminProfileDropdown">
+              <div class="dropdown-header">
+                <div class="dropdown-avatar" id="dropdownAvatar">F</div>
+                <div class="dropdown-info">
+                  <h4 id="dropdownName">Foodie Admin</h4>
+                  <span id="dropdownEmail">admin@foodie.com</span>
+                  <span class="dropdown-role" id="dropdownRole">Admin</span>
+                </div>
+              </div>
+              <div class="dropdown-divider"></div>
+              <a href="store-settings.html" class="dropdown-item">
+                <i class="fa-solid fa-gear"></i> Store Settings
+              </a>
+              <a href="../customer/index.html" class="dropdown-item" target="_blank">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Storefront
+              </a>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item dropdown-logout" onclick="AdminApp.logout()">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dashboard Content -->
+      <div class="admin-content">
+        <!-- Hero Welcome Banner -->
+        <div class="sup-hero-card">
+          <div class="sup-hero-card-left">
+            <h1>Welcome to Foodie Operations</h1>
+            <p>Real-time analytics, kitchen order workflows, seat reservations, and restaurant performance tracking.</p>
+          </div>
+          <div class="sup-hero-card-right">
+            <span class="sup-live-tag">
+              <span class="sup-live-dot"></span> Store Live
+            </span>
+            <a href="menu-items.html" class="admin-btn admin-btn-outline">
+              <i class="fa-solid fa-plus"></i> Add Dish
+            </a>
+            <a href="orders.html" class="admin-btn admin-btn-primary">
+              <i class="fa-solid fa-receipt"></i> View Orders
+            </a>
+          </div>
+        </div>
+
+        <!-- Metric KPI Cards Grid -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-title">Total Revenue</div>
+              <div class="stat-value" id="statRevenue">₹0</div>
+              <span class="stat-badge badge-success"><i class="fa-solid fa-arrow-trend-up"></i> Lifetime Gross</span>
+            </div>
+            <div class="stat-icon icon-bg-orange">
+              <i class="fa-solid fa-indian-rupee-sign"></i>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-title">Total Orders</div>
+              <div class="stat-value" id="statOrders">0</div>
+              <span class="stat-badge badge-info"><i class="fa-solid fa-chart-line"></i> Completed & Active</span>
+            </div>
+            <div class="stat-icon icon-bg-blue">
+              <i class="fa-solid fa-bag-shopping"></i>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-title">Pending Orders</div>
+              <div class="stat-value" id="statPending">0</div>
+              <span class="stat-badge badge-warning"><i class="fa-solid fa-hourglass-half"></i> Kitchen Action</span>
+            </div>
+            <div class="stat-icon icon-bg-orange">
+              <i class="fa-solid fa-clock-rotate-left"></i>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-title">Registered Customers</div>
+              <div class="stat-value" id="statCustomers">0</div>
+              <span class="stat-badge badge-neutral"><i class="fa-solid fa-users"></i> Active Accounts</span>
+            </div>
+            <div class="stat-icon icon-bg-teal">
+              <i class="fa-solid fa-user-group"></i>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-title">Table Reservations</div>
+              <div class="stat-value" id="statReservations">0</div>
+              <span class="stat-badge badge-info"><i class="fa-solid fa-chair"></i> Dine-In Bookings</span>
+            </div>
+            <div class="stat-icon icon-bg-blue">
+              <i class="fa-solid fa-calendar-check"></i>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-title">Active Dishes</div>
+              <div class="stat-value" id="statMenu">0</div>
+              <span class="stat-badge badge-success"><i class="fa-solid fa-kitchen-set"></i> Ready for Order</span>
+            </div>
+            <div class="stat-icon icon-bg-green">
+              <i class="fa-solid fa-utensils"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Activity Section -->
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-top: 10px;">
+          <!-- Recent Orders Card -->
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h3><i class="fa-solid fa-receipt" style="color: var(--admin-primary); margin-right: 8px;"></i> Recent Orders</h3>
+              <a href="orders.html" class="admin-btn admin-btn-outline admin-btn-sm">View All Orders</a>
+            </div>
+            <div class="admin-table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Order #</th>
+                    <th>Customer</th>
+                    <th>Amount</th>
+                    <th>Payment</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="recentOrdersTbody">
+                  <tr>
+                    <td colspan="6" style="text-align: center; padding: 24px; color: var(--admin-text-muted);">
+                      <i class="fa-solid fa-spinner fa-spin"></i> Loading recent orders...
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Quick Actions & Recent Bookings Card -->
+          <div style="display: flex; flex-direction: column; gap: 24px;">
+            <div class="admin-card">
+              <div class="admin-card-header">
+                <h3><i class="fa-solid fa-calendar-days" style="color: var(--admin-secondary); margin-right: 8px;"></i> Recent Bookings</h3>
+                <a href="reservations.html" class="admin-btn admin-btn-outline admin-btn-sm">All</a>
+              </div>
+              <div class="admin-table-responsive">
+                <table class="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Table</th>
+                      <th>Guest</th>
+                      <th>Guests</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="recentBookingsTbody">
+                    <tr>
+                      <td colspan="4" style="text-align: center; padding: 24px; color: var(--admin-text-muted);">
+                        <i class="fa-solid fa-spinner fa-spin"></i> Loading bookings...
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Quick Manager Actions -->
+            <div class="admin-card" style="background: linear-gradient(135deg, rgba(255,107,0,0.04), rgba(13,148,136,0.04)); border-color: rgba(255,107,0,0.18);">
+              <h3 style="margin-bottom: 14px; font-size: 1rem; color: var(--admin-navy);">
+                <i class="fa-solid fa-bolt" style="color: var(--admin-primary); margin-right: 6px;"></i> Quick Shortcuts
+              </h3>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <a href="menu-items.html" class="admin-btn admin-btn-outline" style="justify-content: center; font-size: 0.84rem;">
+                  <i class="fa-solid fa-plus"></i> New Dish
+                </a>
+                <a href="categories.html" class="admin-btn admin-btn-outline" style="justify-content: center; font-size: 0.84rem;">
+                  <i class="fa-solid fa-folder-plus"></i> Category
+                </a>
+                <a href="payments.html" class="admin-btn admin-btn-outline" style="justify-content: center; font-size: 0.84rem;">
+                  <i class="fa-solid fa-file-invoice-dollar"></i> Payments
+                </a>
+                <a href="store-settings.html" class="admin-btn admin-btn-outline" style="justify-content: center; font-size: 0.84rem;">
+                  <i class="fa-solid fa-store"></i> Timings
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="../shared/js/api.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      DashboardController.loadStats();
+    });
+  </script>
+</body>
+</html>

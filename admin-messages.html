@@ -1,132 +1,21 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/png" href="images/logo.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Customer Inquiries — Foodie Express Admin</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="assets/css/admin.css">
-</head>
-<body>
-  <div class="admin-layout">
-    <aside class="admin-sidebar" id="adminSidebar">
-      <div class="admin-brand">
-        <div class="brand-logo"><i class="fa-solid fa-utensils"></i></div>
-        <div class="brand-text">
-          <h2>Foodie Express</h2>
-          <span>Restaurant Manager</span>
-        </div>
-      </div>
-
-      <div class="sidebar-section-title">MANAGEMENT</div>
-      <nav class="admin-nav">
-        <a href="admin-dashboard.html" class="admin-nav-link">
-          <i class="fa-solid fa-chart-pie"></i><span>Dashboard</span>
-        </a>
-        <a href="admin-orders.html" class="admin-nav-link">
-          <i class="fa-solid fa-receipt"></i><span>Orders</span>
-        </a>
-        <a href="admin-menu.html" class="admin-nav-link">
-          <i class="fa-solid fa-bowl-food"></i><span>Menu Items</span>
-        </a>
-        <a href="admin-categories.html" class="admin-nav-link">
-          <i class="fa-solid fa-tags"></i><span>Categories</span>
-        </a>
-        <a href="admin-customers.html" class="admin-nav-link">
-          <i class="fa-solid fa-users"></i><span>Customers</span>
-        </a>
-        <a href="admin-payments.html" class="admin-nav-link">
-          <i class="fa-solid fa-credit-card"></i><span>Payments</span>
-        </a>
-        <a href="admin-reservations.html" class="admin-nav-link">
-          <i class="fa-solid fa-calendar-check"></i><span>Reservations</span>
-        </a>
-        <a href="admin-messages.html" class="admin-nav-link active">
-          <i class="fa-solid fa-envelope"></i><span>Inquiries</span>
-        </a>
-      </nav>
-
-      <div class="sidebar-section-title">SYSTEM</div>
-      <nav class="admin-nav">
-        <a href="admin-settings.html" class="admin-nav-link">
-          <i class="fa-solid fa-sliders"></i><span>Store Settings</span>
-        </a>
-      </nav>
-
-      <div class="admin-sidebar-footer">
-        <div class="admin-user-profile">
-          <div class="admin-avatar" id="adminUserInitial">A</div>
-          <div class="admin-user-details">
-            <h4 id="adminUserName">Admin Manager</h4>
-            <span id="adminUserEmail">admin@foodie.com</span>
-          </div>
-        </div>
-        <button class="admin-btn admin-btn-outline admin-btn-sm" style="width: 100%; justify-content: center;" onclick="AdminApp.logout()">
-          <i class="fa-solid fa-right-from-bracket"></i> Sign Out
-        </button>
-      </div>
-    </aside>
-
-    <main class="admin-main">
-      <header class="admin-topbar">
-  <link rel="icon" type="image/png" href="images/logo.png">
-        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle Sidebar"><i class="fa-solid fa-bars"></i></button>
-        <div style="font-weight: 600; color: var(--admin-text-main);">Customer Support Inbox</div>
-        <div class="topbar-actions">
-          <div class="topbar-avatar" id="topbarAvatar">A</div>
-        </div>
-      </header>
-
-      <div class="admin-content">
-        <div class="admin-page-header">
-          <div>
-            <h1>Customer Inquiries & Feedback</h1>
-            <p>Read customer messages submitted through the contact portal and update resolution statuses.</p>
-          </div>
-          <div>
-            <button class="admin-btn admin-btn-outline" onclick="MessagesAdminController.loadMessages()">
-              <i class="fa-solid fa-rotate"></i> Refresh
-            </button>
-          </div>
-        </div>
-
-        <div class="admin-card">
-          <div class="admin-table-responsive">
-            <table class="admin-table">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Customer Name & Email</th>
-                  <th>Message Content</th>
-                  <th>Status</th>
-                  <th>Change Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody id="messagesTbody">
-                <tr>
-                  <td colspan="6" style="text-align: center; padding: 32px; color: var(--admin-text-muted);">
-                    <i class="fa-solid fa-spinner fa-spin"></i> Loading messages...
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </main>
-  </div>
-
-  <script src="assets/js/admin/admin.js"></script>
-  <script src="assets/js/admin/messages.js"></script>
+  <title>Foodie Express — Redirecting</title>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      MessagesAdminController.loadMessages();
-    });
+    (function() {
+      var s = window.location.search || '';
+      var h = window.location.hash || '';
+      window.location.replace('admin/inquiries.html' + s + h);
+    })();
   </script>
+</head>
+<body style="font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background: #FFF9F5;">
+  <div style="text-align: center;">
+    <h3 style="color: #101828;">Redirecting to Foodie Express...</h3>
+    <p><a href="admin/inquiries.html" style="color: #FF6B00; text-decoration: none; font-weight: bold;">Click here if not redirected automatically &rarr;</a></p>
+  </div>
 </body>
 </html>

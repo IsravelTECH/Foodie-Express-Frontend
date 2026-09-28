@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="images/foodie-logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart — Foodie Express</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/customer.css">
+</head>
+<body class="has-bottom-nav">
+  <!-- Mobile Slide Drawer Backdrop -->
+  <div class="mobile-drawer-backdrop" id="mobileDrawerBackdrop" onclick="FoodieCustomer.toggleMobileDrawer()"></div>
+
+  <!-- Mobile Slide Drawer -->
+  <aside class="mobile-drawer" id="mobileDrawer">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--cust-border); padding-bottom: 16px;">
+      <a href="index.html" class="brand-logo">
+        <img src="images/foodie-logo.png" alt="Foodie Express Logo" class="logo-img">
+        <span class="brand-title">Foodie<span>Express</span></span>
+      </a>
+      <button onclick="FoodieCustomer.toggleMobileDrawer()" style="font-size: 1.2rem; color: var(--cust-navy);">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <nav style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
+      <a href="index.html" class="nav-link"><i class="fa-solid fa-house" style="width: 24px;"></i> Home</a>
+      <a href="menu.html" class="nav-link"><i class="fa-solid fa-utensils" style="width: 24px;"></i> All Menu</a>
+      <a href="veg.html" class="nav-link"><i class="fa-solid fa-leaf" style="color: var(--cust-success); width: 24px;"></i> Pure Veg</a>
+      <a href="nonveg.html" class="nav-link"><i class="fa-solid fa-drumstick-bite" style="color: var(--cust-danger); width: 24px;"></i> Non-Veg</a>
+      <a href="indian.html" class="nav-link"><i class="fa-solid fa-bowl-food" style="color: var(--cust-primary); width: 24px;"></i> Indian Special</a>
+      <a href="snacks.html" class="nav-link"><i class="fa-solid fa-burger" style="color: var(--cust-warning); width: 24px;"></i> Snacks & Chaat</a>
+      <a href="dessert.html" class="nav-link"><i class="fa-solid fa-ice-cream" style="color: #EC4899; width: 24px;"></i> Desserts</a>
+      <a href="reservations.html" class="nav-link"><i class="fa-solid fa-calendar-check" style="width: 24px;"></i> Book Table</a>
+      <a href="orders.html" class="nav-link"><i class="fa-solid fa-receipt" style="width: 24px;"></i> My Orders</a>
+      <a href="wishlist.html" class="nav-link"><i class="fa-solid fa-heart" style="color: #E11D48; width: 24px;"></i> Saved Dishes</a>
+    </nav>
+  </aside>
+
+  <!-- Sticky Storefront Header -->
+  <header class="site-header">
+    <div class="header-container container">
+      <div class="flex items-center gap-3">
+        <button class="hamburger-btn" onclick="FoodieCustomer.toggleMobileDrawer()" title="Open Navigation Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <a href="index.html" class="brand-logo">
+          <img src="images/foodie-logo.png" alt="Foodie Express Logo" class="logo-img">
+          <span class="brand-title">Foodie<span>Express</span></span>
+        </a>
+      </div>
+
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="menu.html" class="nav-link">Menu</a>
+        <a href="reservations.html" class="nav-link">Reservations</a>
+        <a href="orders.html" class="nav-link">Orders</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="wishlist.html" class="header-icon-btn" title="Wishlist">
+          <i class="fa-regular fa-heart"></i>
+          <span class="header-badge wishlist-count-badge" style="display: none;">0</span>
+        </a>
+        <a href="cart.html" class="header-icon-btn" title="Cart">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="header-badge cart-count-badge" style="display: none;">0</span>
+        </a>
+
+        <!-- User Profile Dropdown -->
+        <div class="user-dropdown-wrap">
+          <button class="user-menu-btn" id="userProfileBtn" onclick="FoodieCustomer.toggleUserDropdown()">
+            <div class="user-avatar-circle" id="headerUserAvatar">👤</div>
+            <span id="headerUserName">Account</span>
+            <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem; color: var(--cust-text-muted);"></i>
+          </button>
+          <div class="user-dropdown-menu" id="userDropdownMenu">
+            <div id="userDropdownContent">
+              <a href="login.html" class="dropdown-item"><i class="fa-solid fa-right-to-bracket"></i> Sign In / Register</a>
+              <div class="dropdown-divider"></div>
+              <a href="../admin/login.html" class="dropdown-item" style="color: var(--cust-text-muted); font-size: 0.8rem;"><i class="fa-solid fa-shield-halved"></i> Staff Portal</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Header -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-badge">
+        <i class="fa-solid fa-bag-shopping"></i> ORDER CART
+      </div>
+      <h1 class="page-hero-title">Your Food Basket</h1>
+      <p class="page-hero-desc">Review your selected delicacies, customize portions, and proceed to instant checkout.</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container" style="min-height: 50vh;">
+    <!-- Empty State -->
+    <div id="cart-empty-state" style="display: none; text-align: center; padding: 72px 24px; background: #FFFFFF; border-radius: var(--cust-radius-xl); border: 1px solid var(--cust-border); margin: 36px 0; box-shadow: var(--cust-shadow-sm);">
+      <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--cust-primary-soft); color: var(--cust-primary); display: flex; align-items: center; justify-content: center; font-size: 2.2rem; margin: 0 auto 20px auto;">
+        <i class="fa-solid fa-bag-shopping"></i>
+      </div>
+      <h3 style="font-size: 1.4rem; color: var(--cust-navy); margin-bottom: 8px;">Your cart is hungry!</h3>
+      <p style="color: var(--cust-text-secondary); margin-bottom: 24px; max-width: 420px; margin-left: auto; margin-right: auto;">Explore our curated gourmet menu and add your favorite dishes to begin your feast.</p>
+      <a href="menu.html" class="btn btn-primary btn-lg">
+        <i class="fa-solid fa-utensils"></i> Browse All Dishes
+      </a>
+    </div>
+
+    <!-- Cart Layout -->
+    <div class="cart-layout" id="cart-content-layout">
+      <!-- Left: Cart Items -->
+      <div>
+        <div class="card" style="margin-bottom: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--cust-navy);">Selected Dishes</h3>
+            <a href="menu.html" class="btn btn-ghost btn-sm" style="color: var(--cust-primary);">
+              <i class="fa-solid fa-plus"></i> Add More
+            </a>
+          </div>
+          <div id="cart-items-list">
+            <!-- Rendered dynamically by CartService -->
+          </div>
+        </div>
+
+        <div class="card" style="background: var(--cust-teal-soft); border-color: rgba(46, 196, 182, 0.3);">
+          <div class="flex items-center gap-3">
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--cust-teal); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <div>
+              <strong style="color: var(--cust-navy); font-size: 0.95rem; display: block;">100% Contactless & Safe Delivery</strong>
+              <span style="color: var(--cust-text-secondary); font-size: 0.82rem;">All orders are packed in sanitized, tamper-proof thermal packaging.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Summary Card -->
+      <div>
+        <div class="order-summary-card" style="position: sticky; top: 96px;">
+          <h3 class="summary-title">
+            <i class="fa-solid fa-receipt" style="color: var(--cust-primary);"></i> Bill Summary
+          </h3>
+
+          <div class="summary-row">
+            <span>Items Subtotal</span>
+            <span id="summary-subtotal" style="font-weight: 700; color: var(--cust-navy);">₹0.00</span>
+          </div>
+
+          <div class="summary-row">
+            <span>Delivery Partner Fee</span>
+            <span id="summary-delivery" style="color: var(--cust-success); font-weight: 700;">FREE</span>
+          </div>
+
+          <div class="summary-row">
+            <span>GST & Restaurant Charges (5%)</span>
+            <span id="summary-tax" style="font-weight: 600; color: var(--cust-navy);">₹0.00</span>
+          </div>
+
+          <div style="background: var(--cust-surface-soft); padding: 12px 14px; border-radius: var(--cust-radius); font-size: 0.82rem; color: var(--cust-text-secondary); margin: 16px 0; display: flex; align-items: center; gap: 10px; border: 1px dashed var(--cust-border);">
+            <i class="fa-solid fa-tag" style="color: var(--cust-primary); font-size: 1rem;"></i>
+            <span>Free delivery automatically applied on orders above <strong>₹500</strong></span>
+          </div>
+
+          <div class="summary-row total">
+            <span>Grand Total</span>
+            <span id="summary-total">₹0.00</span>
+          </div>
+
+          <button class="btn btn-primary btn-lg w-full" style="margin-top: 24px; padding: 14px;" onclick="CartService.proceedToCheckout()">
+            Proceed to Checkout <i class="fa-solid fa-arrow-right"></i>
+          </button>
+
+          <div style="text-align: center; margin-top: 14px;">
+            <a href="menu.html" style="font-size: 0.84rem; color: var(--cust-text-muted); font-weight: 600;">
+              <i class="fa-solid fa-arrow-left"></i> Continue Shopping
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modern Multi-Column Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>Foodie<span>Express</span></h3>
+          <p>Delivering hot, hygienic, authentic culinary delights from gourmet kitchens straight to your doorstep.</p>
+          <div style="display: flex; gap: 12px; margin-top: 20px;">
+            <a href="#" style="width: 38px; height: 38px; border-radius: 50%; background: #1F2937; display: flex; align-items: center; justify-content: center; color: #FFFFFF;"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" style="width: 38px; height: 38px; border-radius: 50%; background: #1F2937; display: flex; align-items: center; justify-content: center; color: #FFFFFF;"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" style="width: 38px; height: 38px; border-radius: 50%; background: #1F2937; display: flex; align-items: center; justify-content: center; color: #FFFFFF;"><i class="fa-brands fa-twitter"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Explore Menu</h4>
+          <ul class="footer-links">
+            <li><a href="veg.html">Pure Veg</a></li>
+            <li><a href="nonveg.html">Non-Veg Special</a></li>
+            <li><a href="indian.html">Indian Heritage</a></li>
+            <li><a href="snacks.html">Snacks & Fast Food</a></li>
+            <li><a href="dessert.html">Desserts & Sweets</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Customer Service</h4>
+          <ul class="footer-links">
+            <li><a href="reservations.html">Book a Table</a></li>
+            <li><a href="orders.html">Track My Order</a></li>
+            <li><a href="wishlist.html">My Wishlist</a></li>
+            <li><a href="about.html">About Foodie Express</a></li>
+            <li><a href="contact.html">Help & Support</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Kitchen Hub</h4>
+          <p style="color: #9CA3AF; font-size: 0.9rem; line-height: 1.6; margin-bottom: 12px;">123 Gourmet Food Boulevard, Indiranagar, Bangalore 560038</p>
+          <p style="color: #9CA3AF; font-size: 0.9rem;"><strong>Phone:</strong> +91 98765 43210</p>
+          <p style="color: #9CA3AF; font-size: 0.9rem;"><strong>Hours:</strong> 10:00 AM – 11:30 PM</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; 2026 Foodie Express Inc. All rights reserved.</span>
+        <span>Crafted with passion for authentic culinary experiences.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Bottom App Bar -->
+  <nav class="mobile-bottom-nav">
+    <div class="mobile-nav-grid">
+      <a href="index.html" class="mobile-nav-item">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+      </a>
+      <a href="menu.html" class="mobile-nav-item">
+        <i class="fa-solid fa-utensils"></i>
+        <span>Menu</span>
+      </a>
+      <a href="orders.html" class="mobile-nav-item">
+        <i class="fa-solid fa-receipt"></i>
+        <span>Orders</span>
+      </a>
+      <a href="cart.html" class="mobile-nav-item active">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span>Cart</span>
+        <span class="mobile-badge cart-count-badge" style="display: none;">0</span>
+      </a>
+      <a href="profile.html" class="mobile-nav-item">
+        <i class="fa-solid fa-user"></i>
+        <span>Profile</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Core Scripts -->
+  <script src="../shared/js/api.js"></script>
+  <script src="js/customer.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/cart.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      CartService.renderCartPage();
+    });
+  </script>
+</body>
+</html>

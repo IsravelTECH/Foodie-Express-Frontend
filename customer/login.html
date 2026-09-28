@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="images/foodie-logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Sign In — Foodie Express</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/customer.css">
+</head>
+<body>
+  <div class="login-wrapper">
+    <!-- Left Hero Visual Side -->
+    <div class="login-visual">
+      <div class="visual-brand">
+        <img src="images/foodie-logo.png" alt="Foodie Express" class="logo-img" style="height: 42px; width: auto;">
+        <span>Foodie Express</span>
+      </div>
+
+      <div class="visual-content">
+        <h2>Delicious food.<br>Delivered beautifully.</h2>
+        <p>
+          Order gourmet dishes from top master chefs, reserve intimate restaurant dining tables, and track real-time kitchen deliveries all in one place.
+        </p>
+      </div>
+
+      <div class="visual-footer">
+        &copy; 2026 Foodie Express Platform &bull; Customer Authentication Portal
+      </div>
+    </div>
+
+    <!-- Right Login Card Side -->
+    <div class="login-form-area">
+      <div class="login-card">
+        <div style="margin-bottom: 28px;">
+          <a href="index.html" class="brand-logo" style="margin-bottom: 16px;">
+            <img src="images/foodie-logo.png" alt="Foodie Logo" class="logo-img">
+            <span class="brand-title">Foodie<span>Express</span></span>
+          </a>
+          <h1 style="font-size: 1.85rem; font-weight: 800; color: var(--cust-navy); margin-bottom: 6px;">Welcome Back</h1>
+          <p style="color: var(--cust-text-secondary); font-size: 0.92rem;">Sign in to your account to place food orders and book tables.</p>
+        </div>
+
+        <div id="login-inline-error" class="inline-error"></div>
+
+        <form id="login-form" onsubmit="AuthService.handleLogin(event)">
+          <div class="form-group">
+            <label class="form-label" for="login-email">Email Address</label>
+            <input type="email" id="login-email" class="form-control" placeholder="name@example.com" required autocomplete="email">
+          </div>
+
+          <div class="form-group">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <label class="form-label" for="login-password">Password</label>
+              <a href="#" onclick="FoodieApp.showToast('Please contact support@foodieexpress.com to reset credentials.', 'info')" style="font-size: 0.8rem; color: var(--cust-primary); font-weight: 600;">Forgot Password?</a>
+            </div>
+            <div class="input-with-icon">
+              <input type="password" id="login-password" class="form-control" placeholder="Enter your password" required autocomplete="current-password">
+              <button type="button" class="input-toggle-pwd" onclick="AuthService.togglePasswordVisibility('login-password', this)">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 8px; margin: 18px 0 24px 0; font-size: 0.88rem; color: var(--cust-text-secondary);">
+            <input type="checkbox" id="remember-me" style="accent-color: var(--cust-primary); width: 16px; height: 16px;" checked>
+            <label for="remember-me" style="cursor: pointer;">Keep me signed in</label>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg w-full" style="padding: 14px; margin-bottom: 22px;">
+            Sign In to Foodie <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </form>
+
+        <div style="text-align: center; font-size: 0.88rem; color: var(--cust-text-secondary); padding-top: 18px; border-top: 1px solid var(--cust-border);">
+          <p>Don't have an account? <a href="signup.html" style="color: var(--cust-primary); font-weight: 700;">Create Account</a></p>
+          <div style="margin-top: 16px; display: flex; justify-content: space-between; align-items: center;">
+            <a href="index.html" style="font-size: 0.82rem; color: var(--cust-text-muted); font-weight: 600;">
+              <i class="fa-solid fa-arrow-left"></i> Public Storefront
+            </a>
+            <a href="../admin/login.html" style="font-size: 0.82rem; color: var(--cust-text-muted); font-weight: 600;">
+              <i class="fa-solid fa-shield-halved"></i> Staff Login
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../shared/js/api.js"></script>
+  <script src="js/customer.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

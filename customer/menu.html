@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="images/foodie-logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Full Menu — Foodie Express</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/customer.css">
+</head>
+<body class="has-bottom-nav">
+  <!-- 1. Storefront Header -->
+  <header class="site-header">
+    <div class="header-container container">
+      <a href="index.html" class="brand-logo">
+        <img src="images/foodie-logo.png" alt="Foodie Express Logo" class="logo-img">
+        <span class="brand-title">Foodie<span>Express</span></span>
+      </a>
+
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="menu.html" class="nav-link active">Menu</a>
+        <a href="indian.html" class="nav-link">Indian</a>
+        <a href="veg.html" class="nav-link">Veg</a>
+        <a href="nonveg.html" class="nav-link">Non-Veg</a>
+        <a href="snacks.html" class="nav-link">Snacks</a>
+        <a href="dessert.html" class="nav-link">Desserts</a>
+        <a href="reservations.html" class="nav-link">Reservations</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="wishlist.html" class="header-icon-btn" title="Wishlist">
+          <i class="fa-regular fa-heart"></i>
+          <span class="header-badge wishlist-count-badge" style="display: none;">0</span>
+        </a>
+        <a href="cart.html" class="header-icon-btn" title="Cart">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="header-badge cart-count-badge" style="display: none;">0</span>
+        </a>
+        <a href="login.html" class="btn btn-primary btn-sm">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In
+        </a>
+        <button class="hamburger-btn" id="mobileDrawerBtn" aria-label="Open Navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. Menu Hero Banner -->
+  <section style="background: radial-gradient(circle at 50% 0%, rgba(255, 107, 0, 0.08) 0%, rgba(255, 249, 245, 0) 70%); padding: 48px 0 32px 0; border-bottom: 1px solid var(--cust-border); text-align: center;">
+    <div class="container">
+      <span class="section-tag" style="background: var(--cust-primary-soft); color: var(--cust-primary);">
+        <i class="fa-solid fa-utensils"></i> MASTER MENU CATALOG
+      </span>
+      <h1 style="font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 800; color: var(--cust-navy); margin: 8px 0;">
+        Explore Delicious Dishes
+      </h1>
+      <p style="color: var(--cust-text-secondary); max-width: 600px; margin: 0 auto; font-size: 1rem;">
+        Freshly cooked authentic cuisine, aromatic biryanis, beverages, and handcrafted desserts delivered fast.
+      </p>
+    </div>
+  </section>
+
+  <!-- 3. Main Menu Content -->
+  <main class="container" style="padding-top: 32px;">
+    <!-- Filter & Search Toolbar -->
+    <div class="menu-toolbar">
+      <div class="search-box-wrap">
+        <i class="fa-solid fa-magnifying-glass" style="color: var(--cust-primary);"></i>
+        <input type="text" id="menuSearchInput" placeholder="Search dishes by name or category..." oninput="filterMenu()">
+      </div>
+
+      <div class="filter-pills" id="categoryPillContainer">
+        <button class="filter-pill active" onclick="setCategoryFilter('ALL', this)">🍽️ All Items</button>
+        <button class="filter-pill" onclick="setCategoryFilter('Indian', this)">🍛 Indian</button>
+        <button class="filter-pill" onclick="setCategoryFilter('Veg', this)">🌿 Pure Veg</button>
+        <button class="filter-pill" onclick="setCategoryFilter('Non-Veg', this)">🍗 Non-Veg</button>
+        <button class="filter-pill" onclick="setCategoryFilter('Snacks', this)">🍔 Snacks</button>
+        <button class="filter-pill" onclick="setCategoryFilter('Desserts', this)">🍨 Desserts</button>
+      </div>
+
+      <select id="menuSortSelect" class="sort-select" onchange="sortMenu()">
+        <option value="recommended">Sort by: Recommended</option>
+        <option value="price-low">Price: Low to High</option>
+        <option value="price-high">Price: High to Low</option>
+        <option value="rating">Highest Rated</option>
+        <option value="name">Name: A to Z</option>
+      </select>
+    </div>
+
+    <!-- Dishes Grid -->
+    <div class="food-grid" id="menuDishesGrid">
+      <div style="grid-column: 1 / -1; text-align: center; padding: 60px 0; color: var(--cust-text-muted);">
+        <i class="fa-solid fa-spinner fa-spin fa-2x"></i>
+        <p style="margin-top: 14px; font-weight: 600;">Loading delicious food items...</p>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div id="noResultsMsg" style="display: none; text-align: center; padding: 60px 0;">
+      <i class="fa-solid fa-magnifying-glass fa-3x" style="color: var(--cust-primary); margin-bottom: 16px;"></i>
+      <h3 style="font-size: 1.4rem; color: var(--cust-navy);">No matching dishes found</h3>
+      <p style="color: var(--cust-text-muted); margin-top: 4px;">Try searching with different keywords or switch categories.</p>
+    </div>
+  </main>
+
+  <!-- 4. Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
+            <img src="images/foodie-logo.png" alt="Logo" style="height: 38px; border-radius: 6px;">
+            <h3 style="margin: 0;">Foodie<span>Express</span></h3>
+          </div>
+          <p>Delivering authentic culinary joy, fresh farm ingredients, and unforgettable restaurant moments straight to you.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Explore Menu</h4>
+          <ul class="footer-links">
+            <li><a href="indian.html">Indian Cuisine</a></li>
+            <li><a href="veg.html">Pure Vegetarian</a></li>
+            <li><a href="nonveg.html">Non-Veg Delights</a></li>
+            <li><a href="snacks.html">Crispy Snacks</a></li>
+            <li><a href="dessert.html">Sweet Desserts</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="menu.html">Full Menu</a></li>
+            <li><a href="reservations.html">Table Booking</a></li>
+            <li><a href="orders.html">Track My Orders</a></li>
+            <li><a href="wishlist.html">Saved Favorites</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Customer Support</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Operations</h4>
+          <ul class="footer-links">
+            <li><a href="../admin/login.html" style="color: var(--cust-primary); font-weight: 700;"><i class="fa-solid fa-lock"></i> Staff &amp; Admin Portal</a></li>
+            <li><span style="color: #9CA3AF; font-size: 0.88rem;"><i class="fa-solid fa-clock"></i> 10:00 AM – 11:30 PM</span></li>
+            <li><span style="color: #9CA3AF; font-size: 0.88rem;"><i class="fa-solid fa-phone"></i> +91 98765 43210</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; 2026 Foodie Express Inc. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 5. Mobile Bottom Navigation -->
+  <nav class="mobile-bottom-nav">
+    <div class="mobile-nav-grid">
+      <a href="index.html" class="mobile-nav-item">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+      </a>
+      <a href="menu.html" class="mobile-nav-item active">
+        <i class="fa-solid fa-utensils"></i>
+        <span>Menu</span>
+      </a>
+      <a href="orders.html" class="mobile-nav-item">
+        <i class="fa-solid fa-receipt"></i>
+        <span>Orders</span>
+      </a>
+      <a href="cart.html" class="mobile-nav-item">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span>Cart</span>
+        <span class="mobile-badge cart-count-badge" style="display: none;">0</span>
+      </a>
+      <a href="profile.html" class="mobile-nav-item">
+        <i class="fa-solid fa-user"></i>
+        <span>Profile</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Core Scripts -->
+  <script src="js/app.js"></script>
+  <script src="../shared/js/api.js"></script>
+  <script src="js/customer.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/wishlist.js"></script>
+  <script>
+    let allDishes = [];
+    let currentCategory = 'ALL';
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      const params = new URLSearchParams(window.location.search);
+      const searchParam = params.get('search');
+      const catParam = params.get('cat');
+
+      if (catParam) {
+        currentCategory = catParam;
+        document.querySelectorAll('.filter-pill').forEach(pill => {
+          if (pill.textContent.toLowerCase().includes(catParam.toLowerCase())) {
+            document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+          }
+        });
+      }
+
+      if (searchParam) {
+        document.getElementById('menuSearchInput').value = searchParam;
+      }
+
+      await loadMenuCatalog();
+    });
+
+    async function loadMenuCatalog() {
+      try {
+        const res = await fetch(`${FoodieApp.API_BASE}/api/menu`);
+        if (res.ok) {
+          allDishes = await res.json();
+          filterMenu();
+        } else {
+          loadFallbackDishes();
+        }
+      } catch (err) {
+        console.warn('Backend unavailable, loading local items:', err);
+        loadFallbackDishes();
+      }
+    }
+
+    function loadFallbackDishes() {
+      allDishes = [
+        { name: 'Chicken Biryani', price: 280, rating: 4.9, category: 'Indian', foodType: 'NON_VEG', description: 'Royal aromatic basmati rice layered with tender spiced chicken pieces and saffron.' },
+        { name: 'Mutton Biryani', price: 340, rating: 4.9, category: 'Indian', foodType: 'NON_VEG', description: 'Slow-cooked succulent mutton in traditional thalappakatti spiced masala and ghee.' },
+        { name: 'Butter Chicken', price: 290, rating: 4.8, category: 'Indian', foodType: 'NON_VEG', description: 'Char-grilled chicken chunks in a rich, buttery tomato cream gravy with fenugreek.' },
+        { name: 'Paneer Butter Masala', price: 240, rating: 4.8, category: 'Veg', foodType: 'VEG', description: 'Fresh cottage cheese cubes simmered in a velvety tomato, cashew, and butter gravy.' },
+        { name: 'Palak Paneer', price: 220, rating: 4.7, category: 'Veg', foodType: 'VEG', description: 'Wholesome pureed spinach cooked with garlic, cumin, and soft paneer cubes.' },
+        { name: 'Crispy Cheese Burger', price: 160, rating: 4.7, category: 'Snacks', foodType: 'VEG', description: 'Golden toasted bun packed with crispy patty, melted cheddar, lettuce, and secret sauce.' },
+        { name: 'Chicken Puffs', price: 60, rating: 4.6, category: 'Snacks', foodType: 'NON_VEG', description: 'Flaky baked golden pastry filled with spiced shredded chicken masala.' },
+        { name: 'Gulab Jamun with Rabri', price: 120, rating: 4.9, category: 'Desserts', foodType: 'VEG', description: 'Warm khoya dumplings soaked in rose-cardamom syrup served alongside chilled rabri.' },
+        { name: 'Rasmalai', price: 140, rating: 4.9, category: 'Desserts', foodType: 'VEG', description: 'Soft chenna discs soaked in sweetened saffron-cardamom flavored milk with pistachios.' }
+      ];
+      filterMenu();
+    }
+
+    function setCategoryFilter(category, btn) {
+      currentCategory = category;
+      document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      filterMenu();
+    }
+
+    function filterMenu() {
+      const search = document.getElementById('menuSearchInput').value.toLowerCase().trim();
+      const filtered = allDishes.filter(dish => {
+        const matchesCategory = (currentCategory === 'ALL') ||
+          (dish.category && dish.category.toLowerCase() === currentCategory.toLowerCase()) ||
+          (currentCategory === 'Veg' && (dish.foodType === 'VEG' || dish.category === 'Veg')) ||
+          (currentCategory === 'Non-Veg' && (dish.foodType === 'NON_VEG' || dish.category === 'Non-Veg'));
+
+        const matchesSearch = !search ||
+          (dish.name && dish.name.toLowerCase().includes(search)) ||
+          (dish.description && dish.description.toLowerCase().includes(search)) ||
+          (dish.category && dish.category.toLowerCase().includes(search));
+
+        return matchesCategory && matchesSearch;
+      });
+
+      renderFilteredDishes(filtered);
+    }
+
+    function sortMenu() {
+      const val = document.getElementById('menuSortSelect').value;
+      if (val === 'price-low') {
+        allDishes.sort((a, b) => parseFloat(a.price || 0) - parseFloat(b.price || 0));
+      } else if (val === 'price-high') {
+        allDishes.sort((a, b) => parseFloat(b.price || 0) - parseFloat(a.price || 0));
+      } else if (val === 'rating') {
+        allDishes.sort((a, b) => parseFloat(b.rating || 0) - parseFloat(a.rating || 0));
+      } else if (val === 'name') {
+        allDishes.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+      }
+      filterMenu();
+    }
+
+    function renderFilteredDishes(dishes) {
+      const grid = document.getElementById('menuDishesGrid');
+      const emptyMsg = document.getElementById('noResultsMsg');
+
+      if (dishes.length === 0) {
+        grid.style.display = 'none';
+        emptyMsg.style.display = 'block';
+        return;
+      }
+
+      grid.style.display = 'grid';
+      emptyMsg.style.display = 'none';
+
+      grid.innerHTML = dishes.map(dish => {
+        const img = dish.imageUrl || (typeof FoodieApp !== 'undefined' ? FoodieApp.getDishImage(dish.name) : 'images/indianfood.jpg');
+        const isVeg = dish.foodType === 'VEG' || dish.category === 'Veg' || dish.category === 'VEG';
+        const isFav = WishlistService.isFavorite(dish.name);
+        const price = parseFloat(dish.price || 199).toFixed(2);
+
+        return `
+          <div class="food-card">
+            <div class="food-card-image-wrap">
+              <span class="card-badge ${isVeg ? 'badge-veg' : 'badge-nonveg'}">
+                ${isVeg ? '🌿 Pure Veg' : '🍗 Non-Veg'}
+              </span>
+              <img src="${img}" alt="${dish.name}" onerror="this.src='images/indianfood.jpg'">
+              <button class="card-wishlist-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${dish.name.replace(/'/g, "\\'")}', ${price}, '${img}')" title="Save to Wishlist">
+                ${isFav ? '❤️' : '♡'}
+              </button>
+            </div>
+            <div class="food-card-body">
+              <div class="food-card-header">
+                <h3 class="food-card-title">${dish.name}</h3>
+                <div class="food-card-rating">★ ${dish.rating || 4.8}</div>
+              </div>
+              <p class="food-card-desc">${dish.description || 'Prepared fresh with premium ingredients, aromatic herbs, and rich spices.'}</p>
+              <div class="food-card-footer">
+                <div class="food-price">
+                  <span class="food-price-label">Price</span>
+                  <span class="food-price-val">₹${price}</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <div class="qty-counter">
+                    <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+                    <span class="qty-value">1</span>
+                    <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+                  </div>
+                  <button class="btn btn-primary btn-sm" onclick="addDishToCart(this, '${dish.name.replace(/'/g, "\\'")}', ${price}, '${img}')">
+                    + Add
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function changeQty(btn, delta) {
+      const span = btn.parentElement.querySelector('.qty-value');
+      if (span) {
+        let val = parseInt(span.textContent) || 1;
+        val = Math.max(1, val + delta);
+        span.textContent = val;
+      }
+    }
+
+    function addDishToCart(btn, name, price, img) {
+      const card = btn.closest('.food-card');
+      const qtySpan = card ? card.querySelector('.qty-value') : null;
+      const qty = qtySpan ? parseInt(qtySpan.textContent) || 1 : 1;
+
+      CartService.addToCart(name, price, qty, img);
+
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '✓ Added!';
+      btn.classList.add('btn-secondary');
+      btn.classList.remove('btn-primary');
+
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.classList.add('btn-primary');
+        btn.classList.remove('btn-secondary');
+      }, 1200);
+    }
+  </script>
+</body>
+</html>

@@ -138,19 +138,61 @@ const AdminApp = (() => {
   };
 
   /**
+   * Toggle Header Profile Dropdown
+   */
+  const toggleProfileDropdown = (e) => {
+    if (e) e.stopPropagation();
+    const dropdown = document.getElementById('adminProfileDropdown');
+    if (dropdown) {
+      dropdown.classList.toggle('show');
+    }
+  };
+
+  /**
+   * Close dropdown on outside click
+   */
+  document.addEventListener('click', (e) => {
+    const dropdown = document.getElementById('adminProfileDropdown');
+    const toggle = document.getElementById('topbarAvatar');
+    if (dropdown && dropdown.classList.contains('show')) {
+      if (!dropdown.contains(e.target) && (!toggle || !toggle.contains(e.target))) {
+        dropdown.classList.remove('show');
+      }
+    }
+  });
+
+  /**
    * Initialize layout info
    */
   const init = () => {
     const auth = checkAuth();
     if (auth) {
+      const name = auth.user.name || 'Foodie Admin';
+      const email = auth.user.email || 'admin@foodie.com';
+      const roleStr = (auth.user.role || 'ADMIN').replace('ROLE_', '');
+      const initial = (name ? name.charAt(0) : 'F').toUpperCase();
+
+      // Sidebar Profile Info
       const adminNameEl = document.getElementById('adminUserName');
-      if (adminNameEl) adminNameEl.textContent = auth.user.name || 'Admin Manager';
+      if (adminNameEl) adminNameEl.textContent = name;
       const adminEmailEl = document.getElementById('adminUserEmail');
-      if (adminEmailEl) adminEmailEl.textContent = auth.user.email || '';
+      if (adminEmailEl) adminEmailEl.textContent = email;
+      const adminRoleEl = document.getElementById('adminUserRole');
+      if (adminRoleEl) adminRoleEl.textContent = roleStr;
       const initialEl = document.getElementById('adminUserInitial');
-      if (initialEl) initialEl.textContent = (auth.user.name ? auth.user.name.charAt(0) : 'A').toUpperCase();
+      if (initialEl) initialEl.textContent = initial;
+
+      // Topbar Avatar & Dropdown Info
       const topbarAvatarEl = document.getElementById('topbarAvatar');
-      if (topbarAvatarEl) topbarAvatarEl.textContent = (auth.user.name ? auth.user.name.charAt(0) : 'A').toUpperCase();
+      if (topbarAvatarEl) topbarAvatarEl.textContent = initial;
+      const dropdownAvatarEl = document.getElementById('dropdownAvatar');
+      if (dropdownAvatarEl) dropdownAvatarEl.textContent = initial;
+      const dropdownNameEl = document.getElementById('dropdownName');
+      if (dropdownNameEl) dropdownNameEl.textContent = name;
+      const dropdownEmailEl = document.getElementById('dropdownEmail');
+      if (dropdownEmailEl) dropdownEmailEl.textContent = email;
+      const dropdownRoleEl = document.getElementById('dropdownRole');
+      if (dropdownRoleEl) dropdownRoleEl.textContent = roleStr;
     }
     setupMobileNav();
   };
@@ -161,6 +203,7 @@ const AdminApp = (() => {
     authFetch,
     showToast,
     logout,
+    toggleProfileDropdown,
     init
   };
 })();

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="images/foodie-logo.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Logged Out — Foodie Express</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/customer.css">
+</head>
+<body style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 50% 0%, rgba(255, 107, 0, 0.08) 0%, rgba(255, 249, 245, 0) 70%);">
+
+  <div class="status-card">
+    <div class="status-icon-bubble status-logout">
+      <i class="fa-solid fa-hand-wave" style="display: none;"></i>👋
+    </div>
+
+    <h2 style="font-size: 1.8rem; font-weight: 800; color: var(--cust-navy); margin-bottom: 8px;">You've Been Signed Out</h2>
+    <p style="color: var(--cust-text-secondary); margin: 8px auto 24px; max-width: 400px; font-size: 0.95rem; line-height: 1.5;">
+      Thank you for visiting Foodie Express. Your session has been safely closed. We hope to see you back soon for more delicious meals!
+    </p>
+
+    <div style="margin-bottom: 24px;">
+      <a href="login.html" class="btn btn-primary btn-lg w-full" style="padding: 14px;">
+        Sign In Again <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+
+    <div style="font-size: 0.88rem; color: var(--cust-text-muted);">
+      <span>Redirecting to sign in in <strong id="countdownSec" style="color: var(--cust-primary); font-weight: 800;">5</strong> seconds...</span>
+      <div style="margin-top: 14px;">
+        <a href="index.html" style="color: var(--cust-text-secondary); font-weight: 600; text-decoration: underline;">Return to Public Storefront</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Clean up local session
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+
+    // Countdown redirect
+    let secondsLeft = 5;
+    const countdownEl = document.getElementById("countdownSec");
+
+    const timer = setInterval(() => {
+      secondsLeft--;
+      if (countdownEl) countdownEl.textContent = secondsLeft;
+      if (secondsLeft <= 0) {
+        clearInterval(timer);
+        window.location.href = "login.html";
+      }
+    }, 1000);
+  </script>
+
+</body>
+</html>
