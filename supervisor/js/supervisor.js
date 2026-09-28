@@ -17,7 +17,7 @@ const SupervisorApp = (() => {
     const userStr = localStorage.getItem('user');
 
     if (!token || !userStr) {
-      window.location.href = '../customer/login.html';
+      window.location.href = '../admin/login.html';
       return null;
     }
 
@@ -39,7 +39,7 @@ const SupervisorApp = (() => {
       }
       return { token, user };
     } catch {
-      window.location.href = '../customer/login.html';
+      window.location.href = '../admin/login.html';
       return null;
     }
   };
@@ -66,7 +66,7 @@ const SupervisorApp = (() => {
     if (res.status === 401 || res.status === 403) {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      window.location.href = '../customer/login.html';
+      window.location.href = '../admin/login.html';
     }
 
     return res;
@@ -100,7 +100,7 @@ const SupervisorApp = (() => {
   const logout = async () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    window.location.href = '../customer/login.html';
+    window.location.href = '../admin/login.html';
   };
 
   /**

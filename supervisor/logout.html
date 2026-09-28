@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Signing Out — Foodie Express Supervisor</title>
+  <script>
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    window.location.replace('../admin/login.html');
+  </script>
+</head>
+<body style="font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background: #0F172A; color: #94A3B8;">
+  <p>Signing out securely...</p>
+</body>
+</html>

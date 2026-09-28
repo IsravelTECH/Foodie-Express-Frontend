@@ -80,38 +80,40 @@ const OrdersController = (() => {
 
       const isChecked = selectedOrderIds.has(order.id);
       const supervisorInfo = order.supervisor ? `
-        <div style="display:flex;align-items:center;gap:6px;">
-          <div style="width:24px;height:24px;border-radius:50%;background:#E0E7FF;color:#4338CA;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;">
+        <div style="display:inline-flex;align-items:center;gap:8px;background:#EEF2FF;padding:4px 8px;border-radius:8px;border:1px solid #C7D2FE;">
+          <div style="width:22px;height:22px;border-radius:50%;background:#4338CA;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:800;">
             ${(order.supervisor.name ? order.supervisor.name.charAt(0) : 'S').toUpperCase()}
           </div>
-          <div>
-            <div style="font-weight:600;font-size:0.85rem;color:#1E293B;">${order.supervisor.name}</div>
-            <div style="font-size:0.72rem;color:var(--admin-text-muted);">${order.supervisor.phone || ''}</div>
+          <div style="text-align:left;">
+            <div style="font-weight:700;font-size:0.82rem;color:#312E81;white-space:nowrap;">${order.supervisor.name}</div>
           </div>
         </div>
       ` : `
-        <button class="admin-btn admin-btn-outline admin-btn-sm" style="font-size:0.75rem;padding:4px 8px;" onclick="OrdersController.openSingleAssignModal(${order.id})">
-          <i class="fa-solid fa-user-plus"></i> Assign
+        <button class="admin-btn admin-btn-outline admin-btn-sm" style="font-size:0.75rem;padding:4px 10px;" onclick="OrdersController.openSingleAssignModal(${order.id})">
+          <i class="fa-solid fa-user-plus" style="color:var(--admin-primary);"></i> Assign
         </button>
       `;
+
+      const isCod = (order.paymentMethod || 'COD').toUpperCase() === 'COD';
+      const paymentBadge = `<span class="payment-badge ${isCod ? 'cod' : 'online'}"><i class="fa-solid ${isCod ? 'fa-hand-holding-dollar' : 'fa-credit-card'}"></i> ${order.paymentMethod || 'COD'}</span>`;
 
       return `
         <tr>
           <td>
             <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="OrdersController.toggleSelectOrder(${order.id}, this.checked)">
           </td>
-          <td><strong>#FE-${order.id}</strong></td>
+          <td><strong style="color:var(--admin-navy);">#FE-${order.id}</strong></td>
           <td>
-            <div style="font-weight:600;">${order.name || 'Customer'}</div>
+            <div style="font-weight:700;color:#0F172A;">${order.name || 'Customer'}</div>
             <div style="font-size:0.75rem;color:var(--admin-text-muted);">${order.phone || ''}</div>
           </td>
           <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${itemsSummary}">
             ${itemsSummary}
           </td>
-          <td><strong>₹${parseFloat(order.totalAmount || 0).toFixed(2)}</strong></td>
-          <td><span style="font-size:0.82rem;font-weight:600;">${order.paymentMethod || 'COD'}</span></td>
+          <td><strong style="color:var(--admin-primary);font-size:0.95rem;">₹${parseFloat(order.totalAmount || 0).toFixed(2)}</strong></td>
+          <td>${paymentBadge}</td>
           <td>
-            <select class="admin-select" style="font-size:0.8rem;padding:4px 8px;" onchange="OrdersController.updateStatus(${order.id}, this.value)">
+            <select class="admin-select" style="font-size:0.78rem;padding:4px 8px;border-radius:6px;min-width:130px;" onchange="OrdersController.updateStatus(${order.id}, this.value)">
               <option value="PENDING" ${order.orderStatus === 'PENDING' ? 'selected' : ''}>PENDING</option>
               <option value="CONFIRMED" ${order.orderStatus === 'CONFIRMED' ? 'selected' : ''}>CONFIRMED</option>
               <option value="PREPARING" ${order.orderStatus === 'PREPARING' ? 'selected' : ''}>PREPARING</option>
@@ -122,16 +124,16 @@ const OrdersController = (() => {
             </select>
           </td>
           <td>${supervisorInfo}</td>
-          <td style="font-size:0.8rem;color:var(--admin-text-muted);">
-            ${order.createdAt ? order.createdAt.substring(0, 10) : 'Recent'}
+          <td style="font-size:0.78rem;color:var(--admin-text-muted);white-space:nowrap;">
+            ${order.createdAt ? new Date(order.createdAt).toLocaleDateString() : 'Recent'}
           </td>
           <td>
-            <div style="display:flex;gap:6px;">
+            <div style="display:flex;gap:6px;align-items:center;">
               <a href="order-details.html?id=${order.id}" class="admin-btn admin-btn-outline admin-btn-sm" title="View details">
-                👁️ View
+                <i class="fa-solid fa-eye"></i>
               </a>
-              <button onclick="OrdersController.deleteOrder(${order.id})" class="admin-btn admin-btn-danger admin-btn-sm" title="Delete order">
-                🗑️
+              <button onclick="OrdersController.deleteOrder(${order.id})" class="admin-btn admin-btn-outline admin-btn-sm" style="color:#DC2626;border-color:#FCA5A5;" title="Delete order">
+                <i class="fa-solid fa-trash"></i>
               </button>
             </div>
           </td>

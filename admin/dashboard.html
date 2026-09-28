@@ -232,7 +232,7 @@
         </div>
 
         <!-- Recent Activity Section -->
-        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-top: 10px;">
+        <div class="admin-dashboard-grid">
           <!-- Recent Orders Card -->
           <div class="admin-card">
             <div class="admin-card-header">
@@ -240,7 +240,7 @@
               <a href="orders.html" class="admin-btn admin-btn-outline admin-btn-sm">View All Orders</a>
             </div>
             <div class="admin-table-responsive">
-              <table class="admin-table">
+              <table class="admin-table admin-table-compact">
                 <thead>
                   <tr>
                     <th>Order #</th>
@@ -263,14 +263,14 @@
           </div>
 
           <!-- Quick Actions & Recent Bookings Card -->
-          <div style="display: flex; flex-direction: column; gap: 24px;">
+          <div style="display: flex; flex-direction: column; gap: 24px; min-width: 0;">
             <div class="admin-card">
               <div class="admin-card-header">
                 <h3><i class="fa-solid fa-calendar-days" style="color: var(--admin-secondary); margin-right: 8px;"></i> Recent Bookings</h3>
                 <a href="reservations.html" class="admin-btn admin-btn-outline admin-btn-sm">All</a>
               </div>
               <div class="admin-table-responsive">
-                <table class="admin-table">
+                <table class="admin-table admin-table-compact">
                   <thead>
                     <tr>
                       <th>Table</th>

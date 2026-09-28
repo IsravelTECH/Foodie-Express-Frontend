@@ -54,10 +54,21 @@
 
       <nav class="nav-menu">
         <a href="index.html" class="nav-link">Home</a>
-        <a href="menu.html" class="nav-link">Menu</a>
+        <a href="about.html" class="nav-link">About</a>
+        <div class="nav-dropdown">
+          <a href="menu.html" class="nav-link nav-dropdown-toggle">
+            Menu <i class="fa-solid fa-chevron-down nav-chevron"></i>
+          </a>
+          <div class="nav-dropdown-menu">
+            <a href="menu.html" class="nav-dropdown-item"><i class="fa-solid fa-utensils"></i> All Dishes</a>
+            <a href="indian.html" class="nav-dropdown-item"><i class="fa-solid fa-bowl-food"></i> Indian Cuisine</a>
+            <a href="veg.html" class="nav-dropdown-item"><i class="fa-solid fa-leaf" style="color: #16A34A;"></i> Pure Veg</a>
+            <a href="nonveg.html" class="nav-dropdown-item"><i class="fa-solid fa-drumstick-bite" style="color: #DC2626;"></i> Non-Veg</a>
+            <a href="snacks.html" class="nav-dropdown-item"><i class="fa-solid fa-cookie-bite" style="color: #D97706;"></i> Snacks</a>
+            <a href="dessert.html" class="nav-dropdown-item"><i class="fa-solid fa-ice-cream" style="color: #EC4899;"></i> Desserts</a>
+          </div>
+        </div>
         <a href="reservations.html" class="nav-link">Reservations</a>
-        <a href="orders.html" class="nav-link">Orders</a>
-        <a href="about.html" class="nav-link active">About</a>
         <a href="contact.html" class="nav-link">Contact</a>
       </nav>
 
@@ -74,7 +85,7 @@
         <!-- User Dropdown -->
         <div class="user-dropdown-wrap">
           <button class="user-menu-btn" id="userProfileBtn" onclick="FoodieCustomer.toggleUserDropdown()">
-            <div class="user-avatar-circle" id="headerUserAvatar">👤</div>
+            <div class="user-avatar-circle" id="headerUserAvatar"><i class="fa-solid fa-user"></i></div>
             <span id="headerUserName">Account</span>
             <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem; color: var(--cust-text-muted);"></i>
           </button>
@@ -112,7 +123,7 @@
           Founded with a devotion to uncompromising culinary excellence, <strong>Foodie Express</strong> bridges the gap between master chefs and food enthusiasts. We believe every meal should be a celebration of aroma, flavor, and texture.
         </p>
         <p style="line-height: 1.7; color: var(--cust-text-secondary); font-size: 0.96rem; margin-bottom: 24px;">
-          Whether it’s slow-cooked Dum Biryani, hand-pressed artisanal burgers, or traditional heritage desserts, our kitchen partners maintain the highest standards of culinary hygiene and authentic spice profiles.
+          Whether it's slow-cooked Dum Biryani, hand-pressed artisanal burgers, or traditional heritage desserts, our kitchen partners maintain the highest standards of culinary hygiene and authentic spice profiles.
         </p>
         <div style="display: flex; gap: 14px; flex-wrap: wrap;">
           <a href="menu.html" class="btn btn-primary btn-lg">
@@ -124,8 +135,25 @@
         </div>
       </div>
 
-      <div>
-        <img src="images/indianfood/mb.jpg" alt="Culinary Excellence" style="width: 100%; height: 380px; object-fit: cover; border-radius: var(--cust-radius-xl); box-shadow: var(--cust-shadow-lg); border: 1px solid var(--cust-border);" onerror="this.src='images/indianfood.jpg'">
+      <div style="position: relative; border-radius: var(--cust-radius-xl); overflow: hidden; box-shadow: var(--cust-shadow-lg); border: 1.5px solid var(--cust-border); height: 380px;">
+        <video id="aboutKitchenVideo" class="showcase-video" autoplay muted loop playsinline poster="images/indianfood/mb.jpg" style="position: absolute; width: 100%; height: 100%; object-fit: cover;">
+          <source src="video/promo-kitchen.mp4" type="video/mp4">
+          <source src="../video/login-video.mp4" type="video/mp4">
+          <source src="video/promo-kitchen.mp4" type="video/mp4">
+          <source src="video/foodie-promo.mp4" type="video/mp4">
+        </video>
+        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(16, 24, 40, 0.2) 0%, rgba(16, 24, 40, 0.75) 100%);"></div>
+        <div style="position: absolute; bottom: 20px; left: 20px; right: 20px; display: flex; justify-content: space-between; align-items: flex-end; color: #fff; z-index: 2;">
+          <div>
+            <div style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--cust-primary); letter-spacing: 1px; display: flex; align-items: center; gap: 6px;">
+              <span class="video-live-dot"></span> MASTER KITCHEN BEHIND THE SCENES
+            </div>
+            <div style="font-weight: 800; font-size: 1.15rem; margin-top: 4px;">Purity in Every Sizzle</div>
+          </div>
+          <button type="button" class="video-btn-pill" style="padding: 6px 14px; font-size: 0.8rem;" onclick="toggleShowcaseVideoPlay('aboutKitchenVideo', this)">
+            <i class="fa-solid fa-pause"></i>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -234,3 +262,4 @@
   <script src="js/app.js"></script>
 </body>
 </html>
+

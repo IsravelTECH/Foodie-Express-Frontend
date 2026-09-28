@@ -13,18 +13,39 @@
 </head>
 <body>
   <div class="login-wrapper">
-    <!-- Left Hero Visual Side -->
+    <!-- Left Hero Visual Side with Video & Motion -->
     <div class="login-visual">
+      <video class="visual-video-bg" autoplay muted loop playsinline poster="images/indianfood.jpg">
+        <source src="video/login-video.mp4" type="video/mp4">
+        <source src="../video/login-video.mp4" type="video/mp4">
+      </video>
+      <div class="visual-overlay"></div>
+
       <div class="visual-brand">
-        <img src="images/foodie-logo.png" alt="Foodie Express" class="logo-img" style="height: 42px; width: auto;">
+        <img src="images/foodie-logo.png" alt="Foodie Express" class="logo-img" style="height: 42px; width: auto; border-radius: 8px;">
         <span>Foodie Express</span>
       </div>
 
       <div class="visual-content">
+        <div style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 9999px; background: rgba(255, 107, 0, 0.25); border: 1px solid rgba(255, 107, 0, 0.5); color: #FF9F1C; font-size: 0.8rem; font-weight: 800; margin-bottom: 16px; text-transform: uppercase;">
+          <i class="fa-solid fa-fire"></i> PREMIUM DINING EXPERIENCE
+        </div>
         <h2>Delicious food.<br>Delivered beautifully.</h2>
         <p>
           Order gourmet dishes from top master chefs, reserve intimate restaurant dining tables, and track real-time kitchen deliveries all in one place.
         </p>
+
+        <div class="visual-floating-pills">
+          <div class="visual-pill pill-1">
+            <i class="fa-solid fa-bowl-food" style="color: #FF6B00;"></i> Fresh Gourmet Cooking
+          </div>
+          <div class="visual-pill pill-2">
+            <i class="fa-solid fa-bolt" style="color: #F59E0B;"></i> Superfast 30-Min Delivery
+          </div>
+          <div class="visual-pill pill-3">
+            <i class="fa-solid fa-star" style="color: #EAB308;"></i> 4.9★ Average Foodie Rating
+          </div>
+        </div>
       </div>
 
       <div class="visual-footer">

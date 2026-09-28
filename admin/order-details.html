@@ -214,9 +214,9 @@
             </div>
           </div>
 
-          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+          <div class="admin-order-details-grid">
             <!-- Left: Order Items & Pricing Breakdown -->
-            <div style="display: flex; flex-direction: column; gap: 24px;">
+            <div style="display: flex; flex-direction: column; gap: 24px; min-width: 0;">
               <div class="admin-card">
                 <div class="admin-card-header">
                   <h3>Ordered Items (${Array.isArray(items) ? items.length : 0})</h3>
@@ -225,7 +225,7 @@
                   </span>
                 </div>
                 <div class="admin-table-responsive">
-                  <table class="admin-table">
+                  <table class="admin-table admin-table-compact">
                     <thead>
                       <tr>
                         <th>Item</th>
@@ -239,7 +239,7 @@
                         <tr>
                           <td>
                             <div style="display: flex; align-items: center; gap: 12px;">
-                              ${item.image ? `<img src="${item.image}" alt="${item.name}" style="width: 44px; height: 44px; border-radius: 8px; object-fit: cover;">` : ''}
+                              ${item.image ? `<img src="${item.image}" alt="${item.name}" style="width: 44px; height: 44px; border-radius: 8px; object-fit: cover;" onerror="this.src='../images/foodie-logo.png'">` : ''}
                               <div>
                                 <strong style="font-size: 0.95rem;">${item.name || 'Dish'}</strong>
                                 <div style="font-size: 0.78rem; color: var(--admin-text-muted);">${item.category || 'Food Item'}</div>
@@ -273,7 +273,7 @@
             </div>
 
             <!-- Right: Customer & Delivery Information -->
-            <div style="display: flex; flex-direction: column; gap: 24px;">
+            <div style="display: flex; flex-direction: column; gap: 24px; min-width: 0;">
               <div class="admin-card">
                 <h3 style="margin-bottom: 16px;"><i class="fa-solid fa-user" style="color: var(--admin-primary); margin-right: 8px;"></i> Customer Info</h3>
                 <div style="display: flex; flex-direction: column; gap: 12px; font-size: 0.92rem;">

@@ -52,7 +52,7 @@
         <div class="admin-user-profile">
           <div class="admin-avatar" id="supervisorUserInitial">V</div>
           <div class="admin-user-details">
-            <h4 id="supervisorUserName">Vikram Singh</h4>
+            <h4 id="supervisorUserName">Supervisor Staff</h4>
             <span id="supervisorUserEmail">supervisor@foodie.com</span>
             <span class="admin-role-badge" id="supervisorUserRole">Supervisor</span>
           </div>
@@ -63,7 +63,7 @@
       </div>
     </aside>
 
-    <!-- 2. Main Content Area -->
+    <!-- 2. Main Content Area with Topbar -->
     <main class="admin-main">
       <header class="admin-topbar">
         <div class="topbar-left-content">
@@ -82,7 +82,7 @@
               <div class="dropdown-header">
                 <div class="dropdown-avatar" id="dropdownAvatar">V</div>
                 <div class="dropdown-info">
-                  <h4 id="dropdownName">Vikram Singh</h4>
+                  <h4 id="dropdownName">Supervisor Staff</h4>
                   <span id="dropdownEmail">supervisor@foodie.com</span>
                   <span class="dropdown-role" id="dropdownRole">Supervisor</span>
                 </div>
@@ -120,8 +120,8 @@
           <span>Manifest</span>
         </div>
 
-        <div style="text-align: center; padding: 60px; color: var(--admin-text-muted);">
-          <i class="fa-solid fa-spinner fa-spin fa-2x"></i>
+        <div style="text-align: center; padding: 60px; color: var(--sup-text-muted);">
+          <i class="fa-solid fa-spinner fa-spin fa-2x" style="color: var(--sup-primary);"></i>
           <p style="margin-top: 12px; font-weight: 600;">Loading order manifest details...</p>
         </div>
       </div>
@@ -146,10 +146,10 @@
 
       if (!orderId) {
         container.innerHTML = `
-          <div style="text-align:center; padding: 48px; background: white; border-radius: 16px; border: 1px solid var(--admin-border);">
+          <div style="text-align:center; padding: 48px; background: white; border-radius: 16px; border: 1px solid var(--sup-border);">
             <i class="fa-solid fa-circle-exclamation fa-2x" style="color: #EF4444; margin-bottom: 12px;"></i>
             <h3>No order ID specified</h3>
-            <p style="color: var(--admin-text-muted); margin: 8px 0 16px;">Please select an order from your assigned deliveries list.</p>
+            <p style="color: var(--sup-text-muted); margin: 8px 0 16px;">Please select an order from your assigned deliveries list.</p>
             <a href="assigned-orders.html" class="admin-btn admin-btn-primary">Return to Queue</a>
           </div>
         `;
@@ -164,10 +164,10 @@
       } catch (err) {
         console.error(err);
         container.innerHTML = `
-          <div style="text-align:center; padding: 48px; background: white; border-radius: 16px; border: 1px solid var(--admin-border);">
+          <div style="text-align:center; padding: 48px; background: white; border-radius: 16px; border: 1px solid var(--sup-border);">
             <i class="fa-solid fa-triangle-exclamation fa-2x" style="color: #EF4444; margin-bottom: 12px;"></i>
             <h3>Unable to access manifest</h3>
-            <p style="color: var(--admin-text-muted); margin: 8px 0 16px;">This order may not be assigned to your supervisor account or does not exist.</p>
+            <p style="color: var(--sup-text-muted); margin: 8px 0 16px;">This order may not be assigned to your supervisor account or does not exist.</p>
             <a href="assigned-orders.html" class="admin-btn admin-btn-outline">Back to Assigned Orders</a>
           </div>
         `;
@@ -203,19 +203,19 @@
       let stickyActionBtn = '';
       if (status === 'PREPARING' || status === 'CONFIRMED' || status === 'PENDING') {
         stickyActionBtn = `
-          <button class="admin-btn admin-btn-primary" style="min-height: 44px; padding: 0 20px;" onclick="advanceOrderStatus(${order.id}, 'OUT_FOR_DELIVERY')">
+          <button class="admin-btn admin-btn-primary" style="min-height: 44px; padding: 0 24px;" onclick="advanceOrderStatus(${order.id}, 'OUT_FOR_DELIVERY')">
             <i class="fa-solid fa-motorcycle"></i> Dispatch: Out for Delivery
           </button>
         `;
       } else if (status === 'OUT_FOR_DELIVERY') {
         stickyActionBtn = `
-          <button class="admin-btn admin-btn-success" style="min-height: 44px; padding: 0 20px;" onclick="advanceOrderStatus(${order.id}, 'DELIVERED')">
+          <button class="admin-btn admin-btn-success" style="min-height: 44px; padding: 0 24px;" onclick="advanceOrderStatus(${order.id}, 'DELIVERED')">
             <i class="fa-solid fa-circle-check"></i> Confirm Doorstep Hand-off
           </button>
         `;
       } else {
         stickyActionBtn = `
-          <div style="font-weight: 700; color: #16A34A; display: flex; align-items: center; gap: 8px;">
+          <div style="font-weight: 700; color: #16A34A; display: flex; align-items: center; gap: 8px; font-size: 0.95rem;">
             <i class="fa-solid fa-circle-check fa-lg"></i> Handover Completed
           </div>
         `;
@@ -239,7 +239,7 @@
             <p>Assigned to your dispatch line &bull; Received ${order.createdAt ? new Date(order.createdAt).toLocaleString() : 'Recently'}</p>
           </div>
           <div>
-            <span class="sup-badge ${status === 'DELIVERED' ? 'badge-delivered' : status === 'OUT_FOR_DELIVERY' ? 'badge-out' : 'badge-preparing'}" style="font-size: 0.92rem; padding: 8px 16px;">
+            <span class="sup-badge ${status === 'DELIVERED' ? 'badge-delivered' : status === 'OUT_FOR_DELIVERY' ? 'badge-out' : 'badge-preparing'}" style="font-size: 0.92rem; padding: 8px 18px;">
               <i class="fa-solid ${status === 'DELIVERED' ? 'fa-circle-check' : status === 'OUT_FOR_DELIVERY' ? 'fa-motorcycle' : 'fa-fire-burner'}"></i>
               ${status.replace(/_/g, ' ')}
             </span>
@@ -274,15 +274,15 @@
 
         <div class="manifest-grid">
           <!-- Left: Items Breakdown -->
-          <div style="display: flex; flex-direction: column; gap: 24px;">
+          <div style="display: flex; flex-direction: column; gap: 24px; min-width: 0;">
             <div class="info-card-block">
               <div class="info-card-title">
-                <i class="fa-solid fa-utensils" style="color: var(--admin-primary);"></i>
+                <i class="fa-solid fa-utensils" style="color: var(--sup-primary);"></i>
                 Order Items (${Array.isArray(items) ? items.length : 1})
               </div>
 
               <div class="table-wrapper">
-                <table class="supervisor-table">
+                <table class="supervisor-table supervisor-table-compact">
                   <thead>
                     <tr>
                       <th>Item Description</th>
@@ -296,10 +296,10 @@
                       <tr>
                         <td>
                           <div style="display: flex; align-items: center; gap: 12px;">
-                            ${item.image ? `<img src="${item.image}" style="width: 44px; height: 44px; border-radius: 8px; object-fit: cover; border: 1px solid #E2E8F0;">` : '<div style="width:44px;height:44px;border-radius:8px;background:#F1F5F9;display:flex;align-items:center;justify-content:center;color:#94A3B8;"><i class="fa-solid fa-bowl-food"></i></div>'}
+                            ${item.image ? `<img src="${item.image}" style="width: 44px; height: 44px; border-radius: 8px; object-fit: cover; border: 1px solid #E2E8F0;" onerror="this.src='../images/foodie-logo.png'">` : '<div style="width:44px;height:44px;border-radius:8px;background:#F1F5F9;display:flex;align-items:center;justify-content:center;color:#94A3B8;"><i class="fa-solid fa-bowl-food"></i></div>'}
                             <div>
                               <strong style="font-size: 0.95rem; color: #0F172A;">${item.name || 'Dish'}</strong>
-                              <div style="font-size: 0.76rem; color: var(--admin-text-muted);">${item.category || 'Special Dish'}</div>
+                              <div style="font-size: 0.76rem; color: var(--sup-text-muted);">${item.category || 'Special Dish'}</div>
                             </div>
                           </div>
                         </td>
@@ -312,7 +312,7 @@
                 </table>
               </div>
 
-              <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--admin-border); display: flex; flex-direction: column; gap: 8px; align-items: flex-end;">
+              <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--sup-border); display: flex; flex-direction: column; gap: 8px; align-items: flex-end;">
                 <div style="display: flex; justify-content: space-between; width: 260px; font-size: 0.92rem; color: #64748B;">
                   <span>Subtotal:</span>
                   <strong style="color: #0F172A;">₹${parseFloat(order.totalAmount || 0).toFixed(2)}</strong>
@@ -321,32 +321,32 @@
                   <span>Delivery Fee:</span>
                   <span style="color: #10B981; font-weight: 700;">FREE</span>
                 </div>
-                <div style="display: flex; justify-content: space-between; width: 260px; font-size: 1.2rem; font-weight: 800; color: #0F172A; border-top: 2px solid var(--admin-border); padding-top: 8px; margin-top: 4px;">
+                <div style="display: flex; justify-content: space-between; width: 260px; font-size: 1.2rem; font-weight: 800; color: #0F172A; border-top: 2px solid var(--sup-border); padding-top: 8px; margin-top: 4px;">
                   <span>Total Amount:</span>
-                  <span style="color: var(--admin-primary);">₹${parseFloat(order.totalAmount || 0).toFixed(2)}</span>
+                  <span style="color: var(--sup-primary);">₹${parseFloat(order.totalAmount || 0).toFixed(2)}</span>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- Right: Customer & Navigation -->
-          <div style="display: flex; flex-direction: column; gap: 24px;">
+          <div style="display: flex; flex-direction: column; gap: 24px; min-width: 0;">
             <div class="info-card-block">
               <div class="info-card-title">
-                <i class="fa-solid fa-location-dot" style="color: var(--admin-primary);"></i>
+                <i class="fa-solid fa-location-dot" style="color: var(--sup-primary);"></i>
                 Customer Destination
               </div>
 
-              <div style="display: flex; flex-direction: column; gap: 12px; font-size: 0.92rem;">
+              <div style="display: flex; flex-direction: column; gap: 14px; font-size: 0.92rem;">
                 <div>
-                  <span style="font-size: 0.78rem; color: var(--admin-text-muted); display: block;">Recipient</span>
-                  <strong style="font-size: 1rem; color: #0F172A;">${order.name || 'Customer'}</strong>
+                  <span style="font-size: 0.78rem; color: var(--sup-text-muted); display: block;">Recipient</span>
+                  <strong style="font-size: 1.05rem; color: #0F172A;">${order.name || 'Customer'}</strong>
                 </div>
 
                 <div>
-                  <span style="font-size: 0.78rem; color: var(--admin-text-muted); display: block;">Contact Phone</span>
+                  <span style="font-size: 0.78rem; color: var(--sup-text-muted); display: block; margin-bottom: 4px;">Contact Phone</span>
                   ${order.phone ? `
-                    <div style="display: flex; align-items: center; gap: 8px; margin-top: 2px;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
                       <a href="tel:${order.phone}" class="admin-btn admin-btn-sm" style="background: #EFF6FF; color: #2563EB; border: 1px solid #BFDBFE;">
                         <i class="fa-solid fa-phone"></i> Call ${order.phone}
                       </a>
@@ -355,13 +355,13 @@
                 </div>
 
                 <div>
-                  <span style="font-size: 0.78rem; color: var(--admin-text-muted); display: block;">Street Address</span>
-                  <div style="margin-top: 2px; line-height: 1.5; color: #334155; font-weight: 500;">
+                  <span style="font-size: 0.78rem; color: var(--sup-text-muted); display: block; margin-bottom: 2px;">Street Address</span>
+                  <div style="line-height: 1.5; color: #334155; font-weight: 500;">
                     ${order.address || 'Standard Address'}
                   </div>
                 </div>
 
-                <div style="margin-top: 8px;">
+                <div style="margin-top: 6px;">
                   <a href="${mapUrl}" target="_blank" class="admin-btn admin-btn-outline" style="width: 100%; justify-content: center; gap: 8px;">
                     <i class="fa-solid fa-diamond-turn-right" style="color: #2563EB;"></i> Open in Google Maps
                   </a>
@@ -377,12 +377,12 @@
 
               <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.92rem;">
                 <div style="display: flex; justify-content: space-between;">
-                  <span style="color: var(--admin-text-muted);">Payment Type:</span>
+                  <span style="color: var(--sup-text-muted);">Payment Type:</span>
                   <strong>${order.paymentMethod || 'COD'}</strong>
                 </div>
 
                 <div style="display: flex; justify-content: space-between;">
-                  <span style="color: var(--admin-text-muted);">Payment Status:</span>
+                  <span style="color: var(--sup-text-muted);">Payment Status:</span>
                   <span class="badge-status status-${(order.paymentStatus || 'pending').toLowerCase()}">
                     ${order.paymentStatus || 'PENDING'}
                   </span>
@@ -402,8 +402,8 @@
         <!-- Sticky Action Bar -->
         <div class="delivery-action-bottom-bar">
           <div>
-            <span style="color: var(--admin-text-muted); font-size: 0.8rem; display: block;">Active Action for #FE-${order.id}</span>
-            <strong style="color: var(--admin-text-main);">Current: ${status.replace(/_/g, ' ')}</strong>
+            <span style="color: var(--sup-text-muted); font-size: 0.8rem; display: block;">Active Action for #FE-${order.id}</span>
+            <strong style="color: var(--sup-text-main);">Current: ${status.replace(/_/g, ' ')}</strong>
           </div>
           <div>
             ${stickyActionBtn}

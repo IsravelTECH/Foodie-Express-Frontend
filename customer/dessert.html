@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <link rel="icon" type="image/png" href="images/foodie-logo.png">
@@ -22,14 +22,21 @@
 
       <nav class="nav-menu">
         <a href="index.html" class="nav-link">Home</a>
-        <a href="menu.html" class="nav-link">Menu</a>
-        <a href="indian.html" class="nav-link">Indian</a>
-        <a href="veg.html" class="nav-link">Veg</a>
-        <a href="nonveg.html" class="nav-link">Non-Veg</a>
-        <a href="snacks.html" class="nav-link">Snacks</a>
-        <a href="dessert.html" class="nav-link active">Desserts</a>
-        <a href="reservations.html" class="nav-link">Reservations</a>
         <a href="about.html" class="nav-link">About</a>
+        <div class="nav-dropdown">
+          <a href="menu.html" class="nav-link nav-dropdown-toggle">
+            Menu <i class="fa-solid fa-chevron-down nav-chevron"></i>
+          </a>
+          <div class="nav-dropdown-menu">
+            <a href="menu.html" class="nav-dropdown-item"><i class="fa-solid fa-utensils"></i> All Dishes</a>
+            <a href="indian.html" class="nav-dropdown-item"><i class="fa-solid fa-bowl-food"></i> Indian Cuisine</a>
+            <a href="veg.html" class="nav-dropdown-item"><i class="fa-solid fa-leaf" style="color: #16A34A;"></i> Pure Veg</a>
+            <a href="nonveg.html" class="nav-dropdown-item"><i class="fa-solid fa-drumstick-bite" style="color: #DC2626;"></i> Non-Veg</a>
+            <a href="snacks.html" class="nav-dropdown-item"><i class="fa-solid fa-cookie-bite" style="color: #D97706;"></i> Snacks</a>
+            <a href="dessert.html" class="nav-dropdown-item"><i class="fa-solid fa-ice-cream" style="color: #EC4899;"></i> Desserts</a>
+          </div>
+        </div>
+        <a href="reservations.html" class="nav-link">Reservations</a>
         <a href="contact.html" class="nav-link">Contact</a>
       </nav>
 
@@ -95,9 +102,9 @@
       <!-- 1. Warm Gulab Jamun -->
       <div class="food-card" data-category="sweets" data-price="90" data-rating="4.9">
         <div class="food-card-image-wrap">
-          <span class="card-badge badge-special">🍯 All-Time Favorite</span>
+          <span class="card-badge badge-special"> All-Time Favorite</span>
           <img src="images/desserts/gualab.jpg" alt="Gulab Jamun" onerror="this.src='images/indianfood.jpg'">
-          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Gulab Jamun', 90, 'images/desserts/gualab.jpg')" title="Save to Wishlist">♡</button>
+          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Gulab Jamun', 90, 'images/desserts/gualab.jpg')" title="Save to Wishlist"><i class="fa-regular fa-heart"></i></button>
         </div>
         <div class="food-card-body">
           <div class="food-card-header">
@@ -127,9 +134,9 @@
       <!-- 2. Royal Rasmalai -->
       <div class="food-card" data-category="sweets" data-price="140" data-rating="4.9">
         <div class="food-card-image-wrap">
-          <span class="card-badge badge-special">🍯 Royal Sweet</span>
+          <span class="card-badge badge-special"> Royal Sweet</span>
           <img src="images/desserts/rasmalai.jpg" alt="Rasmalai" onerror="this.src='images/indianfood.jpg'">
-          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Royal Rasmalai', 140, 'images/desserts/rasmalai.jpg')" title="Save to Wishlist">♡</button>
+          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Royal Rasmalai', 140, 'images/desserts/rasmalai.jpg')" title="Save to Wishlist"><i class="fa-regular fa-heart"></i></button>
         </div>
         <div class="food-card-body">
           <div class="food-card-header">
@@ -159,9 +166,9 @@
       <!-- 3. Chocolate Fudge Cake -->
       <div class="food-card" data-category="cakes" data-price="180" data-rating="4.8">
         <div class="food-card-image-wrap">
-          <span class="card-badge badge-veg">🍰 Bakery Special</span>
+          <span class="card-badge badge-veg"><i class="fa-solid fa-leaf" style="color: #16A34A;"></i> Pure Veg</span>
           <img src="images/desserts/cake.jpg" alt="Chocolate Fudge Cake" onerror="this.src='images/indianfood.jpg'">
-          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Chocolate Fudge Cake', 180, 'images/desserts/cake.jpg')" title="Save to Wishlist">♡</button>
+          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Chocolate Fudge Cake', 180, 'images/desserts/cake.jpg')" title="Save to Wishlist"><i class="fa-regular fa-heart"></i></button>
         </div>
         <div class="food-card-body">
           <div class="food-card-header">
@@ -191,9 +198,9 @@
       <!-- 4. Choco Milkshake -->
       <div class="food-card" data-category="shakes" data-price="130" data-rating="4.7">
         <div class="food-card-image-wrap">
-          <span class="card-badge badge-special">🥤 Thick Shake</span>
+          <span class="card-badge badge-special"><i class="fa-solid fa-bowl-food"></i> ¤ Thick Shake</span>
           <img src="images/desserts/chocomilkshake.jpg" alt="Chocolate Milkshake" onerror="this.src='images/indianfood.jpg'">
-          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Choco Milkshake', 130, 'images/desserts/chocomilkshake.jpg')" title="Save to Wishlist">♡</button>
+          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Choco Milkshake', 130, 'images/desserts/chocomilkshake.jpg')" title="Save to Wishlist"><i class="fa-regular fa-heart"></i></button>
         </div>
         <div class="food-card-body">
           <div class="food-card-header">
@@ -223,9 +230,9 @@
       <!-- 5. Rasgulla -->
       <div class="food-card" data-category="sweets" data-price="80" data-rating="4.8">
         <div class="food-card-image-wrap">
-          <span class="card-badge badge-veg">🍯 Bengali Sweet</span>
+          <span class="card-badge badge-veg"><i class="fa-solid fa-leaf" style="color: #16A34A;"></i> Pure Veg</span>
           <img src="images/desserts/rasgulla.jpg" alt="Rasgulla" onerror="this.src='images/indianfood.jpg'">
-          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Kolkata Spongy Rasgulla', 80, 'images/desserts/rasgulla.jpg')" title="Save to Wishlist">♡</button>
+          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Kolkata Spongy Rasgulla', 80, 'images/desserts/rasgulla.jpg')" title="Save to Wishlist"><i class="fa-regular fa-heart"></i></button>
         </div>
         <div class="food-card-body">
           <div class="food-card-header">
@@ -255,9 +262,9 @@
       <!-- 6. Strawberry Cake -->
       <div class="food-card" data-category="cakes" data-price="160" data-rating="4.8">
         <div class="food-card-image-wrap">
-          <span class="card-badge badge-veg">🍰 Fresh Berry</span>
+          <span class="card-badge badge-veg"><i class="fa-solid fa-leaf" style="color: #16A34A;"></i> Pure Veg</span>
           <img src="images/desserts/strawberry cake.jpg" alt="Strawberry Cake" onerror="this.src='images/indianfood.jpg'">
-          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Strawberry Cream Pastry', 160, 'images/desserts/strawberry cake.jpg')" title="Save to Wishlist">♡</button>
+          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Strawberry Cream Pastry', 160, 'images/desserts/strawberry cake.jpg')" title="Save to Wishlist"><i class="fa-regular fa-heart"></i></button>
         </div>
         <div class="food-card-body">
           <div class="food-card-header">
@@ -379,3 +386,4 @@
   <script src="js/menu.js"></script>
 </body>
 </html>
+

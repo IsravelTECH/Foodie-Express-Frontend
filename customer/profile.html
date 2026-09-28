@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <link rel="icon" type="image/png" href="images/foodie-logo.png">
@@ -51,10 +51,21 @@
 
       <nav class="nav-menu">
         <a href="index.html" class="nav-link">Home</a>
-        <a href="menu.html" class="nav-link">Menu</a>
-        <a href="reservations.html" class="nav-link">Reservations</a>
-        <a href="orders.html" class="nav-link">Orders</a>
         <a href="about.html" class="nav-link">About</a>
+        <div class="nav-dropdown">
+          <a href="menu.html" class="nav-link nav-dropdown-toggle">
+            Menu <i class="fa-solid fa-chevron-down nav-chevron"></i>
+          </a>
+          <div class="nav-dropdown-menu">
+            <a href="menu.html" class="nav-dropdown-item"><i class="fa-solid fa-utensils"></i> All Dishes</a>
+            <a href="indian.html" class="nav-dropdown-item"><i class="fa-solid fa-bowl-food"></i> Indian Cuisine</a>
+            <a href="veg.html" class="nav-dropdown-item"><i class="fa-solid fa-leaf" style="color: #16A34A;"></i> Pure Veg</a>
+            <a href="nonveg.html" class="nav-dropdown-item"><i class="fa-solid fa-drumstick-bite" style="color: #DC2626;"></i> Non-Veg</a>
+            <a href="snacks.html" class="nav-dropdown-item"><i class="fa-solid fa-cookie-bite" style="color: #D97706;"></i> Snacks</a>
+            <a href="dessert.html" class="nav-dropdown-item"><i class="fa-solid fa-ice-cream" style="color: #EC4899;"></i> Desserts</a>
+          </div>
+        </div>
+        <a href="reservations.html" class="nav-link">Reservations</a>
         <a href="contact.html" class="nav-link">Contact</a>
       </nav>
 
@@ -71,7 +82,7 @@
         <!-- User Dropdown -->
         <div class="user-dropdown-wrap">
           <button class="user-menu-btn" id="userProfileBtn" onclick="FoodieCustomer.toggleUserDropdown()">
-            <div class="user-avatar-circle" id="headerUserAvatar">👤</div>
+            <div class="user-avatar-circle" id="headerUserAvatar"><i class="fa-solid fa-user"></i></div>
             <span id="headerUserName">Account</span>
             <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem; color: var(--cust-text-muted);"></i>
           </button>
@@ -216,9 +227,10 @@
       user.location = document.getElementById('profLocation').value.trim();
 
       localStorage.setItem('user', JSON.stringify(user));
-      FoodieApp.showToast('✅ Profile details updated successfully!', 'success');
+      FoodieApp.showToast('Profile details updated successfully!', 'success');
       setTimeout(() => location.reload(), 800);
     }
   </script>
 </body>
 </html>
+

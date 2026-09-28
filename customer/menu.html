@@ -22,14 +22,21 @@
 
       <nav class="nav-menu">
         <a href="index.html" class="nav-link">Home</a>
-        <a href="menu.html" class="nav-link active">Menu</a>
-        <a href="indian.html" class="nav-link">Indian</a>
-        <a href="veg.html" class="nav-link">Veg</a>
-        <a href="nonveg.html" class="nav-link">Non-Veg</a>
-        <a href="snacks.html" class="nav-link">Snacks</a>
-        <a href="dessert.html" class="nav-link">Desserts</a>
-        <a href="reservations.html" class="nav-link">Reservations</a>
         <a href="about.html" class="nav-link">About</a>
+        <div class="nav-dropdown">
+          <a href="menu.html" class="nav-link nav-dropdown-toggle">
+            Menu <i class="fa-solid fa-chevron-down nav-chevron"></i>
+          </a>
+          <div class="nav-dropdown-menu">
+            <a href="menu.html" class="nav-dropdown-item"><i class="fa-solid fa-utensils"></i> All Dishes</a>
+            <a href="indian.html" class="nav-dropdown-item"><i class="fa-solid fa-bowl-food"></i> Indian Cuisine</a>
+            <a href="veg.html" class="nav-dropdown-item"><i class="fa-solid fa-leaf" style="color: #16A34A;"></i> Pure Veg</a>
+            <a href="nonveg.html" class="nav-dropdown-item"><i class="fa-solid fa-drumstick-bite" style="color: #DC2626;"></i> Non-Veg</a>
+            <a href="snacks.html" class="nav-dropdown-item"><i class="fa-solid fa-cookie-bite" style="color: #D97706;"></i> Snacks</a>
+            <a href="dessert.html" class="nav-dropdown-item"><i class="fa-solid fa-ice-cream" style="color: #EC4899;"></i> Desserts</a>
+          </div>
+        </div>
+        <a href="reservations.html" class="nav-link">Reservations</a>
         <a href="contact.html" class="nav-link">Contact</a>
       </nav>
 
@@ -77,12 +84,12 @@
       </div>
 
       <div class="filter-pills" id="categoryPillContainer">
-        <button class="filter-pill active" onclick="setCategoryFilter('ALL', this)">🍽️ All Items</button>
-        <button class="filter-pill" onclick="setCategoryFilter('Indian', this)">🍛 Indian</button>
-        <button class="filter-pill" onclick="setCategoryFilter('Veg', this)">🌿 Pure Veg</button>
-        <button class="filter-pill" onclick="setCategoryFilter('Non-Veg', this)">🍗 Non-Veg</button>
-        <button class="filter-pill" onclick="setCategoryFilter('Snacks', this)">🍔 Snacks</button>
-        <button class="filter-pill" onclick="setCategoryFilter('Desserts', this)">🍨 Desserts</button>
+        <button class="filter-pill active" onclick="setCategoryFilter('ALL', this)"><i class="fa-solid fa-utensils"></i> All Items</button>
+        <button class="filter-pill" onclick="setCategoryFilter('Indian', this)"><i class="fa-solid fa-bowl-food"></i> Indian</button>
+        <button class="filter-pill" onclick="setCategoryFilter('Veg', this)"><i class="fa-solid fa-leaf" style="color: #16A34A;"></i> Pure Veg</button>
+        <button class="filter-pill" onclick="setCategoryFilter('Non-Veg', this)"><i class="fa-solid fa-drumstick-bite" style="color: #DC2626;"></i> Non-Veg</button>
+        <button class="filter-pill" onclick="setCategoryFilter('Snacks', this)"><i class="fa-solid fa-cookie-bite" style="color: #D97706;"></i> Snacks</button>
+        <button class="filter-pill" onclick="setCategoryFilter('Desserts', this)"><i class="fa-solid fa-ice-cream" style="color: #EC4899;"></i> Desserts</button>
       </div>
 
       <select id="menuSortSelect" class="sort-select" onchange="sortMenu()">
@@ -304,20 +311,20 @@
       emptyMsg.style.display = 'none';
 
       grid.innerHTML = dishes.map(dish => {
-        const img = dish.imageUrl || (typeof FoodieApp !== 'undefined' ? FoodieApp.getDishImage(dish.name) : 'images/indianfood.jpg');
-        const isVeg = dish.foodType === 'VEG' || dish.category === 'Veg' || dish.category === 'VEG';
-        const isFav = WishlistService.isFavorite(dish.name);
+        const img = (dish.imageUrl && dish.imageUrl.trim() !== '') ? dish.imageUrl : (typeof FoodieApp !== 'undefined' ? FoodieApp.getDishImage(dish.name) : 'images/indianfood.jpg');
+        const isVeg = dish.foodType === 'VEG' || (dish.category && dish.category.toLowerCase().includes('veg')) || (dish.name && (dish.name.toLowerCase().includes('paneer') || dish.name.toLowerCase().includes('gobi') || dish.name.toLowerCase().includes('dal') || dish.name.toLowerCase().includes('veg')));
+        const isFav = typeof WishlistService !== 'undefined' ? WishlistService.isFavorite(dish.name) : false;
         const price = parseFloat(dish.price || 199).toFixed(2);
 
         return `
           <div class="food-card">
             <div class="food-card-image-wrap">
               <span class="card-badge ${isVeg ? 'badge-veg' : 'badge-nonveg'}">
-                ${isVeg ? '🌿 Pure Veg' : '🍗 Non-Veg'}
+                ${isVeg ? '<i class="fa-solid fa-leaf" style="color: #16A34A;"></i> Pure Veg' : '<i class="fa-solid fa-drumstick-bite" style="color: #DC2626;"></i> Non-Veg'}
               </span>
-              <img src="${img}" alt="${dish.name}" onerror="this.src='images/indianfood.jpg'">
+              <img src="${img}" alt="${dish.name}" onerror="this.onerror=null;this.src='${typeof FoodieApp !== 'undefined' ? FoodieApp.getDishImage(dish.name) : 'images/indianfood.jpg'}'">
               <button class="card-wishlist-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${dish.name.replace(/'/g, "\\'")}', ${price}, '${img}')" title="Save to Wishlist">
-                ${isFav ? '❤️' : '♡'}
+                <i class="fa-${isFav ? 'solid' : 'regular'} fa-heart"></i>
               </button>
             </div>
             <div class="food-card-body">
@@ -378,3 +385,4 @@
   </script>
 </body>
 </html>
+

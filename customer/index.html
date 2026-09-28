@@ -21,15 +21,22 @@
       </a>
 
       <nav class="nav-menu">
-        <a href="index.html" class="nav-link active">Home</a>
-        <a href="menu.html" class="nav-link">Menu</a>
-        <a href="indian.html" class="nav-link">Indian</a>
-        <a href="veg.html" class="nav-link">Veg</a>
-        <a href="nonveg.html" class="nav-link">Non-Veg</a>
-        <a href="snacks.html" class="nav-link">Snacks</a>
-        <a href="dessert.html" class="nav-link">Desserts</a>
-        <a href="reservations.html" class="nav-link">Reservations</a>
+        <a href="index.html" class="nav-link">Home</a>
         <a href="about.html" class="nav-link">About</a>
+        <div class="nav-dropdown">
+          <a href="menu.html" class="nav-link nav-dropdown-toggle">
+            Menu <i class="fa-solid fa-chevron-down nav-chevron"></i>
+          </a>
+          <div class="nav-dropdown-menu">
+            <a href="menu.html" class="nav-dropdown-item"><i class="fa-solid fa-utensils"></i> All Dishes</a>
+            <a href="indian.html" class="nav-dropdown-item"><i class="fa-solid fa-bowl-food"></i> Indian Cuisine</a>
+            <a href="veg.html" class="nav-dropdown-item"><i class="fa-solid fa-leaf" style="color: #16A34A;"></i> Pure Veg</a>
+            <a href="nonveg.html" class="nav-dropdown-item"><i class="fa-solid fa-drumstick-bite" style="color: #DC2626;"></i> Non-Veg</a>
+            <a href="snacks.html" class="nav-dropdown-item"><i class="fa-solid fa-cookie-bite" style="color: #D97706;"></i> Snacks</a>
+            <a href="dessert.html" class="nav-dropdown-item"><i class="fa-solid fa-ice-cream" style="color: #EC4899;"></i> Desserts</a>
+          </div>
+        </div>
+        <a href="reservations.html" class="nav-link">Reservations</a>
         <a href="contact.html" class="nav-link">Contact</a>
       </nav>
 
@@ -73,11 +80,25 @@
             <a href="reservations.html" class="btn btn-outline btn-lg">
               <i class="fa-solid fa-chair"></i> Book a Table
             </a>
+            <button type="button" class="btn btn-secondary btn-lg" onclick="document.getElementById('videoShowcaseSection').scrollIntoView({ behavior: 'smooth' })">
+              <i class="fa-solid fa-circle-play" style="color: var(--cust-primary);"></i> Watch Kitchen Reel
+            </button>
           </div>
         </div>
 
         <div class="hero-img-wrap">
-          <img src="images/indianfood.jpg" alt="Delicious Foodie Spread" class="hero-main-img" onerror="this.src='images/indian-desserts.jpg'">
+          <div class="hero-video-banner">
+            <video class="hero-main-video" autoplay muted loop playsinline poster="images/indianfood.jpg">
+              <source src="video/login-video.mp4" type="video/mp4">
+              <source src="../video/login-video.mp4" type="video/mp4">
+              <source src="video/promo-dish.mp4" type="video/mp4">
+              <source src="video/foodie-promo.mp4" type="video/mp4">
+              <img src="images/indianfood.jpg" alt="Delicious Foodie Spread" class="hero-main-img">
+            </video>
+            <div class="hero-video-overlay-badge">
+              <span class="video-live-dot"></span> FRESH KITCHEN FEED
+            </div>
+          </div>
 
           <div class="floating-card card-1">
             <div style="width: 38px; height: 38px; border-radius: 50%; background: #FEF3C7; color: #D97706; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">
@@ -100,12 +121,12 @@
           </div>
 
           <div class="floating-card card-3">
-            <div style="width: 38px; height: 38px; border-radius: 50%; background: #FEF3C7; color: #D97706; display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">
+            <div style="width: 38px; height: 38px; border-radius: 50%; background: #FFF1E8; color: var(--cust-primary); display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">
               <i class="fa-solid fa-star"></i>
             </div>
             <div>
-              <div style="font-weight: 800; font-size: 0.95rem; color: var(--cust-navy);">4.9 ★ Rated</div>
-              <div style="font-size: 0.75rem; color: var(--cust-text-muted);">15,000+ Foodies</div>
+              <div style="font-weight: 800; font-size: 0.95rem; color: var(--cust-navy);">4.9 ★ Rating</div>
+              <div style="font-size: 0.75rem; color: var(--cust-text-muted);">10,000+ Happy Foodies</div>
             </div>
           </div>
         </div>
@@ -144,27 +165,27 @@
 
       <div class="categories-strip">
         <a href="indian.html" class="category-card">
-          <div class="category-icon-circle">🍛</div>
+          <div class="category-icon-circle"><i class="fa-solid fa-bowl-food" style="color: var(--cust-primary);"></i></div>
           <span class="category-title">Indian Cuisine</span>
         </a>
 
         <a href="veg.html" class="category-card">
-          <div class="category-icon-circle">🌿</div>
+          <div class="category-icon-circle"><i class="fa-solid fa-leaf" style="color: #16A34A;"></i></div>
           <span class="category-title">Pure Veg</span>
         </a>
 
         <a href="nonveg.html" class="category-card">
-          <div class="category-icon-circle">🍗</div>
+          <div class="category-icon-circle"><i class="fa-solid fa-drumstick-bite" style="color: #DC2626;"></i></div>
           <span class="category-title">Non-Veg Special</span>
         </a>
 
         <a href="snacks.html" class="category-card">
-          <div class="category-icon-circle">🍔</div>
+          <div class="category-icon-circle"><i class="fa-solid fa-cookie-bite" style="color: #D97706;"></i></div>
           <span class="category-title">Snacks & Fast Food</span>
         </a>
 
         <a href="dessert.html" class="category-card">
-          <div class="category-icon-circle">🍨</div>
+          <div class="category-icon-circle"><i class="fa-solid fa-ice-cream" style="color: #EC4899;"></i></div>
           <span class="category-title">Sweet Desserts</span>
         </a>
       </div>
@@ -217,6 +238,75 @@
             <span style="font-size: 0.82rem; font-weight: 700; text-transform: uppercase;">FLAT</span>
             <strong style="font-size: 2.2rem; line-height: 1; font-weight: 800;">20%</strong>
             <span style="font-size: 0.78rem; font-weight: 700;">OFF</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6.5. Live Kitchen Experience & Motion Video Showcase -->
+  <section id="videoShowcaseSection" class="video-showcase-section">
+    <div class="container">
+      <div class="video-showcase-container">
+        <!-- Left: Informative Story & Value Props -->
+        <div class="video-showcase-text-wrap">
+          <div>
+            <span class="section-tag" style="background: rgba(239, 68, 68, 0.1); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.2); margin-bottom: 14px; display: inline-flex; align-items: center; gap: 8px;">
+              <span class="video-live-dot"></span> LIVE FROM OUR MASTER KITCHEN
+            </span>
+            <h2 style="font-size: clamp(1.75rem, 2.8vw, 2.25rem); color: var(--cust-navy); margin-bottom: 14px; line-height: 1.25; font-weight: 800;">
+              Crafted with Passion.<br>Delivered with Precision.
+            </h2>
+            <p style="color: var(--cust-text-secondary); font-size: 0.96rem; line-height: 1.65; margin-bottom: 22px;">
+              Step behind the scenes into our state-of-the-art hygienic kitchen. Watch master chefs sautéing hand-picked farm spices, slow-cooking rich curries, and preparing every dish to golden perfection.
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 26px;">
+              <div style="display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--cust-navy); font-weight: 600;">
+                <i class="fa-solid fa-circle-check" style="color: var(--cust-success); font-size: 1.05rem;"></i>
+                <span>100% Contactless &amp; Hygienic Food Prep</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--cust-navy); font-weight: 600;">
+                <i class="fa-solid fa-circle-check" style="color: var(--cust-success); font-size: 1.05rem;"></i>
+                <span>Cooked Fresh to Order with Authentic Whole Spices</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--cust-navy); font-weight: 600;">
+                <i class="fa-solid fa-circle-check" style="color: var(--cust-success); font-size: 1.05rem;"></i>
+                <span>Direct Kitchen Dispatch in 25–35 Minutes</span>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+              <a href="menu.html" class="btn btn-primary btn-lg">
+                <i class="fa-solid fa-utensils"></i> Order Fresh Now
+              </a>
+              <a href="reservations.html" class="btn btn-outline btn-lg">
+                <i class="fa-solid fa-chair"></i> Book a Table
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Crystal-Clear Video Reel -->
+        <div class="video-showcase-media-wrap">
+          <video id="promoVideoPlayer" class="showcase-video" autoplay muted loop playsinline poster="images/indianfood.jpg">
+            <source src="video/promo-dish.mp4" type="video/mp4">
+            <source src="../video/login-video.mp4" type="video/mp4">
+            <source src="video/foodie-promo.mp4" type="video/mp4">
+            Your browser does not support HTML5 video playback.
+          </video>
+
+          <div class="video-live-badge-floating">
+            <span class="video-live-dot"></span> LIVE REEL STREAM
+          </div>
+
+          <div class="video-floating-controls">
+            <button type="button" class="video-btn-pill" id="videoPlayPauseBtn" onclick="toggleShowcaseVideoPlay('promoVideoPlayer', 'videoPlayPauseBtn')" title="Toggle Video Play/Pause">
+              <i class="fa-solid fa-pause" id="videoPlayIcon"></i> <span id="videoPlayText">Pause</span>
+            </button>
+            <button type="button" class="video-btn-pill" id="videoMuteToggleBtn" onclick="toggleShowcaseVideoMute('promoVideoPlayer', 'videoMuteToggleBtn')" title="Toggle Audio Mute">
+              <i class="fa-solid fa-volume-xmark" id="videoMuteIcon"></i> <span id="videoMuteText">Unmute</span>
+            </button>
           </div>
         </div>
       </div>
@@ -489,20 +579,20 @@
     function renderDishes(dishes) {
       const grid = document.getElementById('featuredGrid');
       grid.innerHTML = dishes.map(dish => {
-        const img = dish.imageUrl || (typeof FoodieApp !== 'undefined' ? FoodieApp.getDishImage(dish.name) : 'images/indianfood.jpg');
-        const isVeg = dish.foodType === 'VEG' || dish.category === 'Veg' || dish.category === 'VEG';
-        const isFav = WishlistService.isFavorite(dish.name);
+        const img = (dish.imageUrl && dish.imageUrl.trim() !== '') ? dish.imageUrl : (typeof FoodieApp !== 'undefined' ? FoodieApp.getDishImage(dish.name) : 'images/indianfood.jpg');
+        const isVeg = dish.foodType === 'VEG' || (dish.category && dish.category.toLowerCase().includes('veg')) || (dish.name && (dish.name.toLowerCase().includes('paneer') || dish.name.toLowerCase().includes('gobi') || dish.name.toLowerCase().includes('dal') || dish.name.toLowerCase().includes('veg')));
+        const isFav = typeof WishlistService !== 'undefined' ? WishlistService.isFavorite(dish.name) : false;
         const price = parseFloat(dish.price || 199).toFixed(2);
 
         return `
           <div class="food-card">
             <div class="food-card-image-wrap">
               <span class="card-badge ${isVeg ? 'badge-veg' : 'badge-nonveg'}">
-                ${isVeg ? '🌿 Pure Veg' : '🍗 Non-Veg'}
+                ${isVeg ? '<i class="fa-solid fa-leaf" style="color: #16A34A;"></i> Pure Veg' : '<i class="fa-solid fa-drumstick-bite" style="color: #DC2626;"></i> Non-Veg'}
               </span>
-              <img src="${img}" alt="${dish.name}" onerror="this.src='images/indianfood.jpg'">
+              <img src="${img}" alt="${dish.name}" onerror="this.onerror=null;this.src='${typeof FoodieApp !== 'undefined' ? FoodieApp.getDishImage(dish.name) : 'images/indianfood.jpg'}'">
               <button class="card-wishlist-btn ${isFav ? 'active' : ''}" onclick="toggleFav(this, '${dish.name.replace(/'/g, "\\'")}', ${price}, '${img}')" title="Save to Wishlist">
-                ${isFav ? '❤️' : '♡'}
+                <i class="fa-${isFav ? 'solid' : 'regular'} fa-heart"></i>
               </button>
             </div>
             <div class="food-card-body">
@@ -573,3 +663,4 @@
   </script>
 </body>
 </html>
+

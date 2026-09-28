@@ -13,54 +13,97 @@
 </head>
 <body>
   <div class="signup-wrapper">
-    <div class="signup-card">
-      <div style="text-align: center; margin-bottom: 28px;">
-        <a href="index.html" class="brand-logo" style="justify-content: center; margin-bottom: 16px;">
-          <img src="images/foodie-logo.png" alt="Foodie Logo" class="logo-img">
-          <span class="brand-title">Foodie<span>Express</span></span>
-        </a>
-        <h1 style="font-size: 1.85rem; font-weight: 800; color: var(--cust-navy); margin-bottom: 6px;">Create Your Account</h1>
-        <p style="color: var(--cust-text-secondary); font-size: 0.9rem;">Join Foodie Express for lightning food delivery & dining reservations.</p>
+    <!-- Left Hero Visual Side with Video & Motion -->
+    <div class="login-visual">
+      <video class="visual-video-bg" autoplay muted loop playsinline poster="images/indianfood.jpg">
+        <source src="video/login-video.mp4" type="video/mp4">
+        <source src="../video/login-video.mp4" type="video/mp4">
+      </video>
+      <div class="visual-overlay"></div>
+
+      <div class="visual-brand">
+        <img src="images/foodie-logo.png" alt="Foodie Express" class="logo-img" style="height: 42px; width: auto; border-radius: 8px;">
+        <span>Foodie Express</span>
       </div>
 
-      <form id="signup-form" onsubmit="AuthService.handleSignup(event)">
-        <div class="form-group">
-          <label class="form-label" for="signup-name">Full Name *</label>
-          <input type="text" id="signup-name" class="form-control" placeholder="John Doe" required autocomplete="name">
+      <div class="visual-content">
+        <div style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 9999px; background: rgba(255, 107, 0, 0.25); border: 1px solid rgba(255, 107, 0, 0.5); color: #FF9F1C; font-size: 0.8rem; font-weight: 800; margin-bottom: 16px; text-transform: uppercase;">
+          <i class="fa-solid fa-gift"></i> NEW MEMBER PRIVILEGES
         </div>
+        <h2>Join thousands of<br>happy food lovers.</h2>
+        <p>
+          Unlock exclusive welcome discounts, live doorstep tracking, favorite dish bookmarks, and instant table reservations with one unified account.
+        </p>
 
-        <div class="form-group">
-          <label class="form-label" for="signup-email">Email Address *</label>
-          <input type="email" id="signup-email" class="form-control" placeholder="name@example.com" required autocomplete="email">
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="signup-password">Create Password *</label>
-          <div class="input-with-icon">
-            <input type="password" id="signup-password" class="form-control" placeholder="At least 6 characters" required autocomplete="new-password" oninput="updateStrength(this.value)">
-            <button type="button" class="input-toggle-pwd" onclick="AuthService.togglePasswordVisibility('signup-password', this)">
-              <i class="fa-regular fa-eye"></i>
-            </button>
+        <div class="visual-floating-pills">
+          <div class="visual-pill pill-1">
+            <i class="fa-solid fa-percent" style="color: #FF6B00;"></i> Flat 20% OFF on First 3 Orders
           </div>
-          <div class="strength-meter">
-            <div id="pwdStrengthFill" class="strength-fill"></div>
+          <div class="visual-pill pill-2">
+            <i class="fa-solid fa-truck-fast" style="color: #10B981;"></i> Zero Delivery Fee Over ₹500
           </div>
-          <div id="pwdStrengthText" style="font-size: 0.75rem; color: var(--cust-text-muted); margin-top: 4px; text-align: right; font-weight: 600;"></div>
-        </div>
-
-        <button type="submit" class="btn btn-primary btn-lg w-full" style="padding: 14px; margin-top: 8px; margin-bottom: 20px;">
-          Create Account <i class="fa-solid fa-arrow-right"></i>
-        </button>
-
-        <div style="text-align: center; font-size: 0.88rem; color: var(--cust-text-secondary); padding-top: 16px; border-top: 1px solid var(--cust-border);">
-          <p>Already have an account? <a href="login.html" style="color: var(--cust-primary); font-weight: 700;">Sign In</a></p>
-          <div style="margin-top: 12px;">
-            <a href="index.html" style="font-size: 0.82rem; color: var(--cust-text-muted); font-weight: 600;">
-              <i class="fa-solid fa-arrow-left"></i> Back to Storefront
-            </a>
+          <div class="visual-pill pill-3">
+            <i class="fa-solid fa-calendar-check" style="color: #38BDF8;"></i> Priority Table Seating
           </div>
         </div>
-      </form>
+      </div>
+
+      <div class="visual-footer">
+        &copy; 2026 Foodie Express Platform &bull; Customer Membership
+      </div>
+    </div>
+
+    <!-- Right Signup Form -->
+    <div class="signup-form-area">
+      <div class="login-card">
+        <div style="margin-bottom: 24px;">
+          <a href="index.html" class="brand-logo" style="margin-bottom: 16px;">
+            <img src="images/foodie-logo.png" alt="Foodie Logo" class="logo-img">
+            <span class="brand-title">Foodie<span>Express</span></span>
+          </a>
+          <h1 style="font-size: 1.85rem; font-weight: 800; color: var(--cust-navy); margin-bottom: 6px;">Create Your Account</h1>
+          <p style="color: var(--cust-text-secondary); font-size: 0.9rem;">Join Foodie Express for lightning food delivery &amp; dining reservations.</p>
+        </div>
+
+        <form id="signup-form" onsubmit="AuthService.handleSignup(event)">
+          <div class="form-group">
+            <label class="form-label" for="signup-name">Full Name *</label>
+            <input type="text" id="signup-name" class="form-control" placeholder="John Doe" required autocomplete="name">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="signup-email">Email Address *</label>
+            <input type="email" id="signup-email" class="form-control" placeholder="name@example.com" required autocomplete="email">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="signup-password">Create Password *</label>
+            <div class="input-with-icon">
+              <input type="password" id="signup-password" class="form-control" placeholder="At least 6 characters" required autocomplete="new-password" oninput="updateStrength(this.value)">
+              <button type="button" class="input-toggle-pwd" onclick="AuthService.togglePasswordVisibility('signup-password', this)">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+            <div class="strength-meter">
+              <div id="pwdStrengthFill" class="strength-fill"></div>
+            </div>
+            <div id="pwdStrengthText" style="font-size: 0.75rem; color: var(--cust-text-muted); margin-top: 4px; text-align: right; font-weight: 600;"></div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg w-full" style="padding: 14px; margin-top: 8px; margin-bottom: 20px;">
+            Create Account <i class="fa-solid fa-arrow-right"></i>
+          </button>
+
+          <div style="text-align: center; font-size: 0.88rem; color: var(--cust-text-secondary); padding-top: 16px; border-top: 1px solid var(--cust-border);">
+            <p>Already have an account? <a href="login.html" style="color: var(--cust-primary); font-weight: 700;">Sign In</a></p>
+            <div style="margin-top: 12px;">
+              <a href="index.html" style="font-size: 0.82rem; color: var(--cust-text-muted); font-weight: 600;">
+                <i class="fa-solid fa-arrow-left"></i> Back to Storefront
+              </a>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <link rel="icon" type="image/png" href="images/foodie-logo.png">
@@ -22,14 +22,21 @@
 
       <nav class="nav-menu">
         <a href="index.html" class="nav-link">Home</a>
-        <a href="menu.html" class="nav-link">Menu</a>
-        <a href="indian.html" class="nav-link active">Indian</a>
-        <a href="veg.html" class="nav-link">Veg</a>
-        <a href="nonveg.html" class="nav-link">Non-Veg</a>
-        <a href="snacks.html" class="nav-link">Snacks</a>
-        <a href="dessert.html" class="nav-link">Desserts</a>
-        <a href="reservations.html" class="nav-link">Reservations</a>
         <a href="about.html" class="nav-link">About</a>
+        <div class="nav-dropdown">
+          <a href="menu.html" class="nav-link nav-dropdown-toggle">
+            Menu <i class="fa-solid fa-chevron-down nav-chevron"></i>
+          </a>
+          <div class="nav-dropdown-menu">
+            <a href="menu.html" class="nav-dropdown-item"><i class="fa-solid fa-utensils"></i> All Dishes</a>
+            <a href="indian.html" class="nav-dropdown-item"><i class="fa-solid fa-bowl-food"></i> Indian Cuisine</a>
+            <a href="veg.html" class="nav-dropdown-item"><i class="fa-solid fa-leaf" style="color: #16A34A;"></i> Pure Veg</a>
+            <a href="nonveg.html" class="nav-dropdown-item"><i class="fa-solid fa-drumstick-bite" style="color: #DC2626;"></i> Non-Veg</a>
+            <a href="snacks.html" class="nav-dropdown-item"><i class="fa-solid fa-cookie-bite" style="color: #D97706;"></i> Snacks</a>
+            <a href="dessert.html" class="nav-dropdown-item"><i class="fa-solid fa-ice-cream" style="color: #EC4899;"></i> Desserts</a>
+          </div>
+        </div>
+        <a href="reservations.html" class="nav-link">Reservations</a>
         <a href="contact.html" class="nav-link">Contact</a>
       </nav>
 
@@ -77,7 +84,7 @@
           <h3 style="font-size: 1.2rem; color: var(--cust-navy); margin: 4px 0;">Explore Pure Veg &rarr;</h3>
           <p style="font-size: 0.82rem; color: #4B5563;">Paneer curries, pulao, dosas &amp; dal tadka</p>
         </div>
-        <div style="font-size: 2.2rem;">🌿</div>
+        <div style="font-size: 2rem; color: #16A34A;"><i class="fa-solid fa-leaf"></i></div>
       </a>
 
       <a href="nonveg.html" style="background: linear-gradient(135deg, #FEF2F2 0%, #FEE2E2 100%); border: 1.5px solid #FECDD3; border-radius: var(--cust-radius-lg); padding: 22px; display: flex; align-items: center; justify-content: space-between; text-decoration: none;">
@@ -86,7 +93,7 @@
           <h3 style="font-size: 1.2rem; color: var(--cust-navy); margin: 4px 0;">Explore Non-Veg &rarr;</h3>
           <p style="font-size: 0.82rem; color: #4B5563;">Chicken tikka, mutton biryani, fish fry</p>
         </div>
-        <div style="font-size: 2.2rem;">🍗</div>
+        <div style="font-size: 2rem; color: #DC2626;"><i class="fa-solid fa-drumstick-bite"></i></div>
       </a>
     </div>
 
@@ -115,9 +122,9 @@
       <!-- 1. Butter Chicken -->
       <div class="food-card" data-category="nonveg" data-price="320" data-rating="4.9">
         <div class="food-card-image-wrap">
-          <span class="card-badge badge-nonveg">🍗 Non-Veg</span>
+          <span class="card-badge badge-nonveg"><i class="fa-solid fa-drumstick-bite" style="color: #DC2626;"></i> Non-Veg</span>
           <img src="images/indianfood/butterchicken.jpg" alt="Butter Chicken" onerror="this.src='images/indianfood.jpg'">
-          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Butter Chicken', 320, 'images/indianfood/butterchicken.jpg')" title="Save to Wishlist">♡</button>
+          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Butter Chicken', 320, 'images/indianfood/butterchicken.jpg')" title="Save to Wishlist"><i class="fa-regular fa-heart"></i></button>
         </div>
         <div class="food-card-body">
           <div class="food-card-header">
@@ -147,9 +154,9 @@
       <!-- 2. Paneer Butter Masala -->
       <div class="food-card" data-category="veg" data-price="240" data-rating="4.8">
         <div class="food-card-image-wrap">
-          <span class="card-badge badge-veg">🌿 Pure Veg</span>
+          <span class="card-badge badge-veg"><i class="fa-solid fa-leaf" style="color: #16A34A;"></i> Pure Veg</span>
           <img src="images/indianfood/pan.jpg" alt="Paneer Butter Masala" onerror="this.src='images/indianfood.jpg'">
-          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Paneer Butter Masala', 240, 'images/indianfood/pan.jpg')" title="Save to Wishlist">♡</button>
+          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Paneer Butter Masala', 240, 'images/indianfood/pan.jpg')" title="Save to Wishlist"><i class="fa-regular fa-heart"></i></button>
         </div>
         <div class="food-card-body">
           <div class="food-card-header">
@@ -179,9 +186,9 @@
       <!-- 3. Chicken Biryani -->
       <div class="food-card" data-category="nonveg" data-price="280" data-rating="4.9">
         <div class="food-card-image-wrap">
-          <span class="card-badge badge-nonveg">🍗 Non-Veg</span>
+          <span class="card-badge badge-nonveg"><i class="fa-solid fa-drumstick-bite" style="color: #DC2626;"></i> Non-Veg</span>
           <img src="images/indianfood/chickenbiriyani.jpg" alt="Chicken Dum Biryani" onerror="this.src='images/indianfood.jpg'">
-          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Hyderabadi Chicken Biryani', 280, 'images/indianfood/chickenbiriyani.jpg')" title="Save to Wishlist">♡</button>
+          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Hyderabadi Chicken Biryani', 280, 'images/indianfood/chickenbiriyani.jpg')" title="Save to Wishlist"><i class="fa-regular fa-heart"></i></button>
         </div>
         <div class="food-card-body">
           <div class="food-card-header">
@@ -211,9 +218,9 @@
       <!-- 4. Thalappakatti Mutton Biryani -->
       <div class="food-card" data-category="nonveg" data-price="350" data-rating="4.9">
         <div class="food-card-image-wrap">
-          <span class="card-badge badge-nonveg">🍗 Non-Veg</span>
+          <span class="card-badge badge-nonveg"><i class="fa-solid fa-drumstick-bite" style="color: #DC2626;"></i> Non-Veg</span>
           <img src="images/indianfood/muttonbiriyani.jpg" alt="Mutton Biryani" onerror="this.src='images/indianfood.jpg'">
-          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Thalappakatti Mutton Biryani', 350, 'images/indianfood/muttonbiriyani.jpg')" title="Save to Wishlist">♡</button>
+          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Thalappakatti Mutton Biryani', 350, 'images/indianfood/muttonbiriyani.jpg')" title="Save to Wishlist"><i class="fa-regular fa-heart"></i></button>
         </div>
         <div class="food-card-body">
           <div class="food-card-header">
@@ -243,9 +250,9 @@
       <!-- 5. Paneer Biryani -->
       <div class="food-card" data-category="veg" data-price="260" data-rating="4.9">
         <div class="food-card-image-wrap">
-          <span class="card-badge badge-veg">🌿 Pure Veg</span>
+          <span class="card-badge badge-veg"><i class="fa-solid fa-leaf" style="color: #16A34A;"></i> Pure Veg</span>
           <img src="images/indianfood/panner biriyani.jpg" alt="Paneer Biryani" onerror="this.src='images/indianfood.jpg'">
-          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Paneer Biryani', 260, 'images/indianfood/panner biriyani.jpg')" title="Save to Wishlist">♡</button>
+          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Paneer Biryani', 260, 'images/indianfood/panner biriyani.jpg')" title="Save to Wishlist"><i class="fa-regular fa-heart"></i></button>
         </div>
         <div class="food-card-body">
           <div class="food-card-header">
@@ -275,9 +282,9 @@
       <!-- 6. Palak Paneer -->
       <div class="food-card" data-category="veg" data-price="210" data-rating="4.7">
         <div class="food-card-image-wrap">
-          <span class="card-badge badge-veg">🌿 Pure Veg</span>
+          <span class="card-badge badge-veg"><i class="fa-solid fa-leaf" style="color: #16A34A;"></i> Pure Veg</span>
           <img src="images/indianfood/palak.jpg" alt="Palak Paneer" onerror="this.src='images/indianfood.jpg'">
-          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Palak Paneer', 210, 'images/indianfood/palak.jpg')" title="Save to Wishlist">♡</button>
+          <button class="card-wishlist-btn" onclick="toggleFav(this, 'Palak Paneer', 210, 'images/indianfood/palak.jpg')" title="Save to Wishlist"><i class="fa-regular fa-heart"></i></button>
         </div>
         <div class="food-card-body">
           <div class="food-card-header">
@@ -399,3 +406,4 @@
   <script src="js/menu.js"></script>
 </body>
 </html>
+
