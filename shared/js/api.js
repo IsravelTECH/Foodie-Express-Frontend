@@ -14,7 +14,7 @@ const FoodieAPI = (() => {
     if (hostname === 'localhost' || hostname === '127.0.0.1' || window.location.protocol === 'file:') {
       return 'http://localhost:8080';
     }
-    return 'https://foodie-express-backend-production.up.railway.app';
+    return 'https://foodie-backend-vc6z.onrender.com';
   };
 
   const API_BASE_URL = getBaseUrl();
