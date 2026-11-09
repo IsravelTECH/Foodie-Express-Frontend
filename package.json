@@ -4,6 +4,7 @@
   "description": "Foodie Express - Premium Food Delivery & Table Reservation Web Frontend",
   "private": true,
   "scripts": {
+    "start": "node server.js",
     "build": "echo 'Static assets ready for deployment'"
   },
   "keywords": ["food-delivery", "restaurant", "static-frontend", "vercel"],
